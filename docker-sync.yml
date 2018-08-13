@@ -1,0 +1,9 @@
+version: "2"
+
+options:
+    verbose: true
+syncs:
+    alumni-sync: # tip: add -sync and you keep consistent names as a convention
+        src: './alumni'
+        #sync_strategy: 'rsync' # not needed, this is the default now
+        sync_excludes: ['.gitignore', '.DS_Store', '.vscode','.git','./node_modules','./assets']

@@ -1,0 +1,28 @@
+version: "3"
+services:
+    www:
+        build: .
+        ports: 
+            - "80:80"
+        volumes:
+            - ./alumni:/var/www/html/
+        links:
+            - db
+        networks:
+            - default
+    db:
+        image: mysql:5.7
+        ports: 
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: alumni
+            MYSQL_USER: user
+            MYSQL_PASSWORD: test
+            MYSQL_ROOT_PASSWORD: test
+        volumes:
+            - ./database:/docker-entrypoint-initdb.d
+            - ./db_alumni:/var/lib/mysql/alumni
+        networks:
+            - default
+volumes:
+    db_alumni:
