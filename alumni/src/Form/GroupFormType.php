@@ -1,7 +1,7 @@
 <?php
 namespace App\Form;
 
-use App\Entity\VisibiltyGroup;
+use App\Entity\VisibilityGroup;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,7 +31,7 @@ class GroupFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => VisibiltyGroup::class,
+            'data_class' => VisibilityGroup::class,
             'standalone' => false
         ]);
     }
