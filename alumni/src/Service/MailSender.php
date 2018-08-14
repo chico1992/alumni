@@ -19,7 +19,7 @@ class MailSender
         $this->mailer = $mailer;
     }
 
-    public function sendRegistration(Invitation $invitation)
+    public function sendInvitation(Invitation $invitation)
     {
         $message = (new \Swift_Message('Registration Mail'))
             ->setFrom('cedric.correia.alves@gmail.com')

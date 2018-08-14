@@ -58,10 +58,6 @@ class User
      */
     private $roles;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Group")
-     */
-    private $groups;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="author", orphanRemoval=true)
@@ -78,12 +74,18 @@ class User
      */
     private $conversations;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\VisibilityGroup")
+     */
+    private $visibilityGroups;
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
         $this->groups = new ArrayCollection();
         $this->posts = new ArrayCollection();
         $this->conversations = new ArrayCollection();
+        $this->visibilityGroups = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -201,31 +203,7 @@ class User
         return $this;
     }
 
-    /**
-     * @return Collection|Group[]
-     */
-    public function getGroups(): Collection
-    {
-        return $this->groups;
-    }
 
-    public function addGroup(Group $group): self
-    {
-        if (!$this->groups->contains($group)) {
-            $this->groups[] = $group;
-        }
-
-        return $this;
-    }
-
-    public function removeGroup(Group $group): self
-    {
-        if ($this->groups->contains($group)) {
-            $this->groups->removeElement($group);
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Post[]
@@ -293,6 +271,32 @@ class User
         if ($this->conversations->contains($conversation)) {
             $this->conversations->removeElement($conversation);
             $conversation->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|VisibilityGroup[]
+     */
+    public function getVisibilityGroups(): Collection
+    {
+        return $this->visibilityGroups;
+    }
+
+    public function addVisibilityGroup(VisibilityGroup $visibilityGroup): self
+    {
+        if (!$this->visibilityGroups->contains($visibilityGroup)) {
+            $this->visibilityGroups[] = $visibilityGroup;
+        }
+
+        return $this;
+    }
+
+    public function removeVisibilityGroup(VisibilityGroup $visibilityGroup): self
+    {
+        if ($this->visibilityGroups->contains($visibilityGroup)) {
+            $this->visibilityGroups->removeElement($visibilityGroup);
         }
 
         return $this;

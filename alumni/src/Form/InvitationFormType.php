@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Role;
-use App\Entity\Group;
+use App\Entity\VisibilityGroup;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class InvitationFormType extends AbstractType
@@ -32,10 +32,10 @@ class InvitationFormType extends AbstractType
                 )
             )
             ->add(
-                'groups',
+                'visibilityGroups',
                 EntityType::class,
                 array(
-                    'class' => Group::class,
+                    'class' => VisibilityGroup::class,
                     'choice_label' => 'label',
                     'expanded' => false,
                     'multiple' => true
