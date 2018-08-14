@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SignupController extends Controller
 {
-    public function signup(Request $request, EncoderFactoryInterface $factory)
+    public function signup(Request $request, EncoderFactoryInterface $factory, string $invitationId)
     {   
         // build the form
         $user = new User();
@@ -23,23 +23,29 @@ class SignupController extends Controller
         // handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) 
-        {
-            
-            // insert data in database
+        {   
+            $repository = $this->getDoctrine()->getRepository(Invitation::class);
+            $invitation = $repository->findOneBy(['id' => $invitationId]);
+            if(!$invitation)
+            {
+                 // insert data in database
 
-            // encode the password 
-            $encoder = $factory->getEncoder(User::class);
-            
-            $encodedPassword = $encoder->encodePassword(
-                $user->getPassword(),
-                $user->getUsername()
-            );
-            $user->setPassword($encodedPassword);
+                // encode the password 
+                $encoder = $factory->getEncoder(User::class);
+                
+                $encodedPassword = $encoder->encodePassword(
+                    $user->getPassword(),
+                    $user->getUsername()
+                );
+                $user->setPassword($encodedPassword);
 
-            // save the User!
-            $manager = $this->getDoctrine()->getManager();
-            $manager->persist($user);
-            $manager->flush();
+                // save the User!
+                $manager = $this->getDoctrine()->getManager();
+                $manager->persist($user);
+                $manager->flush();
+            }
+            
+           
         }
 
         return $this->render(

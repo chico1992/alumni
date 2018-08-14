@@ -4,7 +4,7 @@
 
 
 signup:
-    path:       /signup
+    path:       /signup/{invitationId}
     controller: App\Controller\SignupController::signup
 
 
