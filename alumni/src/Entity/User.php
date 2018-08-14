@@ -68,11 +68,22 @@ class User
      */
     private $posts;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Conversation", mappedBy="users")
+     */
+    private $conversations;
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
         $this->groups = new ArrayCollection();
         $this->posts = new ArrayCollection();
+        $this->conversations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -242,6 +253,46 @@ class User
             if ($post->getAuthor() === $this) {
                 $post->setAuthor(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Conversation[]
+     */
+    public function getConversations(): Collection
+    {
+        return $this->conversations;
+    }
+
+    public function addConversation(Conversation $conversation): self
+    {
+        if (!$this->conversations->contains($conversation)) {
+            $this->conversations[] = $conversation;
+            $conversation->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConversation(Conversation $conversation): self
+    {
+        if ($this->conversations->contains($conversation)) {
+            $this->conversations->removeElement($conversation);
+            $conversation->removeUser($this);
         }
 
         return $this;
