@@ -2,6 +2,29 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+
 signup:
-    path:     /signup
+    path:       /signup
     controller: App\Controller\SignupController::signup
+
+
+group_list:
+    path:       /groups
+    controller: App\Controller\AdminController::listGroups
+
+
+homepage:
+    path:       /
+    controller: App\Controller\DefaultController::homepage
+  
+login:
+    path:       /login
+    controller: App\Controller\DefaultController::login
+    
+logout:
+    path: /logout
+
+invitation:
+    path:       /admin/invitation
+    controller: App\Controller\AdminController::invitation
+
