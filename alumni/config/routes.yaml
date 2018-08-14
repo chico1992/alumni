@@ -3,6 +3,11 @@
 #    controller: App\Controller\DefaultController::index
 
 
+signup:
+    path:       /signup
+    controller: App\Controller\SignupController::signup
+
+
 group_list:
     path:       /groups
     controller: App\Controller\AdminController::listGroups
@@ -22,3 +27,4 @@ logout:
 invitation:
     path:       /admin/invitation
     controller: App\Controller\AdminController::invitation
+
