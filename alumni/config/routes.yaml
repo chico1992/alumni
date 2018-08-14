@@ -4,12 +4,12 @@
 
 
 group_list:
-  path:       /groups
-  controller: App\Controller\AdminController::listGroups
+    path:       /groups
+    controller: App\Controller\AdminController::listGroups
 
 
 homepage:
-    path:     /
+    path:       /
     controller: App\Controller\DefaultController::homepage
   
 login:
