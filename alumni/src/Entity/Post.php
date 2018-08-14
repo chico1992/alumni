@@ -21,7 +21,7 @@ class Post
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $titel;
+    private $title;
 
     /**
      * @ORM\Column(type="boolean")
@@ -43,11 +43,7 @@ class Post
      */
     private $status;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Group")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $visibility;
+    
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="posts")
@@ -60,6 +56,12 @@ class Post
      */
     private $comments;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\VisibilityGroup")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $visibility;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -71,14 +73,14 @@ class Post
         return $this->id;
     }
 
-    public function getTitel(): ?string
+    public function getTitle(): ?string
     {
-        return $this->titel;
+        return $this->title;
     }
 
-    public function setTitel(string $titel): self
+    public function setTitle(string $title): self
     {
-        $this->titel = $titel;
+        $this->title = $title;
 
         return $this;
     }
@@ -131,17 +133,6 @@ class Post
         return $this;
     }
 
-    public function getVisibility(): ?Group
-    {
-        return $this->visibility;
-    }
-
-    public function setVisibility(?Group $visibility): self
-    {
-        $this->visibility = $visibility;
-
-        return $this;
-    }
 
     public function getAuthor(): ?User
     {
@@ -182,6 +173,18 @@ class Post
                 $comment->setPost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getVisibility(): ?VisibilityGroup
+    {
+        return $this->visibility;
+    }
+
+    public function setVisibility(?VisibilityGroup $visibility): self
+    {
+        $this->visibility = $visibility;
 
         return $this;
     }
