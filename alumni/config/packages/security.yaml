@@ -9,13 +9,13 @@ security:
         main:
             anonymous: ~
             http_basic: ~   
-            form_login:
-                login_path:             login
-                check_path:             login
-                default_target_path:    / 
-            logout:
-                path:                   /logout
-                target:                 /
+            #form_login:
+                #login_path:             login
+                #check_path:             login
+                #default_target_path:    / 
+            #logout:
+                #path:                   /logout
+                #target:                 /
        
 
             # activate different ways to authenticate
@@ -33,5 +33,5 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: ROLE_ADMIN }
+        # - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: ^/, roles: ROLE_ADMIN }
