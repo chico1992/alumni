@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -7,10 +6,38 @@ use App\Service\MailSender;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Invitation;
 use App\Form\InvitationFormType;
+use App\Entity\VisibilityGroup;
+use App\Form\GroupFormType;
 
 
 class AdminController extends Controller
 {
+    public function listGroups(Request $request)
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $group = new VisibilityGroup();
+        $form = $this->createForm(GroupFormType::class, $group, ['standalone'=>true]);
+        
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($group);
+            $manager->flush();
+            
+            return $this->redirectToRoute('group_list');
+        }
+
+        $groups = $manager->getRepository(VisibilityGroup::class)->findAll();
+
+        return $this->render(
+            'admin/groupCreation.html.twig',
+            [
+                'groups' =>  $groups,
+                'form' => $form->createView()
+            ]
+        );
+    }
+
+    
     public function invitation(Request $request, MailSender $mailSender)
     {
         $invitation = new Invitation();
