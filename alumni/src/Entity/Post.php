@@ -43,8 +43,6 @@ class Post
      */
     private $status;
 
-    
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
@@ -65,6 +63,8 @@ class Post
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->creationDate = new \DateTime();
+        $this->flag = false;
     }
 
 
@@ -112,13 +112,6 @@ class Post
     public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
-    }
-
-    public function setCreationDate(\DateTimeInterface $creationDate): self
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
     }
 
     public function getStatus(): ?bool
