@@ -2,9 +2,22 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+
 group_list:
   path:     /groups
   controller: App\Controller\AdminController::listGroups
+
+
+homepage:
+    path:     /
+    controller: App\Controller\DefaultController::homepage
+  
+login:
+    path:       /login
+    controller: App\Controller\DefaultController::login
+    
+logout:
+    path: /logout
 
 invitation:
     path:       /admin/invitation
