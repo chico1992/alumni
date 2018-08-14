@@ -31,8 +31,16 @@ class UserFormType extends AbstractType
                     'first_options'  => array('label' => 'Password'),
                     'second_options' => array('label' => 'Repeat Password')
                 ]
+            )->add(
+                'firstname',
+                TextType::class,
+                ['label'=>'Please enter your Firstname']
+            )->add(
+                'lastname',
+                TextType::class,
+                ['label'=>'Please enter your Lastname']
             );
-        
+            
         if ($options['standalone']) {
             $builder->add(
                 'submit', 

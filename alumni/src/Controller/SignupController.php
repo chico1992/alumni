@@ -43,7 +43,7 @@ class SignupController extends Controller
         }
 
         return $this->render(
-            'Default/signup.html.twig',
+            'base.html.twig',
             ['user_form' => $form->createView()]
         );
     }
