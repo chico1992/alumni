@@ -3,7 +3,7 @@
 #    controller: App\Controller\DefaultController::index
 
 group_list:
-  path:     /groups
+  path:       /groups
   controller: App\Controller\AdminController::listGroups
 
 invitation:
