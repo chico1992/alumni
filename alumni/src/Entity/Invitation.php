@@ -29,14 +29,16 @@ class Invitation
     private $roles;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Group")
+     * @ORM\ManyToMany(targetEntity="App\Entity\VisibilityGroup")
      */
-    private $groups;
+    private $visibilityGroups;
+
+    
 
     public function __construct()
     {
         $this->roles = new ArrayCollection();
-        $this->groups = new ArrayCollection();
+        $this->visibilityGroups = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -83,28 +85,29 @@ class Invitation
     }
 
     /**
-     * @return Collection|Group[]
+     * @return Collection|VisibilityGroup[]
      */
-    public function getGroups(): Collection
+    public function getVisibilityGroups(): Collection
     {
-        return $this->groups;
+        return $this->visibilityGroups;
     }
 
-    public function addGroup(Group $group): self
+    public function addVisibilityGroup(VisibilityGroup $visibilityGroup): self
     {
-        if (!$this->groups->contains($group)) {
-            $this->groups[] = $group;
+        if (!$this->visibilityGroups->contains($visibilityGroup)) {
+            $this->visibilityGroups[] = $visibilityGroup;
         }
 
         return $this;
     }
 
-    public function removeGroup(Group $group): self
+    public function removeVisibilityGroup(VisibilityGroup $visibilityGroup): self
     {
-        if ($this->groups->contains($group)) {
-            $this->groups->removeElement($group);
+        if ($this->visibilityGroups->contains($visibilityGroup)) {
+            $this->visibilityGroups->removeElement($visibilityGroup);
         }
 
         return $this;
     }
+
 }
