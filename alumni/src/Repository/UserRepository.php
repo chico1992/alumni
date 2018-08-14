@@ -47,4 +47,27 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findByTaskSearch(TaskSearch $dto)
+    {
+        //em = entity manager
+        $queryBuilder = $this->createQueryBuilder('ta');
+    
+        if(!empty($dto->project)) {
+            $queryBuilder->andWhere(
+                'ta.project = :project'
+            );
+            $queryBuilder->setParameter('project', $dto->project);
+        }
+    
+        if(!empty($dto->search)) {
+            $queryBuilder->andWhere(
+                'ta.title like :search'
+            );
+            $queryBuilder->setParameter('search', '%' . $dto->search . '%');
+        }
+    
+        return $queryBuilder->getQuery()->execute();
+    }
 }
+
+
