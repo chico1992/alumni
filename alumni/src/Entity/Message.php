@@ -11,15 +11,10 @@ class Message
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="UUID")
+     * @ORM\Column(type="string" , length=36)
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $creationDate;
 
     /**
      * @ORM\Column(type="text")
@@ -33,7 +28,7 @@ class Message
     private $sender;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Conversation", inversedBy="messages")
      * @ORM\JoinColumn(nullable=false)
      */
     private $receiver;
@@ -41,18 +36,6 @@ class Message
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getCreationDate(): ?\DateTimeInterface
-    {
-        return $this->creationDate;
-    }
-
-    public function setCreationDate(\DateTimeInterface $creationDate): self
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
     }
 
     public function getContent(): ?string
@@ -79,12 +62,12 @@ class Message
         return $this;
     }
 
-    public function getReceiver(): ?User
+    public function getReceiver(): ?Conversation
     {
         return $this->receiver;
     }
 
-    public function setReceiver(?User $receiver): self
+    public function setReceiver(?Conversation $receiver): self
     {
         $this->receiver = $receiver;
 
