@@ -28,6 +28,11 @@ invitation:
     path:       /admin/invitation
     controller: App\Controller\AdminController::invitation
 
+user_list:
+    path:       /users
+    controller: App\Controller\DefaultController::listUsers
+
 post:
-    path: /post
+    path:       /post
     controller: App\Controller\PostController::createPost
+
