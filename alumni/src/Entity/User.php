@@ -90,6 +90,7 @@ class User
         $this->posts = new ArrayCollection();
         $this->conversations = new ArrayCollection();
         $this->visibilityGroups = new ArrayCollection();
+        $this->creationDate = new \DateTime();
     }
 
     public function getId(): ?int
@@ -292,6 +293,7 @@ class User
     {
         if (!$this->visibilityGroups->contains($visibilityGroup)) {
             $this->visibilityGroups[] = $visibilityGroup;
+
         }
 
         return $this;

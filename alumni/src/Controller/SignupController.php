@@ -28,7 +28,7 @@ class SignupController extends Controller
             $invitation = $repository->findOneBy(['id' => $invitationId]);
             if(!$invitation)
             {
-                 // insert data in database
+                // insert data in database
 
                 // encode the password 
                 $encoder = $factory->getEncoder(User::class);
@@ -38,6 +38,22 @@ class SignupController extends Controller
                     $user->getUsername()
                 );
                 $user->setPassword($encodedPassword);
+
+                // search for the roles of the user, which where set up in Invitation
+                //$invitation = $repository->findBy($invitationId);
+                $roles = $invitation->getRoles();
+                foreach($role as $roles)
+                {
+	                $user->addRole($role);
+                }
+
+                // search for the visibilityGroups of the user, which where set up in Invitation
+                $groups = $invitation->getVisibilityGroups();
+                foreach($group as $groups)
+                {
+                    $user->addVisibilityGroup($group);
+                }
+
 
                 // save the User!
                 $manager = $this->getDoctrine()->getManager();
@@ -49,7 +65,7 @@ class SignupController extends Controller
         }
 
         return $this->render(
-            'base.html.twig',
+            'Default/signup.html.twig',
             ['user_form' => $form->createView()]
         );
     }
