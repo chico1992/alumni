@@ -5,6 +5,9 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\UserSearchFormType;
+use App\DTO\UserSearch;
+use App\Entity\User;
 
 
 class DefaultController extends Controller
@@ -38,17 +41,16 @@ class DefaultController extends Controller
         $manager = $this->getDoctrine()->getManager();
     
         $dto = new UserSearch();
-        $searchForm = $this->createForm(TaskSearchFormType::class, $dto, ['standalone'=>true]);
+        $searchForm = $this->createForm(UserSearchFormType::class, $dto, ['standalone'=>true]);
 
         $searchForm->handleRequest($request);
 
-        $tasks = $manager->getRepository(Task::class)->findByTaskSearch($dto);
+        $users = $manager->getRepository(User::class)->findByUserSearch($dto);
     
         return $this->render(
-            'task/list.html.twig',
+            'Userlist/list.html.twig',
             [
-                'tasks' =>  $tasks,
-                'form' => $form->createView(),
+                'users' =>  $users,
                 'searchForm'=>$searchForm->createView()
 
             ]

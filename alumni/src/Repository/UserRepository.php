@@ -2,70 +2,24 @@
 
 namespace App\Repository;
 
-use App\Entity\User;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use App\DTO\UserSearch;
+use Doctrine\ORM\EntityRepository;
 
-/**
- * @method User|null find($id, $lockMode = null, $lockVersion = null)
- * @method User|null findOneBy(array $criteria, array $orderBy = null)
- * @method User[]    findAll()
- * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
-class UserRepository extends ServiceEntityRepository
+
+class UserRepository extends EntityRepository
 {
-    public function __construct(RegistryInterface $registry)
-    {
-        parent::__construct($registry, User::class);
-    }
 
-//    /**
-//     * @return User[] Returns an array of User objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function findByUserSearch(UserSearch $dto)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
-    public function findByTaskSearch(TaskSearch $dto)
-    {
-        //em = entity manager
-        $queryBuilder = $this->createQueryBuilder('ta');
-    
-        if(!empty($dto->project)) {
-            $queryBuilder->andWhere(
-                'ta.project = :project'
-            );
-            $queryBuilder->setParameter('project', $dto->project);
-        }
+        $queryBuilder = $this->createQueryBuilder('us');
     
         if(!empty($dto->search)) {
-            $queryBuilder->andWhere(
-                'ta.title like :search'
-            );
+            $queryBuilder
+                ->andWhere('us.username like :search')
+                ->orWhere('us.firstname like :search')
+                ->orWhere('us.lastname like :search');
             $queryBuilder->setParameter('search', '%' . $dto->search . '%');
         }
-    
         return $queryBuilder->getQuery()->execute();
     }
 }

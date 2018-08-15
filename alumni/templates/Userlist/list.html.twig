@@ -17,16 +17,17 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-                        <th></th>
+						<th></th>
 						<th>Username</th>
 						<th>Firstname</th>
 						<th>Lastname</th>
-                        <th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for user in users %}
 						<tr>
+							<td>Profile pic (not working yet)</td>
 							{% if user.getUsername()|length() > 10 %}
 								{% set username = user.getUsername()|slice(0, 10) %}
 								{% set username = username ~ '...' %}
@@ -50,8 +51,9 @@
 								{% set lastname = user.getLastname() %}
 							{% endif %}
 							<td>{{ lastname }}</td>
-
-							<td><a href="{{ path("task_detail", {task: user.getId()}) }}">Detail</a></td>
+							{# link to the single profiles of each user #}
+							{#<td><a href="{{ path("task_detail", {task: user.getId()}) }}">Detail</a></td>#}
+							<td>link to profile (not working yet)</td>
 						</tr>
 					{% endfor %}
 				</tbody>
