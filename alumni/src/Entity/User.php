@@ -5,9 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields="email", message="Email already taken")
+ * @UniqueEntity(fields="username", message="Username already taken")
  */
 class User
 {
@@ -49,7 +53,7 @@ class User
     private $cv;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $creationDate;
 
@@ -86,6 +90,7 @@ class User
         $this->posts = new ArrayCollection();
         $this->conversations = new ArrayCollection();
         $this->visibilityGroups = new ArrayCollection();
+        $this->creationDate = new \DateTime();
     }
 
     public function getId(): ?int
@@ -168,13 +173,6 @@ class User
     public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
-    }
-
-    public function setCreationDate(\DateTimeInterface $creationDate): self
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
     }
 
     /**
