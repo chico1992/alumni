@@ -15,8 +15,9 @@ use App\Entity\User;
 
 class PostFormType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, User $user, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $user= $options['user'];
         $builder
             ->add(
                 'title',
