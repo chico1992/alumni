@@ -90,6 +90,7 @@ class User
         $this->posts = new ArrayCollection();
         $this->conversations = new ArrayCollection();
         $this->visibilityGroups = new ArrayCollection();
+        $this->creationDate = new \DateTime();
     }
 
     public function getId(): ?int
@@ -172,13 +173,6 @@ class User
     public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
-    }
-
-    public function setCreationDate(\DateTimeInterface $creationDate): self
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
     }
 
     /**
