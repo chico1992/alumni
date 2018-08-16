@@ -12,6 +12,13 @@ use App\Form\GroupFormType;
 
 class AdminController extends Controller
 {
+
+    public function admin()
+    {
+        return $this->render('Admin/admin.html.twig');
+    }
+
+
     public function listGroups(Request $request)
     {
         $manager = $this->getDoctrine()->getManager();
