@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -13,7 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity(fields="email", message="Email already taken")
  * @UniqueEntity(fields="username", message="Username already taken")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -48,12 +50,7 @@ class User
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $cv;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
     private $creationDate;
 
@@ -83,6 +80,18 @@ class User
      */
     private $visibilityGroups;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Cv", cascade={"persist", "remove"})
+     * @Assert\File(mimeTypes={ "application/pdf" })
+     */
+    private $cv;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Document", cascade={"persist", "remove"})
+     * @Assert\File(mimeTypes={ "image/*" })
+     */
+    private $profilePicture;
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
@@ -90,6 +99,7 @@ class User
         $this->posts = new ArrayCollection();
         $this->conversations = new ArrayCollection();
         $this->visibilityGroups = new ArrayCollection();
+        $this->creationDate = new \DateTime();
     }
 
     public function getId(): ?int
@@ -157,28 +167,10 @@ class User
         return $this;
     }
 
-    public function getCv(): ?string
-    {
-        return $this->cv;
-    }
-
-    public function setCv(string $cv): self
-    {
-        $this->cv = $cv;
-
-        return $this;
-    }
 
     public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
-    }
-
-    public function setCreationDate(\DateTimeInterface $creationDate): self
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
     }
 
     /**
@@ -292,6 +284,7 @@ class User
     {
         if (!$this->visibilityGroups->contains($visibilityGroup)) {
             $this->visibilityGroups[] = $visibilityGroup;
+
         }
 
         return $this;
@@ -304,5 +297,39 @@ class User
         }
 
         return $this;
+    }
+
+    public function getCv(): ?Cv
+    {
+        return $this->cv;
+    }
+
+    public function setCv(?Cv $cv): self
+    {
+        $this->cv = $cv;
+
+        return $this;
+    }
+
+    public function getProfilePicture(): ?Document
+    {
+        return $this->profilePicture;
+    }
+
+    public function setProfilePicture(?Document $profilePicture): self
+    {
+        $this->profilePicture = $profilePicture;
+
+        return $this;
+    }
+
+    public function getSalt(){
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+        return null;
+
     }
 }

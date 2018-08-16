@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} User list {% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="element-success">
+			{{ form(searchForm) }}
+		</div>
+	</div>
+	
+	<div class="container">
+		{% if users is empty %}
+			<p>No user found in the application</p>
+		{% else %}
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Username</th>
+						<th>Firstname</th>
+						<th>Lastname</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for user in users %}
+						<tr>
+							<td>Profile pic (not working yet)</td>
+							{% if user.getUsername()|length() > 10 %}
+								{% set username = user.getUsername()|slice(0, 10) %}
+								{% set username = username ~ '...' %}
+							{% else %}
+								{% set username = user.getUsername() %}
+							{% endif %}
+							<td>{{ username }}</td>
+
+                            {% if user.getFirstname()|length() > 10 %}
+								{% set firstname = user.getFirstname()|slice(0, 10) %}
+								{% set firstname = firstname ~ '...' %}
+							{% else %}
+								{% set firstname = user.getFirstname() %}
+							{% endif %}
+							<td>{{ firstname }}</td>
+
+							{% if user.getLastname()|length() > 10 %}
+								{% set lastname = user.getLastname()|slice(0, 10) %}
+								{% set lastname = lastname ~ '...' %}
+							{% else %}
+								{% set lastname = user.getLastname() %}
+							{% endif %}
+							<td>{{ lastname }}</td>
+							{# link to the single profiles of each user #}
+							{#<td><a href="{{ path("task_detail", {task: user.getId()}) }}">Detail</a></td>#}
+							<td>link to profile (not working yet)</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% endif %}
+	</div>
+
+{% endblock %}
