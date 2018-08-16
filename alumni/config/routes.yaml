@@ -46,4 +46,9 @@ post:
     path:       /post
     controller: App\Controller\PostController::createPost
 
+post_list:
+    path:       /posts
+    controller: App\Controller\PostController::listPosts
+
+
 

@@ -41,4 +41,18 @@ class PostController extends Controller
             ]
         );
     }
+
+
+    public function listPosts(Request $request)
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $posts = $manager->getRepository(Post::class)->findAll();
+    
+        return $this->render(
+            'Postlist/test.html.twig',
+            [
+                'posts' =>  $posts,
+            ]
+        );
+    }
 }
