@@ -66,11 +66,6 @@ class User implements UserInterface
     private $posts;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $image;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Conversation", mappedBy="users")
      */
     private $conversations;
@@ -234,17 +229,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Conversation[]
