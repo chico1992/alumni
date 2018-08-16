@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Post;
 use App\Form\PostFormType;
 use App\Entity\User;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\SerializerInterface;
 
 
 class PostController extends Controller
@@ -40,5 +42,29 @@ class PostController extends Controller
                 'user' => $user      
             ]
         );
+    }
+
+    public function getPosts(int $creationDate)
+    {
+        $time = new \DateTime();
+        $time->setTimestamp($creationDate);
+        $posts = $this->getDoctrine()
+            ->getManager()
+            ->getRepository(Post::class);
+        
+        $postList = $posts->findByDate($time);
+        $serializer = $this->getSerializer();
+
+        return new JsonResponse(
+            $serializer->serialize($postList,'json'),
+            200,
+            [],
+            true
+        );
+    }
+
+    public function getSerializer() : SerializerInterface
+    {
+        return $this->get('serializer');
     }
 }
