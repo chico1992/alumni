@@ -6,19 +6,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Post;
 use App\Form\PostFormType;
+use App\Entity\User;
 
 
 class PostController extends Controller
 {
     public function createPost(Request $request){
         $post = new Post();
-        $post->setAuthor($this->getUser());
+        $user = $this->getUser();
+        $post->setAuthor($user);
         $form = $this->createForm(
             PostFormType::class,
             $post,
             [
                 'standalone' => true,
-                'user' => $this->getUser()
+                'user' => $user
             ]
         );
         
@@ -34,7 +36,8 @@ class PostController extends Controller
         return $this->render(
             'Default\post.html.twig',
             [
-                'post_form' => $form->createView(),       
+                'post_form' => $form->createView(), 
+                'user' => $user      
             ]
         );
     }

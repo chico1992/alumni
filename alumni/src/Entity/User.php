@@ -102,7 +102,7 @@ class User implements UserInterface
         $this->creationDate = new \DateTime();
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
