@@ -28,6 +28,14 @@ invitation:
     path:       /admin/invitation
     controller: App\Controller\AdminController::invitation
 
+profile:
+    path:       /profile
+    controller: App\Controller\ProfileController::profile
+
+profile_edit:
+    path:       /profile/edit{user}
+    controller: App\Controller\ProfileController::profileEdit
+
 user_list:
     path:       /users
     controller: App\Controller\DefaultController::listUsers
@@ -35,4 +43,5 @@ user_list:
 post:
     path:       /post
     controller: App\Controller\PostController::createPost
+
 
