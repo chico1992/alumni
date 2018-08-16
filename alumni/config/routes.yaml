@@ -26,7 +26,7 @@ invitation:
     controller: App\Controller\AdminController::invitation
     
 group_list:
-    path:       /groups
+    path:       /admin/groups
     controller: App\Controller\AdminController::listGroups
 
 profile:
