@@ -49,11 +49,6 @@ class User implements UserInterface
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $cv;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $creationDate;
@@ -83,6 +78,18 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity="App\Entity\VisibilityGroup")
      */
     private $visibilityGroups;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Cv", cascade={"persist", "remove"})
+     * @Assert\File(mimeTypes={ "application/pdf" })
+     */
+    private $cv;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Document", cascade={"persist", "remove"})
+     * @Assert\File(mimeTypes={ "image/*" })
+     */
+    private $profilePicture;
 
     public function __construct()
     {
@@ -159,17 +166,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCv(): ?string
-    {
-        return $this->cv;
-    }
-
-    public function setCv(string $cv): self
-    {
-        $this->cv = $cv;
-
-        return $this;
-    }
 
     public function getCreationDate(): ?\DateTimeInterface
     {
@@ -302,6 +298,29 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getCv(): ?Cv
+    {
+        return $this->cv;
+    }
+
+    public function setCv(?Cv $cv): self
+    {
+        $this->cv = $cv;
+
+        return $this;
+    }
+
+    public function getProfilePicture(): ?Document
+    {
+        return $this->profilePicture;
+    }
+
+    public function setProfilePicture(?Document $profilePicture): self
+    {
+        $this->profilePicture = $profilePicture;
+
+        return $this;
+
     public function getSalt(){
         return null;
     }
@@ -309,5 +328,6 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         return null;
+
     }
 }
