@@ -26,14 +26,14 @@ class MailSender
             ->setTo($invitation->getEmail())
             ->setBody(
                 $this->twig->render(
-                    'email/invitation.html.twig',
+                    'Email/invitation.html.twig',
                     array('invitation' => $invitation)
                 ),
                 'text/html'
             )
             ->addPart(
                 $this->twig->render(
-                    'email/invitation.txt.twig',
+                    'Email/invitation.txt.twig',
                     array('invitation' => $invitation)
                 ),
                 'text/plain'

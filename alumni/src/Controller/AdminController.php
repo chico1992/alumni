@@ -68,7 +68,7 @@ class AdminController extends Controller
         }
 
         return $this->render(
-            'admin\invitation.html.twig',
+            'Admin\invitation.html.twig',
             [
                 'invitation_form' => $form->createView(),       
             ]
