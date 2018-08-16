@@ -177,11 +177,13 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Role[]
-     */
-    public function getRoles(): Collection
+     * Get the value of role
+     * @return Role[]
+     */ 
+    public function getRoles(): array
     {
-        return $this->roles;
+        
+        return array_map('strval',$this->roles->toArray());
     }
 
     public function addRole(Role $role): self
