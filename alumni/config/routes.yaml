@@ -3,15 +3,17 @@
 #    controller: App\Controller\DefaultController::index
 
 
+admin:
+    path:       /admin
+    controller: App\Controller\AdminController::admin
+
 signup:
     path:       /signup/{invitationId}
     controller: App\Controller\SignupController::signup
 
-
 group_list:
     path:       /admin/groups
     controller: App\Controller\AdminController::listGroups
-
 
 homepage:
     path:       /
@@ -27,7 +29,7 @@ logout:
 invitation:
     path:       /admin/invitation
     controller: App\Controller\AdminController::invitation
-
+    
 profile:
     path:       /profile
     controller: App\Controller\ProfileController::profile
