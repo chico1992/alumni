@@ -44,15 +44,15 @@ class PostController extends Controller
         );
     }
 
-    public function getPosts(int $creationDate)
+    public function getPosts(\DateTime $creationDate)
     {
-        $time = new \DateTime();
-        $time->setTimestamp($creationDate);
+        // $time = new \DateTime();
+        // $time->setTimestamp($creationDate);
         $posts = $this->getDoctrine()
             ->getManager()
             ->getRepository(Post::class);
         
-        $postList = $posts->findByDate($time);
+        $postList = $posts->findByDate($creationDate);
         $serializer = $this->getSerializer();
 
         return new JsonResponse(

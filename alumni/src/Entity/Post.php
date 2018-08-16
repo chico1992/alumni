@@ -51,10 +51,10 @@ class Post
      */
     private $author;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="post", orphanRemoval=true)
-     */
-    private $comments;
+    // /**
+    //  * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="post", orphanRemoval=true)
+    //  */
+    // private $comments;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\VisibilityGroup")
@@ -141,36 +141,36 @@ class Post
         return $this;
     }
 
-    /**
-     * @return Collection|Comment[]
-     */
-    public function getComments(): Collection
-    {
-        return $this->comments;
-    }
+    // /**
+    //  * @return Collection|Comment[]
+    //  */
+    // public function getComments(): Collection
+    // {
+    //     return $this->comments;
+    // }
 
-    public function addComment(Comment $comment): self
-    {
-        if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
-            $comment->setPost($this);
-        }
+    // public function addComment(Comment $comment): self
+    // {
+    //     if (!$this->comments->contains($comment)) {
+    //         $this->comments[] = $comment;
+    //         $comment->setPost($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeComment(Comment $comment): self
-    {
-        if ($this->comments->contains($comment)) {
-            $this->comments->removeElement($comment);
-            // set the owning side to null (unless already changed)
-            if ($comment->getPost() === $this) {
-                $comment->setPost(null);
-            }
-        }
+    // public function removeComment(Comment $comment): self
+    // {
+    //     if ($this->comments->contains($comment)) {
+    //         $this->comments->removeElement($comment);
+    //         // set the owning side to null (unless already changed)
+    //         if ($comment->getPost() === $this) {
+    //             $comment->setPost(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getVisibility(): ?VisibilityGroup
     {

@@ -60,15 +60,15 @@ class User implements UserInterface
     private $roles;
 
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="author", orphanRemoval=true)
-     */
-    private $posts;
+    // /**
+    //  * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="author", orphanRemoval=true)
+    //  */
+    // private $posts;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Conversation", mappedBy="users")
-     */
-    private $conversations;
+    // /**
+    //  * @ORM\ManyToMany(targetEntity="App\Entity\Conversation", mappedBy="users")
+    //  */
+    // private $conversations;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\VisibilityGroup")
@@ -198,65 +198,65 @@ class User implements UserInterface
 
 
 
-    /**
-     * @return Collection|Post[]
-     */
-    public function getPosts(): Collection
-    {
-        return $this->posts;
-    }
+    // /**
+    //  * @return Collection|Post[]
+    //  */
+    // public function getPosts(): Collection
+    // {
+    //     return $this->posts;
+    // }
 
-    public function addPost(Post $post): self
-    {
-        if (!$this->posts->contains($post)) {
-            $this->posts[] = $post;
-            $post->setAuthor($this);
-        }
+    // public function addPost(Post $post): self
+    // {
+    //     if (!$this->posts->contains($post)) {
+    //         $this->posts[] = $post;
+    //         $post->setAuthor($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removePost(Post $post): self
-    {
-        if ($this->posts->contains($post)) {
-            $this->posts->removeElement($post);
-            // set the owning side to null (unless already changed)
-            if ($post->getAuthor() === $this) {
-                $post->setAuthor(null);
-            }
-        }
+    // public function removePost(Post $post): self
+    // {
+    //     if ($this->posts->contains($post)) {
+    //         $this->posts->removeElement($post);
+    //         // set the owning side to null (unless already changed)
+    //         if ($post->getAuthor() === $this) {
+    //             $post->setAuthor(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
 
-    /**
-     * @return Collection|Conversation[]
-     */
-    public function getConversations(): Collection
-    {
-        return $this->conversations;
-    }
+    // /**
+    //  * @return Collection|Conversation[]
+    //  */
+    // public function getConversations(): Collection
+    // {
+    //     return $this->conversations;
+    // }
 
-    public function addConversation(Conversation $conversation): self
-    {
-        if (!$this->conversations->contains($conversation)) {
-            $this->conversations[] = $conversation;
-            $conversation->addUser($this);
-        }
+    // public function addConversation(Conversation $conversation): self
+    // {
+    //     if (!$this->conversations->contains($conversation)) {
+    //         $this->conversations[] = $conversation;
+    //         $conversation->addUser($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeConversation(Conversation $conversation): self
-    {
-        if ($this->conversations->contains($conversation)) {
-            $this->conversations->removeElement($conversation);
-            $conversation->removeUser($this);
-        }
+    // public function removeConversation(Conversation $conversation): self
+    // {
+    //     if ($this->conversations->contains($conversation)) {
+    //         $this->conversations->removeElement($conversation);
+    //         $conversation->removeUser($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection|VisibilityGroup[]
