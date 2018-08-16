@@ -7,6 +7,7 @@ use App\Form\UserFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Invitation;
 
 class SignupController extends Controller
 {
@@ -58,14 +59,14 @@ class SignupController extends Controller
                 // search for the roles of the user, which where set up in Invitation
                 //$invitation = $repository->findBy($invitationId);
                 $roles = $invitation->getRoles();
-                foreach($role as $roles)
+                foreach($roles as $role)
                 {
 	                $user->addRole($role);
                 }
 
                 // search for the visibilityGroups of the user, which where set up in Invitation
                 $groups = $invitation->getVisibilityGroups();
-                foreach($group as $groups)
+                foreach($groups as $group)
                 {
                     $user->addVisibilityGroup($group);
                 }
