@@ -39,11 +39,7 @@
 }
 
 .sidebar .nav-link.active {
-<<<<<<< HEAD
   color: #131516;
-=======
-    color: #007bff;
->>>>>>> dev
 }
 
 .sidebar .nav-link:hover .feather,

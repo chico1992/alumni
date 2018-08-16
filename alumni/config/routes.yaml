@@ -2,9 +2,6 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-homepage:
-    path:       /
-    controller: App\Controller\DefaultController::homepage
 
 admin:
     path:       /admin
@@ -14,19 +11,14 @@ signup:
     path:       /signup/{invitationId}
     controller: App\Controller\SignupController::signup
 
-<<<<<<< HEAD
-=======
-
 group_list:
     path:       /admin/groups
     controller: App\Controller\AdminController::listGroups
-
 
 homepage:
     path:       /
     controller: App\Controller\DefaultController::homepage
   
->>>>>>> dev
 login:
     path:       /login
     controller: App\Controller\DefaultController::login
@@ -38,15 +30,6 @@ invitation:
     path:       /admin/invitation
     controller: App\Controller\AdminController::invitation
     
-group_list:
-    path:       /groups
-    controller: App\Controller\AdminController::listGroups
-
-
-  
-
-
-
 profile:
     path:       /profile
     controller: App\Controller\ProfileController::profile
