@@ -1,16 +1,18 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block title %} User list {% endblock %}
 
 {% block body %}
 
-	<div class="container">
+	<div class="container mt-5 pl-5 pt-5">
 		<div class="element-success">
 			{{ form(searchForm) }}
 		</div>
 	</div>
+
+	<br>
 	
-	<div class="container">
+	<div class="container pl-5">
 		{% if users is empty %}
 			<p>No user found in the application</p>
 		{% else %}
