@@ -40,7 +40,7 @@ profile_edit:
 
 user_list:
     path:       /users
-    controller: App\Controller\DefaultController::listUsers
+    controller: App\Controller\SearchController::listUsers
 
 post:
     path:       /post
