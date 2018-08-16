@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <div class="container">
+
+{% extends 'base.html.twig' %}
+
+{% block title %} Groups {% endblock %}
+
+{% block body %}
+
+	<div class="container">
 		{% if groups is empty %}
 			<p>No group found in the application</p>
 		{% else %}
@@ -31,5 +29,5 @@
 	<div class="container">
 	    {{ form(form) }}
 	</div>
-</body>
-</html>
+	
+{% endblock %}

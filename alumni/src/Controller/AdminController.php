@@ -38,7 +38,7 @@ class AdminController extends Controller
     }
 
     
-    public function invitation(Request $request, MailSender $mailSender)
+    public function invitation(Request $request, MailSender $sender)
     {
         $invitation = new Invitation();
         $form = $this->createForm(

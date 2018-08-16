@@ -21,7 +21,7 @@ class UserFormType extends AbstractType
             )->add(
                 'email',
                 EmailType::class,
-                ['label'=>'Please enter your email adress']
+                ['label'=>'Please enter the email adress, where your invitation was send to']
             )->add(
                 'password',
                 RepeatedType::class,
