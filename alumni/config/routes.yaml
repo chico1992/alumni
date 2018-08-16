@@ -28,3 +28,11 @@ invitation:
     path:       /admin/invitation
     controller: App\Controller\AdminController::invitation
 
+profile:
+    path:       /profile
+    controller: App\Controller\ProfileController::profile
+
+profile_edit:
+    path:       /profile/edit{user}
+    controller: App\Controller\ProfileController::profileEdit
+
