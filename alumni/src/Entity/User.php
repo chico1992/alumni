@@ -49,12 +49,12 @@ class User implements UserInterface
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $cv;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
     private $creationDate;
 
@@ -287,6 +287,7 @@ class User implements UserInterface
     {
         if (!$this->visibilityGroups->contains($visibilityGroup)) {
             $this->visibilityGroups[] = $visibilityGroup;
+
         }
 
         return $this;
