@@ -32,14 +32,13 @@ class SignupController extends Controller
             $invitation = $repository->findOneBy(['id' => $invitationId]);
 
             $userEmail = $form["email"]->getData();
-            $invitationEmail = $invitation->getEmail();
 
             if(empty($invitation))
             {
                 $errorInvitation = true;
                 $errorEmail = false;
             }
-            else if($userEmail != $invitationEmail)
+            else if(($userEmail != $invitation->getEmail()) )
             {
                 $errorInvitation = false;
                 $errorEmail = true;
