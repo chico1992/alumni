@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Your profile{% endblock %}
+
+{% block body %}
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col"></th>
+				<th scope="col">User information</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Username :</td>
+				<td>{{ user.getUsername() }}</td>
+			</tr>
+			<tr>
+				<td>Firstname :</td>
+				<td>{{ user.getFirstname() }}</td>
+			</tr>
+			<tr>
+				<td>Lastname :</td>
+				<td>{{ user.getLastname() }}</td>
+			</tr>
+			<tr>
+				<td>Email :</td>
+				<td>{{ user.getEmail() }}</td>
+			</tr>
+			<tr>
+				<td>Photo :</td>
+				<td>{{ user.getProfilePicture() }}</td>
+			</tr>
+			<tr>
+				<td>CV :</td>
+				<td>{{ user.getCv() }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+<a href="{{ path("profile_edit", {'user' : user.getUser()}) }}" class="btn btn-primary btn-lg disabled" role="button">Edit profile</a>
+
+{% endblock %}

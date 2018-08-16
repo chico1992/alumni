@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 /**
@@ -13,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity(fields="email", message="Email already taken")
  * @UniqueEntity(fields="username", message="Username already taken")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -47,9 +48,8 @@ class User
      */
     private $lastname;
 
-
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
     private $creationDate;
 
@@ -283,6 +283,7 @@ class User
     {
         if (!$this->visibilityGroups->contains($visibilityGroup)) {
             $this->visibilityGroups[] = $visibilityGroup;
+
         }
 
         return $this;
@@ -319,5 +320,14 @@ class User
         $this->profilePicture = $profilePicture;
 
         return $this;
+
+    public function getSalt(){
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+        return null;
+
     }
 }
