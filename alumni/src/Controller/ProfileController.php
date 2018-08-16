@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
 use App\Form\ProfileFormType;
+use App\Entity\Document;
 
 
 class ProfileController extends Controller{
@@ -18,14 +19,30 @@ class ProfileController extends Controller{
         );
     }
 
-    public function profileEdit(User $user, Request $request)
+    public function profileEdit(Request $request)
     {
+        $manager = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
         $profileForm = $this->createForm(ProfileFormType::class, $user, ['standalone' => true]);
         $profileForm->handleRequest($request);
         
         if ($profileForm->isSubmitted() && $profileForm->isValid()) {
+
+            $file = $user->getProfilePicture();
+
+            if($file){
+                $document = new Document();
+                $document->setId($file->getId())
+                    ->setPath($this->getPath('upload_dir'))
+                    ->setMimeType($file->getMimeType())
+                    ->setName($file->getName());
+                $file->move($this->getPath('upload_dir'));
+                
+                $user->setProfilePicture($document);
+                $manager->persist($document);
+            }
             
-            $this->getDoctrine()->getManager()->flush();
+            $manager->flush();
             
             return $this->redirectToRoute('profile_edit', ['user' => $user->getUser()]);
         }
@@ -34,7 +51,7 @@ class ProfileController extends Controller{
             'Default/profileEdit.html.twig',
             [
                 'user'=>$user,
-                'form' => $profileForm->createView()
+                'profileForm' => $profileForm->createView()
             ]
         );
     }
