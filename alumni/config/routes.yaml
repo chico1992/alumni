@@ -11,7 +11,7 @@ admin:
     controller: App\Controller\AdminController::admin
 
 signup:
-    path:       /signup
+    path:       /signup/{invitationId}
     controller: App\Controller\SignupController::signup
 
 login:
@@ -19,7 +19,7 @@ login:
     controller: App\Controller\DefaultController::login
     
 logout:
-    path: /logout
+    path:       /logout
 
 invitation:
     path:       /admin/invitation
@@ -29,8 +29,20 @@ group_list:
     path:       /groups
     controller: App\Controller\AdminController::listGroups
 
+profile:
+    path:       /profile
+    controller: App\Controller\ProfileController::profile
 
-  
+profile_edit:
+    path:       /profile/edit{user}
+    controller: App\Controller\ProfileController::profileEdit
 
+user_list:
+    path:       /users
+    controller: App\Controller\DefaultController::listUsers
+
+post:
+    path:       /post
+    controller: App\Controller\PostController::createPost
 
 

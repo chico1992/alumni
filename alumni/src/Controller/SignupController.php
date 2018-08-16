@@ -7,10 +7,11 @@ use App\Form\UserFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Invitation;
 
 class SignupController extends Controller
 {
-    public function signup(Request $request, EncoderFactoryInterface $factory)
+    public function signup(Request $request, EncoderFactoryInterface $factory, string $invitationId)
     {   
         // build the form
         $user = new User();
@@ -20,31 +21,72 @@ class SignupController extends Controller
             ['standalone' => true]
         );
 
+        $errorInvitation = false;
+        $errorEmail = false;
+
         // handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) 
-        {
-            
-            // insert data in database
+        {   
+            $repository = $this->getDoctrine()->getRepository(Invitation::class);
+            $invitation = $repository->findOneBy(['id' => $invitationId]);
 
-            // encode the password 
-            $encoder = $factory->getEncoder(User::class);
-            
-            $encodedPassword = $encoder->encodePassword(
-                $user->getPassword(),
-                $user->getUsername()
-            );
-            $user->setPassword($encodedPassword);
+            $userEmail = $form["email"]->getData();
 
-            // save the User!
-            $manager = $this->getDoctrine()->getManager();
-            $manager->persist($user);
-            $manager->flush();
+            if(empty($invitation))
+            {
+                $errorInvitation = true;
+                $errorEmail = false;
+            }
+            else if(($userEmail != $invitation->getEmail()) )
+            {
+                $errorInvitation = false;
+                $errorEmail = true;
+            }
+            else
+            {   
+              
+                // encode the password 
+                $encoder = $factory->getEncoder(User::class);
+                
+                $encodedPassword = $encoder->encodePassword(
+                    $user->getPassword(),
+                    $user->getUsername()
+                );
+                $user->setPassword($encodedPassword);
+
+                // search for the roles of the user, which where set up in Invitation
+                //$invitation = $repository->findBy($invitationId);
+                $roles = $invitation->getRoles();
+                foreach($roles as $role)
+                {
+	                $user->addRole($role);
+                }
+
+                // search for the visibilityGroups of the user, which where set up in Invitation
+                $groups = $invitation->getVisibilityGroups();
+                foreach($groups as $group)
+                {
+                    $user->addVisibilityGroup($group);
+                }
+
+                // save the User! and delete the invitation
+                // insert data in database
+                $manager = $this->getDoctrine()->getManager();
+                $manager->persist($user);
+                $manager->remove($invitation);
+                $manager->flush();
+            }
+            
         }
 
         return $this->render(
-            'base.html.twig',
-            ['user_form' => $form->createView()]
+            'Default/signup.html.twig',
+            [
+                'user_form' => $form->createView(),
+                'errorInvitation' => $errorInvitation,
+                'errorEmail' => $errorEmail
+            ]
         );
     }
 }

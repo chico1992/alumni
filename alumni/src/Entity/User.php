@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 /**
@@ -13,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity(fields="email", message="Email already taken")
  * @UniqueEntity(fields="username", message="Username already taken")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -48,12 +49,12 @@ class User
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $cv;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
     private $creationDate;
 
@@ -90,6 +91,7 @@ class User
         $this->posts = new ArrayCollection();
         $this->conversations = new ArrayCollection();
         $this->visibilityGroups = new ArrayCollection();
+        $this->creationDate = new \DateTime();
     }
 
     public function getId(): ?int
@@ -172,13 +174,6 @@ class User
     public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
-    }
-
-    public function setCreationDate(\DateTimeInterface $creationDate): self
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
     }
 
     /**
@@ -292,6 +287,7 @@ class User
     {
         if (!$this->visibilityGroups->contains($visibilityGroup)) {
             $this->visibilityGroups[] = $visibilityGroup;
+
         }
 
         return $this;
@@ -304,5 +300,14 @@ class User
         }
 
         return $this;
+    }
+
+    public function getSalt(){
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+        return null;
     }
 }
