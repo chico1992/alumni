@@ -3,8 +3,19 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block body %}
+
 	<div class="container">
-	
-       {{ form(user_form) }}
+		{{ form(user_form) }}
    	</div>
+
+	<div class="container">  
+		{% if errorInvitation %}
+			<p>Invitation does not exist</p>
+		{% else if errorEmail %}
+			<p>Your email is not the same as in your invitation</p>
+		{% else %}
+			<p>Signup copmlete!</p>
+		{% endif %}
+	</div>
+
 {% endblock %}

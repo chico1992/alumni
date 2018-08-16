@@ -20,16 +20,32 @@ class SignupController extends Controller
             ['standalone' => true]
         );
 
+        $errorInvitation = false;
+        $errorEmail = false;
+
         // handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) 
         {   
             $repository = $this->getDoctrine()->getRepository(Invitation::class);
             $invitation = $repository->findOneBy(['id' => $invitationId]);
-            if(!$invitation)
-            {
-                // insert data in database
 
+            $userEmail = $form["email"]->getData();
+            $invitationEmail = $invitation->getEmail();
+
+            if(empty($invitation))
+            {
+                $errorInvitation = true;
+                $errorEmail = false;
+            }
+            else if($userEmail != $invitationEmail)
+            {
+                $errorInvitation = false;
+                $errorEmail = true;
+            }
+            else
+            {   
+              
                 // encode the password 
                 $encoder = $factory->getEncoder(User::class);
                 
@@ -54,19 +70,23 @@ class SignupController extends Controller
                     $user->addVisibilityGroup($group);
                 }
 
-
-                // save the User!
+                // save the User! and delete the invitation
+                // insert data in database
                 $manager = $this->getDoctrine()->getManager();
                 $manager->persist($user);
+                $manager->remove($invitation);
                 $manager->flush();
             }
             
-           
         }
 
         return $this->render(
             'Default/signup.html.twig',
-            ['user_form' => $form->createView()]
+            [
+                'user_form' => $form->createView(),
+                'errorInvitation' => $errorInvitation,
+                'errorEmail' => $errorEmail
+            ]
         );
     }
 }
