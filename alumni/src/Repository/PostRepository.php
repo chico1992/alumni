@@ -19,6 +19,21 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
+    /**
+     * @return Post[] Returns an array of the 10 next oldest posts 
+     */
+    public function findByDate(\DateTime $creationDate)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.creationDate < :date')
+            ->setParameter('date', $creationDate)
+            ->orderBy('p.creationDate', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */

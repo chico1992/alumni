@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
@@ -16,38 +17,45 @@ class Post
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\Column(type="string" , length=36)
+     * @Groups({"posts"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
+     * @Groups({"posts"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"posts"})
      */
     private $flag;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"posts"})
      */
     private $content;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"posts"})
      */
     private $creationDate;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"posts"})
      */
     private $status;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"posts"})
      */
     private $author;
 
@@ -59,6 +67,7 @@ class Post
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\VisibilityGroup")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"posts"})
      */
     private $visibility;
 
@@ -70,7 +79,8 @@ class Post
     }
 
 
-    public function getId()
+
+    public function getId(): ?string
     {
         return $this->id;
     }

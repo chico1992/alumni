@@ -11,7 +11,7 @@ use App\Entity\Invitation;
 
 class SignupController extends Controller
 {
-    public function signup(Request $request, EncoderFactoryInterface $factory, string $invitationId)
+    public function signup(Request $request, EncoderFactoryInterface $factory, Invitation $invitation)
     {   
         // build the form
         $user = new User();
@@ -28,9 +28,6 @@ class SignupController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) 
         {   
-            $repository = $this->getDoctrine()->getRepository(Invitation::class);
-            $invitation = $repository->findOneBy(['id' => $invitationId]);
-
             $userEmail = $form["email"]->getData();
 
             if(empty($invitation))
