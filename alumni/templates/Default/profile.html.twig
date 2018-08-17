@@ -29,7 +29,11 @@
 			</tr>
 			<tr>
 				<td>Photo :</td>
-				<td>{{ user.getProfilePicture() }}</td>
+				{% if user.getProfilePicture() is empty %}
+					<td></td>
+				{% else %}
+					<td>{{ user.getProfilePicture().getPath() ~ '/' ~ user.getProfilePicture().getName() }}</td>
+				{% endif %}
 			</tr>
 			<tr>
 				<td>CV :</td>

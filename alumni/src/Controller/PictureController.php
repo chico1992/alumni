@@ -14,35 +14,33 @@ class PictureController extends Controller{
     public function pictureEdit(Request $request)
     {
         $manager = $this->getDoctrine()->getManager();
-        $picture = $this->getUser()->getProfilePicture();
-        $pictureForm = $this->createForm(PictureFormType::class, $picture, ['standalone' => true]);
+        $user = $this->getUser();
+        $pictureForm = $this->createForm(PictureFormType::class, $user, ['standalone' => true]);
         $pictureForm->handleRequest($request);
         
         if ($pictureForm->isSubmitted() && $pictureForm->isValid()) {
 
-            $file = $picture->getProfilePicture();
+            $file = $user->getProfilePicture();
 
             if($file){
                 $document = new Document();
-                $document->setId($file->getId())
-                    ->setPath($this->getPath('upload_dir'))
+                $document->setPath($this->getParameter('upload_dir'))
                     ->setMimeType($file->getMimeType())
-                    ->setName($file->getName());
-                $file->move($this->getPath('upload_dir'));
+                    ->setName($file->getFilename());
+                $file->move($this->getParameter('upload_dir'));
                 
-                $picture->setProfilePicture($document);
+                $user->setProfilePicture($document);
                 $manager->persist($document);
             }
             
             $manager->flush();
             
-            return $this->redirectToRoute('picture_edit', ['picture' => $this->getDocument()]);
+            return $this->redirectToRoute('profile');
         }
         
         return $this->render(
             'Default/picture.html.twig',
             [
-                'picture'=>$picture,
                 'pictureForm' => $pictureForm->createView()
             ]
         );

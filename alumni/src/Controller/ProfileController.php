@@ -29,7 +29,7 @@ class ProfileController extends Controller{
             
             $manager->flush();
             
-            return $this->redirectToRoute('profile_edit', ['user' => $this->getUser()]);
+            return $this->redirectToRoute('profile');
         }
         
         return $this->render(

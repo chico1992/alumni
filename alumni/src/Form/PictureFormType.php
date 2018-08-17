@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Document;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -33,7 +33,7 @@ class PictureFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Document::class,
+            'data_class' => User::class,
             'standalone' => false
         ]);
     }
