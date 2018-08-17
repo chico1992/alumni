@@ -46,8 +46,14 @@ post:
     path:       /post
     controller: App\Controller\PostController::createPost
 
+post_list:
+    path:       /post/list
+    controller: App\Controller\PostListController::postList
+
 comment:
-    path:       /comment
+    path:       /comment/{post}
     controller: App\Controller\CommentController::comment
+
+
 
 
