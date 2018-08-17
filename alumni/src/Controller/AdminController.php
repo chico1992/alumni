@@ -10,6 +10,7 @@ use App\Entity\VisibilityGroup;
 use App\Form\GroupFormType;
 use App\Entity\Post;
 use App\Entity\Comment;
+use App\Form\PostEditFormType;
 
 
 class AdminController extends Controller
@@ -89,6 +90,52 @@ class AdminController extends Controller
             [
                 'posts' =>  $posts,
                 'comments' =>  $comments,
+            ]
+        );
+    }
+
+    public function editPost(Post $post, Request $request)
+    {
+
+        $editForm = $this->createForm(PostEditFormType::class, $post, ['standalone'=>true]);
+        $editForm->handleRequest($request);
+        
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $post->setFlag(0);
+            
+            $this->getDoctrine()->getManager()->flush();
+            
+            return $this->redirectToRoute('flags');
+        }
+        
+        return $this->render(
+            'admin/editPost.html.twig',
+            [
+                'post'=>$post,
+                'edit_form'=>$editForm->createView()
+            ]
+        );
+    }
+
+    public function editComment(Comment $comment, Request $request)
+    {
+        $editForm = $this->createForm(PostFormType::class, $comment, ['standalone'=>true]);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            
+            $this->getDoctrine()->getManager()->flush();
+            
+            return $this->redirectToRoute('flags', ['post'=>$post->getId()]);
+        }
+        
+        return $this->render(
+            'admin/editComment.html.twig',
+            [
+                'user' => $this->getUser(),
+                'comment'=>$comment,
+                'edit_form'=>$editForm->createView()
             ]
         );
     }

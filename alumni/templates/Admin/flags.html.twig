@@ -14,6 +14,8 @@
 						<th>title</th>
 						<th>Username</th>
 						<th>status</th>
+						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -27,6 +29,8 @@
 								{% set flag = "unappropriate content?" %}
 							{% endif %}
 							<td>{{ flag }}</td>
+							<td><a href="{{ path('post_edit', {post: post.getId()}) }}">Edit</a></td>
+							<td><a href="#">Delete</a></td>
 						</tr>
 					{% endfor %}
 				</tbody>
@@ -36,7 +40,7 @@
     <h3>Flagged Comments</h3>
 	<div class="container">
 		{% if comments is empty %}
-			<p>No post found in the application</p>
+			<p>No comment found in the application</p>
 		{% else %}
 			<table class="table table-striped">
 				<thead>
@@ -44,6 +48,8 @@
 						<th>title</th>
 						<th>Username</th>
 						<th>status</th>
+						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -57,6 +63,9 @@
 								{% set flag = "unappropriate content?" %}
 							{% endif %}
 							<td>{{ flag }}</td>
+							<td><a href="{{ path("comment_edit", {comment: comment.getId()}) }}">Edit</a></td>
+							{# change content to: "this comment was deleted by an admin" #}
+							<td><a href="#">Delete</a></td>
 						</tr>
 					{% endfor %}
 				</tbody>

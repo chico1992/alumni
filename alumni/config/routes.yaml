@@ -46,10 +46,6 @@ post:
     path:       /post
     controller: App\Controller\PostController::createPost
 
-flags:
-    path:       /admin/flags
-    controller: App\Controller\AdminController::listFlags
-    
 post_list:
     path:       /posts
     controller: App\Controller\PostController::listPosts
@@ -58,5 +54,17 @@ post_list:
 flag_post:
     path:       /post/{post}/flag
     controller: App\Controller\PostController::flagPost
+
+flags:
+    path:       /admin/flags
+    controller: App\Controller\AdminController::listFlags
+    
+post_edit:
+    path:       /admin/flags/post/edit/{post}
+    controller: App\Controller\AdminController::editPost
+
+comment_edit:
+    path:       /admin/flags/comment/edit/{comment}
+    controller: App\Controller\AdminController::editComment
 
 
