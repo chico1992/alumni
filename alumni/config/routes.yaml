@@ -50,12 +50,17 @@ posts:
     path:       /posts/{creationDate}
     controller: App\Controller\PostController::getPosts
 post_list:
-    path:       /posts
-    controller: App\Controller\PostController::listPosts
 
+    path:       /post/list
+    controller: App\Controller\PostListController::postList
+
+comment:
+    path:       /comment/{post}
+    controller: App\Controller\CommentController::comment
 
 flag_post:
     path:       /post/{post}/flag
     controller: App\Controller\PostController::flagPost
+
 
 
