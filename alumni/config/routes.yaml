@@ -49,10 +49,14 @@ post:
 posts:
     path:       /posts/{creationDate}
     controller: App\Controller\PostController::getPosts
-post_list:
 
+post_list:
     path:       /post/list
     controller: App\Controller\PostListController::postList
+
+delete:
+    path:       /comment/delete/{id}
+    controller: App\Controller\CommentController::delete
 
 comment:
     path:       /comment/{post}

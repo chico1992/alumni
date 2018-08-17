@@ -38,8 +38,9 @@
 														<td>{{ comment.getCreationDate()|date('Y-m-d H:i:s') }}</td>
 														<td>{{ comment.getContent() }}</td>
 														<td>{{ comment.getAuthor().getFirstname() }}</td>
+														<td>{{ comment.getId() }}</td>
 														<td><a href="#">Edit</a></td>
-														<td><a href="#">Delete</a></td>
+														
 													</tr>
 												{% endfor %}
 											</tbody>
