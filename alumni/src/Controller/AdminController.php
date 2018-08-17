@@ -74,4 +74,21 @@ class AdminController extends Controller
             ]
         );
     }
+
+    public function listFlags()
+    {
+        $manager = $this->getDoctrine()->getManager();
+        
+        $posts = $manager->getRepository(Post::class)->findBy(['flag' == 1]);
+        $comments = $manager->getRepository(Comment::class)->findBy(['flag' == 1]);
+
+        return $this->render(
+            'Admin/flags.html.twig',
+            [
+                'posts' =>  $posts,
+                'comments' =>  $comments,
+            ]
+        );
+    }
+
 }

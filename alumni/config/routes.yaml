@@ -46,4 +46,6 @@ post:
     path:       /post
     controller: App\Controller\PostController::createPost
 
-
+flagged_posts:
+    path:       /admin/flags
+    controller: App\Controller\AdminController::checkPost
