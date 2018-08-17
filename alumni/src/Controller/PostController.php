@@ -54,9 +54,16 @@ class PostController extends Controller
         
         $postList = $posts->findByDate($creationDate);
         $serializer = $this->getSerializer();
+        $data = $serializer->serialize(
+            $postList,
+            'json', 
+            array(
+                'groups' => array('posts')
+            )
+        );
 
         return new JsonResponse(
-            $serializer->serialize($postList,'json'),
+            $data,
             200,
             [],
             true

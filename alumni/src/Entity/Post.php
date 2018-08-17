@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
@@ -16,49 +17,57 @@ class Post
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\Column(type="string" , length=36)
+     * @Groups({"posts"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
+     * @Groups({"posts"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"posts"})
      */
     private $flag;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"posts"})
      */
     private $content;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"posts"})
      */
     private $creationDate;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"posts"})
      */
     private $status;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"posts"})
      */
     private $author;
 
-    // /**
-    //  * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="post", orphanRemoval=true)
-    //  */
-    // private $comments;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="post", orphanRemoval=true)
+     */
+    private $comments;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\VisibilityGroup")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"posts"})
      */
     private $visibility;
 
@@ -141,36 +150,36 @@ class Post
         return $this;
     }
 
-    // /**
-    //  * @return Collection|Comment[]
-    //  */
-    // public function getComments(): Collection
-    // {
-    //     return $this->comments;
-    // }
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
 
-    // public function addComment(Comment $comment): self
-    // {
-    //     if (!$this->comments->contains($comment)) {
-    //         $this->comments[] = $comment;
-    //         $comment->setPost($this);
-    //     }
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setPost($this);
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function removeComment(Comment $comment): self
-    // {
-    //     if ($this->comments->contains($comment)) {
-    //         $this->comments->removeElement($comment);
-    //         // set the owning side to null (unless already changed)
-    //         if ($comment->getPost() === $this) {
-    //             $comment->setPost(null);
-    //         }
-    //     }
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getPost() === $this) {
+                $comment->setPost(null);
+            }
+        }
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
     public function getVisibility(): ?VisibilityGroup
     {
