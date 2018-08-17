@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\VisibilityGroup;
 use App\Entity\User;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class PostFormType extends AbstractType
 {
@@ -53,7 +54,7 @@ class PostFormType extends AbstractType
             $builder->add(
                 'submit', 
                 SubmitType::class,
-                ['attr'=>['class'=>'btn-success btn-block']]
+                ['attr'=>['class'=> 'btn btn-lg btn-dark btn-block']]
             );
         }
     }
@@ -63,7 +64,7 @@ class PostFormType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Post::class,
             'standalone' => false,
-            'user' => $user
+            'user' => null
         ]);
     }
 }
