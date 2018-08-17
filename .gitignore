@@ -4,3 +4,4 @@
 .vscode
 /db_alumni
 /alumni/templates/.unison.*
+node_modules

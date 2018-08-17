@@ -24,7 +24,32 @@ services:
             - ./db_alumni:/var/lib/mysql/
         networks:
             - default
+    rabbit:
+        image: rabbitmq:3.7.7-alpine
+        ports:
+            - "5672:5672"
+        environment:
+            RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+            RABBITMQ_DEFAULT_USER: "guest"
+            RABBITMQ_DEFAULT_PASS: "guest"
+            RABBITMQ_DEFAULT_VHOST: "/"
+    node:
+        image: node:8.11.4-alpine
+        working_dir: /home/node/app
+        environment:
+            - NODE_ENV=production
+        ports: 
+            - "8080:8080"
+        volumes:
+            - node-sync:/home/node/app/:nocopy
+        command: "npm start"
+        links:
+            - rabbit
+        depends_on:
+            - "rabbit"
 volumes:
     alumni-sync:
+        external: true
+    node-sync:
         external: true
     db_alumni:

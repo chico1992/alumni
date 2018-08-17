@@ -10,11 +10,12 @@ use App\Entity\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use App\DTO\PostSearch;
+use App\Service\MessageSender;
 
 
 class PostController extends Controller
 {
-    public function createPost(Request $request){
+    public function createPost(Request $request,MessageSender $messageSender){
         $post = new Post();
         $user = $this->getUser();
         $post->setAuthor($user);
@@ -34,6 +35,7 @@ class PostController extends Controller
             $manager->persist($post);
             $manager->flush();
             // redirect to user list GET
+            $messageSender->sendMessage("post was created");
             return $this->redirectToRoute('post');
         }
         return $this->render(
