@@ -6,7 +6,7 @@
 
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <main role="main" class="container">
-            <div class="starter-template">
+            <div class="starter">
                 <h1>Welcome to Alumni!</h1>
                 <p class="lead">Exchange and share informations with your classmates, as well as with <br> 
                 other current and former students who followed the same training like you. <br><br>
@@ -17,11 +17,24 @@
         </main>
     {% else %}
         <main role="main" class="container">
-            <div class="starter-template">
+            <div class="starter">
                 <h1>Welcome to Alumni!</h1>
                 <p class="lead">Sign up with your invitation link or browse our CV library.</p>  
             </div>
         </main>
     {% endif %}
+
+
+    <!-- Post Content -->
+    <div class="container">
+        <blockquote class="blockquote">
+            <p class="mb-0">Post Title</p>
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <footer class="blockquote-footer">Posted by
+                    <cite title="Source Title">Username</cite>
+                </footer>
+        </blockquote>
+    </div>
+
 
 {% endblock %}
