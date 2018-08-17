@@ -43,7 +43,7 @@ class PostController extends Controller
             ]
         );
     }
-
+  
     public function getPosts(\DateTime $creationDate)
     {
         // $time = new \DateTime();
@@ -70,6 +70,37 @@ class PostController extends Controller
         );
     }
 
+
+    public function listPosts(Request $request)
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $posts = $manager->getRepository(Post::class)->findAll();
+    
+        return $this->render(
+            'Postlist/test.html.twig',
+            [
+                'posts' =>  $posts,
+            ]
+        );
+    }
+
+    public function flagPost(Request $request, Post $post)
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $post->setFlag(1);
+        
+        $manager->persist($post);
+        $manager->flush();
+
+        $serializer = $this->getSerializer();
+
+        return new JsonResponse(
+            $serializer->serialize("The post was successfully flagged", 'json'),
+            200,
+            [],
+            true
+        );  
+    }
     public function getSerializer() : SerializerInterface
     {
         return $this->get('serializer');

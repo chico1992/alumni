@@ -1,11 +1,11 @@
 
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block title %} Groups {% endblock %}
 
 {% block body %}
 
-	<div class="container">
+	<div class="container mt-5 pl-5 pt-5">
 		{% if groups is empty %}
 			<p>No group found in the application</p>
 		{% else %}
@@ -26,7 +26,9 @@
 		{% endif %}
 	</div>
 	
-	<div class="container">
+	<br>
+	
+	<div class="container pl-5">
 	    {{ form(form) }}
 	</div>
 	
