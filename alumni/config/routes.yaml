@@ -47,6 +47,7 @@ post:
     controller: App\Controller\PostController::createPost
 
 post_list:
+
     path:       /post/list
     controller: App\Controller\PostListController::postList
 
@@ -54,6 +55,9 @@ comment:
     path:       /comment/{post}
     controller: App\Controller\CommentController::comment
 
+flag_post:
+    path:       /post/{post}/flag
+    controller: App\Controller\PostController::flagPost
 
 
 
