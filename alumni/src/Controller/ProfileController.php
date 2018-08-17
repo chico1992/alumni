@@ -18,23 +18,25 @@ class ProfileController extends Controller{
         );
     }
 
-    public function profileEdit(User $user, Request $request)
+    public function profileEdit(Request $request)
     {
+        $manager = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
         $profileForm = $this->createForm(ProfileFormType::class, $user, ['standalone' => true]);
         $profileForm->handleRequest($request);
         
         if ($profileForm->isSubmitted() && $profileForm->isValid()) {
             
-            $this->getDoctrine()->getManager()->flush();
+            $manager->flush();
             
-            return $this->redirectToRoute('profile_edit', ['user' => $user->getUser()]);
+            return $this->redirectToRoute('profile_edit', ['user' => $this->getUser()]);
         }
         
         return $this->render(
             'Default/profileEdit.html.twig',
             [
                 'user'=>$user,
-                'form' => $profileForm->createView()
+                'profileForm' => $profileForm->createView()
             ]
         );
     }

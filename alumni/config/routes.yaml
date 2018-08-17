@@ -35,8 +35,12 @@ profile:
     controller: App\Controller\ProfileController::profile
 
 profile_edit:
-    path:       /profile/edit{user}
+    path:       /profile/edit
     controller: App\Controller\ProfileController::profileEdit
+
+picture_edit:
+    path:       /profile/picture
+    controller: App\Controller\PictureController::pictureEdit
 
 user_list:
     path:       /users
