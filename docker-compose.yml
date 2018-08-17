@@ -25,9 +25,11 @@ services:
         networks:
             - default
     rabbit:
-        image: rabbitmq:3.7.7-alpine
+        image: rabbitmq:3.7.7-management-alpine
         ports:
+            - "15672:15672"
             - "5672:5672"
+            - "8080:8080"
         environment:
             RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
             RABBITMQ_DEFAULT_USER: "guest"
@@ -38,7 +40,8 @@ services:
         working_dir: /home/node/app
         environment:
             - NODE_ENV=production
-        ports: "8080:8080"
+        ports: 
+            - "3000:3000"
         volumes:
             - ./node:/home/node/app/
         command: "npm start"

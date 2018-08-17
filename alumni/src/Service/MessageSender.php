@@ -14,12 +14,13 @@ class MessageSender
     {
         $this->connection = new AMQPStreamConnection('rabbit', 5672, 'guest', 'guest');
         $this->channel = $this->connection->channel();
-        $this->channel->queue_declare('messages',false,false,false,false);
     }
-
+    
     public function sendMessage($message)
     {
-        $this->channel->basic_publish(new AMQPMessage($message),'','messages');
+        $this->channel->queue_declare('messages',false,false,false,false);
+        $msg = new AMQPMessage("hello i'm a message");
+        $this->channel->basic_publish($msg,'','messages');
         $this->channel->close();
         $this->connection->close();
         return 200;
