@@ -9,6 +9,7 @@ use App\Form\PostFormType;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
+use App\DTO\PostSearch;
 
 
 class PostController extends Controller
@@ -52,7 +53,13 @@ class PostController extends Controller
             ->getManager()
             ->getRepository(Post::class);
         
-        $postList = $posts->findByDate($creationDate);
+        $postSearch = new PostSearch();
+
+        $postSearch->creationDate=$creationDate;
+        $postSearch->user=null;
+        $postSearch->groups=$this->getUser()->getVisibilityGroups();
+        
+        $postList = $posts->findByDate($postSearch);
         $serializer = $this->getSerializer();
         $data = $serializer->serialize(
             $postList,
