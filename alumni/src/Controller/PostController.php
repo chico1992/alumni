@@ -43,6 +43,32 @@ class PostController extends Controller
             ]
         );
     }
+  
+    public function getPosts(\DateTime $creationDate)
+    {
+        // $time = new \DateTime();
+        // $time->setTimestamp($creationDate);
+        $posts = $this->getDoctrine()
+            ->getManager()
+            ->getRepository(Post::class);
+        
+        $postList = $posts->findByDate($creationDate);
+        $serializer = $this->getSerializer();
+        $data = $serializer->serialize(
+            $postList,
+            'json', 
+            array(
+                'groups' => array('posts')
+            )
+        );
+
+        return new JsonResponse(
+            $data,
+            200,
+            [],
+            true
+        );
+    }
 
 
     public function listPosts(Request $request)
@@ -79,5 +105,4 @@ class PostController extends Controller
     {
         return $this->get('serializer');
     }
-
 }
