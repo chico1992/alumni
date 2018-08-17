@@ -1,5 +1,9 @@
-{% extends 'Admin/admin.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block body %}
-    {{form(invitation_form)}}
+
+	<div class="container mt-5 pl-5 pt-5">
+        {{form(invitation_form)}}
+    </div>
+
 {% endblock %}
