@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UniqueEntity(fields="email", message="Email already taken")
  * @UniqueEntity(fields="username", message="Username already taken")
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface //, \Serializable
 {
     /**
      * @ORM\Id()
@@ -319,31 +319,31 @@ class User implements UserInterface, \Serializable
 
     }
 
-    /** @see \Serializable::serialize() */
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-            $this->username,
-            $this->firstname,
-            $this->lastname,
-            $this->profilePicture,
-            // see section on salt below
-            // $this->salt,
-        ));
-    }
+    // /** @see \Serializable::serialize() */
+    // public function serialize()
+    // {
+    //     return serialize(array(
+    //         $this->id,
+    //         $this->username,
+    //         $this->firstname,
+    //         $this->lastname,
+    //         $this->profilePicture,
+    //         // see section on salt below
+    //         // $this->salt,
+    //     ));
+    // }
 
-    /** @see \Serializable::unserialize() */
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->username,
-            $this->firstname,
-            $this->lastname,
-            $this->profilePicture,
-            // see section on salt below
-            // $this->salt
-        ) = unserialize($serialized, array('allowed_classes' => false));
-    }
+    // /** @see \Serializable::unserialize() */
+    // public function unserialize($serialized)
+    // {
+    //     list (
+    //         $this->id,
+    //         $this->username,
+    //         $this->firstname,
+    //         $this->lastname,
+    //         $this->profilePicture,
+    //         // see section on salt below
+    //         // $this->salt
+    //     ) = unserialize($serialized, array('allowed_classes' => false));
+    // }
 }

@@ -38,6 +38,10 @@ profile_edit:
     path:       /profile/edit
     controller: App\Controller\ProfileController::profileEdit
 
+picture_edit:
+    path:       /profile/picture
+    controller: App\Controller\PictureController::pictureEdit
+
 user_list:
     path:       /users
     controller: App\Controller\SearchController::listUsers
