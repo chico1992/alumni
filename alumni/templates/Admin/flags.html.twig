@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Flags {% endblock %}
+
+{% block body %}
+	<h3>Flagged Posts</h3>
+	<div class="container">
+		{% if posts is empty %}
+			<p>No post found in the application</p>
+		{% else %}
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>title</th>
+						<th>Username</th>
+						<th>status</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for post in posts %}
+						<tr>
+							<td>{{ post.getTitle() }}</td>
+							<td>{{ post.getAuthor().getUsername() }}</td>
+							{% if post.getFlag() %}
+								{% set flag = "flagged" %}
+							{% else %}
+								{% set flag = "unappropriate content?" %}
+							{% endif %}
+							<td>{{ flag }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% endif %}
+	</div>
+    <h3>Flagged Comments</h3>
+	<div class="container">
+		{% if comments is empty %}
+			<p>No post found in the application</p>
+		{% else %}
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>title</th>
+						<th>Username</th>
+						<th>status</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for comment in comments %}
+						<tr>
+							<td>{{ comment.getTitle() }}</td>
+							<td>{{ comment.getAuthor().getUsername() }}</td>
+							{% if comment.getFlag() %}
+								{% set flag = "flagged" %}
+							{% else %}
+								{% set flag = "unappropriate content?" %}
+							{% endif %}
+							<td>{{ flag }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% endif %}
+	</div>
+
+{% endblock %}

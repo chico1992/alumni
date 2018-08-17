@@ -8,6 +8,8 @@ use App\Entity\Invitation;
 use App\Form\InvitationFormType;
 use App\Entity\VisibilityGroup;
 use App\Form\GroupFormType;
+use App\Entity\Post;
+use App\Entity\Comment;
 
 
 class AdminController extends Controller
@@ -79,8 +81,8 @@ class AdminController extends Controller
     {
         $manager = $this->getDoctrine()->getManager();
         
-        $posts = $manager->getRepository(Post::class)->findBy(['flag' == 1]);
-        $comments = $manager->getRepository(Comment::class)->findBy(['flag' == 1]);
+        $posts = $manager->getRepository(Post::class)->findBy(['flag' => 1]);
+        $comments = $manager->getRepository(Comment::class)->findBy(['flag' => 1]);
 
         return $this->render(
             'Admin/flags.html.twig',
