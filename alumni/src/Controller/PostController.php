@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Post;
 use App\Form\PostFormType;
 use App\Entity\User;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\SerializerInterface;
 
 
 class PostController extends Controller
@@ -55,4 +57,27 @@ class PostController extends Controller
             ]
         );
     }
+
+    public function flagPost(Request $request, Post $post)
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $post->setFlag(1);
+        
+        $manager->persist($post);
+        $manager->flush();
+
+        $serializer = $this->getSerializer();
+
+        return new JsonResponse(
+            $serializer->serialize("The post was successfully flagged", 'json'),
+            200,
+            [],
+            true
+        );  
+    }
+    public function getSerializer() : SerializerInterface
+    {
+        return $this->get('serializer');
+    }
+
 }

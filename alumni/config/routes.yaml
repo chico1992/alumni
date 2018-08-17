@@ -51,4 +51,8 @@ post_list:
     controller: App\Controller\PostController::listPosts
 
 
+flag_post:
+    path:       /post/{post}/flag
+    controller: App\Controller\PostController::flagPost
+
 
