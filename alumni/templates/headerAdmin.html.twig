@@ -52,33 +52,53 @@
 
         <div class="container-fluid">
             <div class="row">
-                <nav class="col-md-0 d-none d-md-block bg-light sidebar">
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                     <div class="sidebar-sticky">
                         <ul class="nav flex-column">
                         <br>
                             <li class="nav-item">
                                 <a class="nav-link active" href="{{ path('group_list') }}">
-                                    <i class="fas fa-layer-group"></i>
-                                    <span data-feather="home"></span>
-                                    Groups <span class="sr-only">(current)</span>
+                                    <div class="container">
+                                        <i class="fas fa-layer-group"></i>
+                                        <span data-feather="home"></span>
+                                        Groups <span class="sr-only">(current)</span>
+                                        <span class="d-inline-block btn float-right">
+                                            <i class="fas fa-angle-right"></i>
+                                        </span>
+                                    </div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('invitation') }}">
-                                    <i class="fas fa-envelope"></i>
-                                    <span data-feather="file">Invitations</span>
+                                    <div class="container">
+                                        <i class="fas fa-envelope"></i>
+                                        <span data-feather="file">Invitations</span>
+                                        <span class="d-inline-block btn float-right">
+                                            <i class="fas fa-angle-right"></i>
+                                        </span>
+                                    </div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
-                                    <i class="fas fa-flag"></i>
-                                    <span data-feather="file">Flagged Posts</span>
+                                    <div class="container">
+                                        <i class="fas fa-flag"></i>
+                                        <span data-feather="file">Flagged Posts</span>
+                                        <span class="d-inline-block btn float-right">
+                                            <i class="fas fa-angle-right"></i>
+                                        </span>
+                                    </div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('user_list') }}">
-                                    <i class="fas fa-users"></i>
-                                    <span data-feather="file">Users</span>
+                                    <div class="container">
+                                        <i class="fas fa-users"></i>
+                                        <span data-feather="file">Users</span>
+                                        <span class="d-inline-block btn float-right">
+                                            <i class="fas fa-angle-right"></i>
+                                        </span>
+                                    </div>
                                 </a>
                             </li>
                         </ul>
