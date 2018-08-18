@@ -16,7 +16,7 @@ class Conversation
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\Column(type="string" , length=36)
-     * @Groups({"conversation"})
+     * @Groups({"conversation","message"})
      */
     private $id;
 

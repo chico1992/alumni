@@ -15,7 +15,7 @@ use App\Service\MessageSender;
 
 class PostController extends Controller
 {
-    public function createPost(Request $request,MessageSender $messageSender){
+    public function createPost(Request $request){
         $post = new Post();
         $user = $this->getUser();
         $post->setAuthor($user);

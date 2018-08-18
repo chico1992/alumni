@@ -22,13 +22,13 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\Column(type="string" , length=36)
-     * @Groups({"posts","conversation"})
+     * @Groups({"posts","conversation","message"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Groups({"posts","conversation"})
+     * @Groups({"posts","conversation","message"})
      */
     private $username;
 
@@ -45,13 +45,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"posts","conversation"})
+     * @Groups({"posts","conversation","message"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"posts","conversation"})
+     * @Groups({"posts","conversation","message"})
      */
     private $lastname;
 

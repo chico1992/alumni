@@ -66,4 +66,8 @@ new_conversation:
     path:       /conversation/new/{user}
     controller: App\Controller\ConversationController::newConversation
 
+new_message:
+    path:       /message/{conversation}
+    controller: App\Controller\MessageController::receiveMessage
+
 

@@ -19,7 +19,7 @@ class MessageSender
     public function sendMessage($message)
     {
         $this->channel->queue_declare('messages',false,false,false,false);
-        $msg = new AMQPMessage("hello i'm a message");
+        $msg = new AMQPMessage($message);
         $this->channel->basic_publish($msg,'','messages');
         $this->channel->close();
         $this->connection->close();
