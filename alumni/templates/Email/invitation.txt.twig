@@ -1,4 +1,5 @@
-Welcome to alumni
-Hello you have been invited to join our wonderfull platform, where you can exchange with your classmates and with other students and ex-students that followed the same formation ass you.
+
+Welcome to Alumni!
+Hello, you have been invited to join our wonderful platform, where you can exchange and share informations with your classmates, as well as with other students and former students who followed the same training like you.
 To get started simply follow this link
-{{ absolute_url(path('signup')) }}/{invitation.getId()}
+{{ absolute_url(path('signup/',{'invitation' : invitation.getId()})) }}

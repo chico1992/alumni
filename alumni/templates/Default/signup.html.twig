@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Sign Up{% endblock %}
+{% block title %}Sign up{% endblock %}
 
 {% block body %}
 
@@ -12,9 +12,9 @@
 		{% if errorInvitation %}
 			<p>Invitation does not exist</p>
 		{% elseif errorEmail %}
-			<p>Your email is not the same as in your invitation</p>
+			<p>Please make sure to use the same email as in your invitation.</p>
 		{% else %}
-			<p>Signup copmlete!</p>
+			<p>Signup complete!</p>
 		{% endif %}
 	</div>
 

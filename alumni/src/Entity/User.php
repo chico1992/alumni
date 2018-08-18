@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -21,16 +22,19 @@ class User implements UserInterface //, \Serializable
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\Column(type="string" , length=36)
+     * @Groups({"posts"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups({"posts"})
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups({"posts"})
      */
     private $email;
 
@@ -41,11 +45,13 @@ class User implements UserInterface //, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"posts"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"posts"})
      */
     private $lastname;
 
@@ -84,6 +90,7 @@ class User implements UserInterface //, \Serializable
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Document", cascade={"persist", "remove"})
      * @Assert\File(mimeTypes={ "image/*" })
+     * @Groups({"posts"})
      */
     private $profilePicture;
 

@@ -1,69 +1,110 @@
+<header>
+    <nav class="navbar navbar-expand-md fixed-top navbar-dark flex-md-nowrap bg-dark">
+        {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
+            <a class="navbar-brand" href="{{ path('homepage') }}">Alumni</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+        {% endif %}
 
-<nav class="navbar navbar-expand-md fixed-top navbar-dark flex-md-nowrap bg-dark">
-    <a class="navbar-brand" href="{{ path('homepage') }}">Alumni</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    </button>
+            <div class="collapse navbar-collapse" id="navbarsExample04">
+                <ul class="navbar-nav mr-auto">
+                    {% if is_granted('ROLE_USER') %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('profile') }}">Profile <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">CV Library</a>
+                        </li>
+                    {% endif %}
 
-    <div class="collapse navbar-collapse" id="navbarsExample04">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ path('homepage') }}">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">CV</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('login') }}">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('logout') }}">Logout</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('admin') }}">Admin Panel</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-md-0">
-            <input class="form-control" type="text" placeholder="Search">
-        </form>
-    </div>
-</nav>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('admin') }}">Administration</a>
+                        </li>
+                    {% endif %}
+
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('logout') }}">Logout</a>
+                        </li>
+                    {% else %}
+                    <a class="navbar-brand" href="{{ path('homepage') }}">Alumni</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">CV Library</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('login') }}">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <form class="form-inline my-2 my-md-0">
+                    <input class="form-control" type="text" placeholder="Search...">
+                </form>
+            </div>
+        </nav>
 
 
-<!-- SIDEBAR -->
+        <!-- SIDEBAR -->
 
-<div class="container-fluid">
-    <div class="row">
-    <nav class="col-md-0 d-none d-md-block bg-light sidebar">
-        <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ path('group_list') }}">
-                        <span data-feather="home"></span>
-                        Groupes <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('invitation') }}">
-                        <span data-feather="file"></span>
-                        Invitations
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span data-feather="file"></span>
-                        Flagged Posts
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('user_list') }}">
-                        <span data-feather="file"></span>
-                        Users
-                    </a>
-                </li>
-            </ul>
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                    <div class="sidebar-sticky">
+                        <ul class="nav flex-column">
+                        <br>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ path('group_list') }}">
+                                    <div class="container">
+                                        <i class="fas fa-layer-group"></i>
+                                        <span data-feather="home"></span>
+                                        Groups <span class="sr-only">(current)</span>
+                                        <span class="d-inline-block btn float-right">
+                                            <i class="fas fa-angle-right"></i>
+                                        </span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('invitation') }}">
+                                    <div class="container">
+                                        <i class="fas fa-envelope"></i>
+                                        <span data-feather="file">Invitations</span>
+                                        <span class="d-inline-block btn float-right">
+                                            <i class="fas fa-angle-right"></i>
+                                        </span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <div class="container">
+                                        <i class="fas fa-flag"></i>
+                                        <span data-feather="file">Flagged Posts</span>
+                                        <span class="d-inline-block btn float-right">
+                                            <i class="fas fa-angle-right"></i>
+                                        </span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('user_list') }}">
+                                    <div class="container">
+                                        <i class="fas fa-users"></i>
+                                        <span data-feather="file">Users</span>
+                                        <span class="d-inline-block btn float-right">
+                                            <i class="fas fa-angle-right"></i>
+                                        </span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
         </div>
-    </nav>
+
+</header>

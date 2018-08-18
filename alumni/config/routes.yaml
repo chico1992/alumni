@@ -8,7 +8,7 @@ admin:
     controller: App\Controller\AdminController::admin
 
 signup:
-    path:       /signup/{invitationId}
+    path:       /signup/{invitation}
     controller: App\Controller\SignupController::signup
 
 group_list:
@@ -49,5 +49,22 @@ user_list:
 post:
     path:       /post
     controller: App\Controller\PostController::createPost
+
+posts:
+    path:       /posts/{creationDate}
+    controller: App\Controller\PostController::getPosts
+post_list:
+
+    path:       /post/list
+    controller: App\Controller\PostListController::postList
+
+comment:
+    path:       /comment/{post}
+    controller: App\Controller\CommentController::comment
+
+flag_post:
+    path:       /post/{post}/flag
+    controller: App\Controller\PostController::flagPost
+
 
 
