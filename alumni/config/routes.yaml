@@ -62,5 +62,8 @@ flag_post:
     path:       /post/{post}/flag
     controller: App\Controller\PostController::flagPost
 
+new_conversation:
+    path:       /conversation/new/{user}
+    controller: App\Controller\ConversationController::newConversation
 
 

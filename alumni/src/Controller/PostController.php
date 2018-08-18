@@ -35,7 +35,6 @@ class PostController extends Controller
             $manager->persist($post);
             $manager->flush();
             // redirect to user list GET
-            $messageSender->sendMessage("post was created");
             return $this->redirectToRoute('post');
         }
         return $this->render(
