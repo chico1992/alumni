@@ -19,11 +19,11 @@ class PostEditFormType extends AbstractType
         $builder
             ->add('title',
                 TextType::class,
-                ['label' => 'Title for your post']
+                ['label' => 'Edit the title']
             )   
             ->add('content',
                 TextareaType::class,
-                ['label' => 'Enter the content of your post']
+                ['label' => 'Edit the post']
             )
         ;
         if ($options['standalone']) {

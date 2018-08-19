@@ -55,7 +55,6 @@
 				<tbody>
 					{% for comment in comments %}
 						<tr>
-							<td>{{ comment.getTitle() }}</td>
 							<td>{{ comment.getAuthor().getUsername() }}</td>
 							{% if comment.getFlag() %}
 								{% set flag = "flagged" %}
