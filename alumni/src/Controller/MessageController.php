@@ -13,16 +13,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class MessageController extends Controller
 {
-    public function receiveMessage(Request $request, Conversation $conversation,MessageSender $messageSender)
+    public function receiveMessage(Request $request,MessageSender $messageSender)
     {
         $message = new Message();
         $content = $request->request->get('content');
-        if($content)
+        $conversationId = $request->request->get('conversation');
+        if($content && $conversationId)
         {
+            $manager = $this->getDoctrine()->getManager();
+            $conversation = $this->getDoctrine()
+                ->getRepository(Conversation::class)
+                ->find($conversationId);
             $message->setContent($content);
             $message->setSender($this->getUser());
             $message->setReceiver($conversation);
-            $manager = $this->getDoctrine()->getManager();
             $manager->persist($message);
             $manager->flush();
         }
@@ -36,7 +40,7 @@ class MessageController extends Controller
         );
         $messageSender->sendMessage($data);
         return new JsonResponse(
-            "message was sent",
+            $data,
             200,
             [],
             true

@@ -22,19 +22,19 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\Column(type="string" , length=36)
-     * @Groups({"posts","conversation","message"})
+     * @Groups({"posts","conversation","message","user"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Groups({"posts","conversation","message"})
+     * @Groups({"posts","conversation","message","user"})
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Groups({"posts"})
+     * @Groups({"posts","user"})
      */
     private $email;
 
@@ -51,7 +51,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"posts","conversation","message"})
+     * @Groups({"posts","conversation","message","user"})
      */
     private $lastname;
 
@@ -90,7 +90,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Document", cascade={"persist", "remove"})
      * @Assert\File(mimeTypes={ "image/*" })
-     * @Groups({"posts"})
+     * @Groups({"posts","user"})
      */
     private $profilePicture;
 
