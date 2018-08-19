@@ -42,14 +42,16 @@ class Comment
      * @ORM\JoinColumn(nullable=false)
      */
     private $post;
-
+  
+ 
     public function __construct()
+
     {
         $this->creationDate = new \DateTime();
     }
 
 
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }
