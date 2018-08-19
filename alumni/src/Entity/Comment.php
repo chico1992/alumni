@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
+ * @ORM\Entity()
  */
 class Comment
 {
@@ -42,6 +42,14 @@ class Comment
      * @ORM\JoinColumn(nullable=false)
      */
     private $post;
+  
+ 
+    public function __construct()
+
+    {
+        $this->creationDate = new \DateTime();
+    }
+
 
     public function getId(): ?string
     {
@@ -51,13 +59,6 @@ class Comment
     public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
-    }
-
-    public function setCreationDate(\DateTimeInterface $creationDate): self
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
     }
 
     public function getContent(): ?string

@@ -5,6 +5,10 @@ namespace App\Repository;
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use App\Entity\User;
+use App\Entity\VisibilityGroup;
+use Doctrine\Common\Collections\Collection;
+use App\DTO\PostSearch;
 
 /**
  * @method Post|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +21,32 @@ class PostRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Post::class);
+    }
+
+    /**
+     * @return Post[] Returns an array of the 10 next oldest posts 
+     */
+    public function findByDate(PostSearch $dto)
+    {
+        $queryBuilder =$this->createQueryBuilder('p')
+            ->andWhere('p.creationDate < :date')
+            ->setParameter('date', $dto->creationDate);
+        if(!empty($dto->user)){
+            $queryBuilder->andWhere(
+                'p.author like :author'
+            );
+            $queryBuilder->setParameter('autor',$dto->user);
+        }
+        if(!empty($dto->groups)){
+            $queryBuilder->andWhere(
+                'p.visibility in (:visibility)'
+            );
+            $queryBuilder->setParameter('visibility',$dto->groups);
+        }
+        $queryBuilder->orderBy('p.creationDate', 'DESC')
+            ->setMaxResults(10);
+            
+        return $queryBuilder->getQuery()->getResult();
     }
 
 //    /**

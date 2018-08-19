@@ -1,0 +1,57 @@
+	<div class="container">
+    	{% if posts is empty %}
+    		<p>No posts found in the application</p>
+    	{% else %}
+            <table class="table">
+            	<thead>
+            		<tr>
+            			<th>Creation date</th>
+            			<th>Title</th>
+            			<th>Content</th>
+            			<th></th>
+            		</tr>
+            	</thead>
+            	<tbody>
+            		{% for post in posts %}
+            			<tr>
+            				<td>{{ post.getCreationDate()|date('Y-m-d H:i:s') }}</td>
+            				<td>{{ post.getTitle() }}</td>
+            				<td>{{ post.getContent() }}</td>
+                            <td><a href="{{ path("comment", {post: post.getId()}) }}">Comment</a></td>
+							<td>
+								<div class="container">
+									{% if comments is empty %}
+										<p>No comments found</p>
+									{% else %}
+										<table class="table">
+											<thead>
+												<tr>
+													<th>Creation date</th>
+													<th>Content</th>
+													<th>Username</th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for comment in comments %}
+													<tr>
+														<td>{{ comment.getCreationDate()|date('Y-m-d H:i:s') }}</td>
+														<td>{{ comment.getContent() }}</td>
+														<td>{{ comment.getAuthor().getFirstname() }}</td>
+														<td>{{ comment.getId() }}</td>
+														<td><a href="#">Edit</a></td>
+														
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									{% endif %}
+
+								</div>
+							<td>
+            			</tr>
+            		{% endfor %}
+            	</tbody>
+            </table>
+    	{% endif %}
+	
