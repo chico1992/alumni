@@ -102,7 +102,9 @@ class AdminController extends Controller
         
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
+           //add if user = admin
             $post->setFlag(0);
+            
             
             $this->getDoctrine()->getManager()->flush();
             

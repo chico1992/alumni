@@ -67,4 +67,8 @@ comment_edit:
     path:       /admin/flags/comment/edit/{comment}
     controller: App\Controller\AdminController::editComment
 
+profile_search:
+    path:       /users/search{user}
+    controller: App\Controller\SearchController::showUser 
+
 

@@ -24,7 +24,7 @@ public function listUsers(Request $request)
         $users = $manager->getRepository(User::class)->findByUserSearch($dto);
     
         return $this->render(
-            'Userlist/list.html.twig',
+            'Search/searchList.html.twig',
             [
                 'users' =>  $users,
                 'searchForm'=>$searchForm->createView()
@@ -32,4 +32,16 @@ public function listUsers(Request $request)
             ]
         );
     }
+
+    public function showUser(User $user)
+    {
+        return $this->render(
+            'default/profileSearch.html.twig',
+            [
+                'searchedUser' => $user
+            ]
+        );
+    }
+
+
 }
