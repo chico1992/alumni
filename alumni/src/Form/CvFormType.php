@@ -2,31 +2,33 @@
 
 namespace App\Form;
 
+use App\Entity\Cv;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
-class ProfileFormType extends AbstractType
+class CvFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(
-            'username',
-            TextType::class,
-            ['label'=>'Please choose a Username']
-        )->add(
-            'firstname',
-            TextType::class,
-            ['label'=>'Please enter your Firstname']
-        )->add(
-            'lastname',
-            TextType::class,
-            ['label'=>'Please enter your Lastname']
-        );
-        
+        $builder
+            ->add(
+                'cv',
+                FileType::class,
+                ['label'=>'Please upload your CV'],
+                ['required' => false]
+            )
+            /* ->add(
+                'status',
+                CheckboxType::class,
+                ['label'=>'Show your CV publicly?'],
+                ['required' => false]
+            ) */;
+
         if ($options['standalone']) {
             $builder->add(
                 'submit', 

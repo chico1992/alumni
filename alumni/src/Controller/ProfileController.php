@@ -18,16 +18,18 @@ class ProfileController extends Controller{
         );
     }
 
-    public function profileEdit(User $user, Request $request)
+    public function profileEdit(Request $request)
     {
+        $manager = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
         $profileForm = $this->createForm(ProfileFormType::class, $user, ['standalone' => true]);
         $profileForm->handleRequest($request);
         
         if ($profileForm->isSubmitted() && $profileForm->isValid()) {
             
-            $this->getDoctrine()->getManager()->flush();
+            $manager->flush();
             
-            return $this->redirectToRoute('profile_edit', ['user' => $user->getId()]);
+            return $this->redirectToRoute('profile');
         }
         
         return $this->render(
