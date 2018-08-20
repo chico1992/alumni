@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use App\DTO\PostSearch;
 use App\Service\MessageSender;
+use App\Form\PostEditFormType;
 
 
 class PostController extends Controller
@@ -112,5 +113,57 @@ class PostController extends Controller
     public function getSerializer() : SerializerInterface
     {
         return $this->get('serializer');
+    }
+
+    public function deletePost(Request $request, Post $post)
+    {
+        $idUser = $this->getUser();
+        $deletionError = false;
+        
+        if(($idUser == $post->getAuthor()))
+        {
+            $manager = $this->getDoctrine()->getManager();
+            $manager->remove($post);
+            $manager->flush();
+        } 
+        else
+        {
+            $deletionError = true;  
+        }
+
+        return $this->redirectToRoute('post_list');
+    }
+
+    public function editUserPost(Post $post, Request $request)
+    {
+        $editForm = $this->createForm(PostEditFormType::class, $post, ['standalone'=>true]);
+        $editForm->handleRequest($request);
+
+        $editError = false;
+        $idUser = $this->getUser();
+        
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            
+            if(($idUser == $post->getAuthor()))
+            {
+                $this->getDoctrine()->getManager()->flush();
+            
+                return $this->redirectToRoute('post_list');
+            }
+            else
+            {
+                $editError = true;
+            }
+
+        }
+        
+        return $this->render(
+            'Default/editPost.html.twig',
+            [
+                'post'=>$post,
+                'editError'=>$editError,
+                'edit_form'=>$editForm->createView()
+            ]
+        );
     }
 }
