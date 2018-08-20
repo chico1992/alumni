@@ -23,7 +23,7 @@ class PostFormType extends AbstractType
             ->add(
                 'title',
                 TextType::class,
-                ['label' => 'Titel for your post']
+                ['label' => 'Title for your post']
             )
             ->add(
                 'content',

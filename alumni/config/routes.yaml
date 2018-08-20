@@ -70,6 +70,7 @@ flag_post:
     path:       /post/{post}/flag
     controller: App\Controller\PostController::flagPost
 
+
 post_user_edit:
     path:       /post/edit/{id}
     controller: App\Controller\PostController::editUserPost
@@ -77,6 +78,23 @@ post_user_edit:
 comment_user_edit:
     path:       /comment/edit/{id}
     controller: App\Controller\CommentController::editUserComment
+
+flags:
+    path:       /admin/flags
+    controller: App\Controller\AdminController::listFlags
+    
+post_edit:
+    path:       /admin/flags/post/edit/{post}
+    controller: App\Controller\AdminController::editPost
+
+comment_edit:
+    path:       /admin/flags/comment/edit/{comment}
+    controller: App\Controller\AdminController::editComment
+
+profile_search:
+    path:       /users/search{user}
+    controller: App\Controller\SearchController::showUser 
+
 
 
 

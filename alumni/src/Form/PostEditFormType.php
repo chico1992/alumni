@@ -1,5 +1,8 @@
 <?php
+
 namespace App\Form;
+
+
 use App\Entity\Post;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -9,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Entity\VisibilityGroup;
+
 class PostEditFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -16,11 +20,12 @@ class PostEditFormType extends AbstractType
         $builder
             ->add('title',
                 TextType::class,
-                ['label' => 'Title for your post']
+                ['label' => 'Edit the title']
             )   
             ->add('content',
                 TextareaType::class,
-                ['label' => 'Enter the content of your post']
+                ['label' => 'Edit the post']
+
             )
         ;
         if ($options['standalone']) {
@@ -31,6 +36,7 @@ class PostEditFormType extends AbstractType
             );
         }
     }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -39,3 +45,4 @@ class PostEditFormType extends AbstractType
         ]);
     }
 }
+
