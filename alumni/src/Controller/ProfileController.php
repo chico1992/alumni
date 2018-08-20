@@ -27,14 +27,14 @@ class ProfileController extends Controller{
             
             $this->getDoctrine()->getManager()->flush();
             
-            return $this->redirectToRoute('profile_edit', ['user' => $user->getUser()]);
+            return $this->redirectToRoute('profile_edit', ['user' => $user->getId()]);
         }
         
         return $this->render(
             'Default/profileEdit.html.twig',
             [
                 'user'=>$user,
-                'form' => $profileForm->createView()
+                'profileForm' => $profileForm->createView()
             ]
         );
     }
