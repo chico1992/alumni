@@ -1,27 +1,3 @@
 {% extends 'base.html.twig' %}
 
 {% block title %} Welcome to Alumni {% endblock %}
-
-{% block body %} 
-
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <main role="main" class="container">
-            <div class="starter-template">
-                <h1>Welcome to Alumni!</h1>
-                <p class="lead">Exchange and share informations with your classmates, as well as with <br> 
-                other current and former students who followed the same training like you. <br><br>
-                Browse our CV library, upload your own and get it in front of the right people. <br>
-                Oh, and you'll be able to choose who can see your CV details, since we care <br>
-                about your privacy and never share your informations without your approval. <br></p>  
-            </div>
-        </main>
-    {% else %}
-        <main role="main" class="container">
-            <div class="starter-template">
-                <h1>Welcome to Alumni!</h1>
-                <p class="lead">Sign up with your invitation link or browse our CV library.</p>  
-            </div>
-        </main>
-    {% endif %}
-
-{% endblock %}
