@@ -7,3 +7,6 @@ syncs:
         src: './alumni'
         #sync_strategy: 'rsync' # not needed, this is the default now
         sync_excludes: ['.gitignore', '.DS_Store', '.vscode','.git','./node_modules','./assets']
+    node-sync:
+        src: './node'
+        sync_excludes: ['.gitignore', '.DS_Store', '.vscode','.git','./assets']

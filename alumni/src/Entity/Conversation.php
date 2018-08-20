@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ConversationRepository")
@@ -15,16 +16,19 @@ class Conversation
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\Column(type="string" , length=36)
+     * @Groups({"conversation","message"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"conversation"})
      */
     private $name;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="conversations")
+     * @Groups({"conversation"})
      */
     private $users;
 
@@ -39,7 +43,7 @@ class Conversation
         $this->messages = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }

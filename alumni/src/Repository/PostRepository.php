@@ -30,7 +30,9 @@ class PostRepository extends ServiceEntityRepository
     {
         $queryBuilder =$this->createQueryBuilder('p')
             ->andWhere('p.creationDate < :date')
-            ->setParameter('date', $dto->creationDate);
+            ->setParameter('date', $dto->creationDate)
+            ->andWhere('p.status = :status')
+            ->setParameter('status', $dto->status);
         if(!empty($dto->user)){
             $queryBuilder->andWhere(
                 'p.author like :author'
@@ -43,6 +45,7 @@ class PostRepository extends ServiceEntityRepository
             );
             $queryBuilder->setParameter('visibility',$dto->groups);
         }
+        
         $queryBuilder->orderBy('p.creationDate', 'DESC')
             ->setMaxResults(10);
             

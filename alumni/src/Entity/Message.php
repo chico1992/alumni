@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MessageRepository")
@@ -13,27 +14,31 @@ class Message
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\Column(type="string" , length=36)
+     * @Groups({"message"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"message"})
      */
     private $content;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"message"})
      */
     private $sender;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Conversation", inversedBy="messages")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"message"})
      */
     private $receiver;
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
