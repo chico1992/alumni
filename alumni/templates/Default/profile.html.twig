@@ -44,7 +44,7 @@
 				{% if user.getProfilePicture() is empty %}
 					<td></td>
 				{% else %}
-					<td><img src="{{ path('profile', {'profilePicture': user.getProfilePicture().getId}) }}" class="img img-responsive img-preview thumbnail" /></td>
+					<td><img src="{{ path('profile', {'profilePicture': user.getProfilePicture()}) }}" class="img img-responsive img-preview thumbnail" /></td>
 				{% endif %}
 			</tr>
 		</tbody>
