@@ -42,6 +42,10 @@ picture_edit:
     path:       /profile/picture
     controller: App\Controller\PictureController::pictureEdit
 
+cv_edit:
+    path:       /profile/cv
+    controller: App\Controller\CvController::cvEdit
+
 user_list:
     path:       /users
     controller: App\Controller\SearchController::listUsers

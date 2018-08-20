@@ -292,12 +292,12 @@ class User implements UserInterface //, \Serializable
         return $this;
     }
 
-    public function getCv(): ?Cv
+    public function getCv()
     {
         return $this->cv;
     }
 
-    public function setCv(?Cv $cv): self
+    public function setCv($cv): self
     {
         $this->cv = $cv;
 

@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
 use App\Entity\Document;
 use App\Form\PictureFormType;
+use Symfony\Component\HttpFoundation\File\File;
 
 
 class PictureController extends Controller{
@@ -15,6 +16,7 @@ class PictureController extends Controller{
     {
         $manager = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        $user->setProfilePicture( new File($this->getParameter('upload_dir') . '/' . $user->getProfilePicture()->getName()));
         $pictureForm = $this->createForm(PictureFormType::class, $user, ['standalone' => true]);
         $pictureForm->handleRequest($request);
         
