@@ -8,46 +8,22 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use App\Entity\VisibilityGroup;
-use App\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use App\Entity\VisibilityGroup;
 
-class PostFormType extends AbstractType
+class PostEditFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $user= $options['user'];
         $builder
-            ->add(
-                'title',
+            ->add('title',
                 TextType::class,
-                ['label' => 'Title for your post']
-            )
-            ->add(
-                'content',
+                ['label' => 'Edit the title']
+            )   
+            ->add('content',
                 TextareaType::class,
-                ['label' => 'Enter the content of your post']
-            )
-            ->add(
-                'status',
-                ChoiceType::class,
-                array(
-                    'choices' => array(
-                        'publish' => true,
-                        'draft' => false,
-                    )
-                )
-            )
-            ->add(
-                'visibility',
-                EntityType::class,
-                array(
-                    'class' => VisibilityGroup::class,
-                    'choices' => $user->getVisibilityGroups(),
-                    'choice_label' => 'label'
-                )
+                ['label' => 'Edit the post']
             )
         ;
         if ($options['standalone']) {
@@ -64,7 +40,6 @@ class PostFormType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Post::class,
             'standalone' => false,
-            'user' => null
         ]);
     }
 }
