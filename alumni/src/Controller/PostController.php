@@ -60,6 +60,7 @@ class PostController extends Controller
         $postSearch->creationDate=$creationDate;
         $postSearch->user=null;
         $postSearch->groups=$this->getUser()->getVisibilityGroups();
+        $postSearch->status=true;
         
         $postList = $posts->findByDate($postSearch);
         $serializer = $this->getSerializer();
