@@ -10,6 +10,7 @@ use App\Entity\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use App\DTO\PostSearch;
+use App\Service\MessageSender;
 use App\Form\PostEditFormType;
 
 
