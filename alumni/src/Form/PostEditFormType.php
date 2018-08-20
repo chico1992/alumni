@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+
 use App\Entity\Post;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,6 +25,7 @@ class PostEditFormType extends AbstractType
             ->add('content',
                 TextareaType::class,
                 ['label' => 'Edit the post']
+
             )
         ;
         if ($options['standalone']) {
@@ -43,3 +45,4 @@ class PostEditFormType extends AbstractType
         ]);
     }
 }
+

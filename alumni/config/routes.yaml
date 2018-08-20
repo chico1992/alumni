@@ -54,7 +54,11 @@ post_list:
     path:       /post/list
     controller: App\Controller\PostListController::postList
 
-delete:
+delete_post:
+    path:       /post/delete/{id}
+    controller: App\Controller\PostController::deletePost
+
+delete_comment:
     path:       /comment/delete/{id}
     controller: App\Controller\CommentController::delete
 
@@ -65,6 +69,15 @@ comment:
 flag_post:
     path:       /post/{post}/flag
     controller: App\Controller\PostController::flagPost
+
+
+post_user_edit:
+    path:       /post/edit/{id}
+    controller: App\Controller\PostController::editUserPost
+
+comment_user_edit:
+    path:       /comment/edit/{id}
+    controller: App\Controller\CommentController::editUserComment
 
 flags:
     path:       /admin/flags
@@ -81,6 +94,7 @@ comment_edit:
 profile_search:
     path:       /users/search{user}
     controller: App\Controller\SearchController::showUser 
+
 
 
 
