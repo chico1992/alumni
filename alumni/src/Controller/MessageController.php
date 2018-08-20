@@ -38,7 +38,7 @@ class MessageController extends Controller
                 'groups' => array('message')
             )
         );
-        $messageSender->sendMessage($data);
+        $messageSender->pushToQueue($data,'messages');
         return new JsonResponse(
             $data,
             200,

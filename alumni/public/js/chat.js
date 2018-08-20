@@ -14,13 +14,26 @@ $(function() {
         })
     }
     let socket = io('http://localhost:3000');
-    socket.on('connect',function(){
-        conversations.forEach(conversation => {
-            socket.emit('room',conversation.id);
+    console.log(user!=null);
+    if(user!=null){
+        socket.on('connect',function(){
+            if(conversations!=null){
+                conversations.forEach(conversation => {
+                    socket.emit('room',conversation.id);
+                });
+            }
+            socket.emit('room',user.id);
         });
-    });
+    }
 
     socket.on('message',function(message){
         console.log('Incoming message:', message);
+    });
+
+    socket.on('conversation',function(message){
+        console.log('Incoming conversation',message);
+        conversations.push(JSON.parse(message));
+        sessionStorage.setItem('conversations',JSON.stringify(conversations));
     })
+
 });
