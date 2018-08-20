@@ -28,14 +28,6 @@
 				<td>{{ user.getEmail() }}</td>
 			</tr>
 			<tr>
-				<td>Photo :</td>
-				{% if user.getProfilePicture() is empty %}
-					<td></td>
-				{% else %}
-					<td>{{ user.getProfilePicture().getPath() ~ '/' ~ user.getProfilePicture().getName() }}</td>
-				{% endif %}
-			</tr>
-			<tr>
 				<td>CV :</td>
 				<td>{{ user.getCv() }}</td>
 			</tr>
@@ -44,19 +36,14 @@
 				{% if user.getProfilePicture() is empty %}
 					<td></td>
 				{% else %}
-					<td><img src="{{ path('profile', {'profilePicture': user.getProfilePicture()}) }}" class="img img-responsive img-preview thumbnail" /></td>
+					<td><img src="{{ path('download_picture', { 'document': user.getProfilePicture().getId() } ) }}" alt="profile picture" /></td>
 				{% endif %}
 			</tr>
 		</tbody>
 	</table>
 
-<<<<<<< HEAD
-<a href="{{ path("profile_edit", {'user' : user.getId()}) }}" class="btn btn-primary btn-lg" role="button">Edit profile</a>
-=======
 <a href="{{ path("profile_edit") }}" class="btn btn-primary btn-lg" role="button">Edit profile</a>
-<a href="{{ path("picture_edit") }}" class="btn btn-primary btn-lg" role="button">Upload picture</a>
 <a href="{{ path("cv_edit") }}" class="btn btn-primary btn-lg" role="button">Upload CV</a>
 
->>>>>>> 95aa8885db7a42dff4ea5efb3d978c34a6faeac2
 
 {% endblock %}

@@ -16,6 +16,7 @@ class CvController extends Controller{
     {
         $manager = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        
         $cvForm = $this->createForm(CvFormType::class, $user, ['standalone' => true]);
         $cvForm->handleRequest($request);
         

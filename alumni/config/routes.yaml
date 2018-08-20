@@ -38,10 +38,6 @@ profile_edit:
     path:       /profile/edit
     controller: App\Controller\ProfileController::profileEdit
 
-picture_edit:
-    path:       /profile/picture
-    controller: App\Controller\PictureController::pictureEdit
-
 cv_edit:
     path:       /profile/cv
     controller: App\Controller\CvController::cvEdit
@@ -118,5 +114,9 @@ profile_search:
 get_user_conversations:
     path:       /user/conversations
     controller: App\Controller\UserController::getCurrentUserConversations
+
+download_picture:
+    path:       /profile/{document}
+    controller: App\Controller\ProfileController::downloadPicture
 
 
