@@ -28,16 +28,22 @@
 				<td>{{ user.getEmail() }}</td>
 			</tr>
 			<tr>
-				<td>Photo :</td>
-				<td>{{ user.getProfilePicture() }}</td>
-			</tr>
-			<tr>
 				<td>CV :</td>
 				<td>{{ user.getCv() }}</td>
+			</tr>
+			<tr>
+				<td>Photo :</td>
+				{% if user.getProfilePicture() is empty %}
+					<td></td>
+				{% else %}
+					<td><img src="{{ path('download_picture', { 'document': user.getProfilePicture().getId() } ) }}" alt="profile picture" /></td>
+				{% endif %}
 			</tr>
 		</tbody>
 	</table>
 
-<a href="{{ path("profile_edit", {'user' : user.getId()}) }}" class="btn btn-primary btn-lg" role="button">Edit profile</a>
+<a href="{{ path("profile_edit") }}" class="btn btn-primary btn-lg" role="button">Edit profile</a>
+<a href="{{ path("cv_edit") }}" class="btn btn-primary btn-lg" role="button">Upload CV</a>
+
 
 {% endblock %}
