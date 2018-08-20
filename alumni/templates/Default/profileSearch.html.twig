@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Profile {% endblock %}
+
+{% block body %}
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col"></th>
+				<th scope="col">User information</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Username :</td>
+				<td>{{ searchedUser.getUsername() }}</td>
+			</tr>
+			<tr>
+				<td>Firstname :</td>
+				<td>{{ searchedUser.getFirstname() }}</td>
+			</tr>
+			<tr>
+				<td>Lastname :</td>
+				<td>{{ searchedUser.getLastname() }}</td>
+			</tr>
+			<tr>
+				<td>Email :</td>
+				<td>{{ searchedUser.getEmail() }}</td>
+			</tr>
+			<tr>
+				<td>Photo :</td>
+				<td>{{ searchedUser.getProfilePicture() }}</td>
+			</tr>
+			<tr>
+				<td>CV :</td>
+				<td>{{ searchedUser.getCv() }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+{% endblock %}

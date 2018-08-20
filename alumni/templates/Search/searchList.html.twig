@@ -53,9 +53,7 @@
 								{% set lastname = user.getLastname() %}
 							{% endif %}
 							<td>{{ lastname }}</td>
-							{# link to the single profiles of each user #}
-							{#<td><a href="{{ path("task_detail", {task: user.getId()}) }}">Detail</a></td>#}
-							<td>link to profile (not working yet)</td>
+							<td><a href="{{ path("profile_search", {'user' : user.getId()}) }}" class="btn btn-primary btn-lg">View profile</a></td>
 						</tr>
 					{% endfor %}
 				</tbody>
