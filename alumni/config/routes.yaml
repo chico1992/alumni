@@ -70,7 +70,6 @@ flag_post:
     path:       /post/{post}/flag
     controller: App\Controller\PostController::flagPost
 
-
 post_user_edit:
     path:       /post/edit/{id}
     controller: App\Controller\PostController::editUserPost

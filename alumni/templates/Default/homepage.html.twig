@@ -6,14 +6,13 @@
 
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <main role="main" class="container">
-            <div class="starter-template">
-                <h1>Welcome to Alumni!</h1>
-                <p class="lead">Exchange and share informations with your classmates, as well as with <br> 
-                other current and former students who followed the same training like you. <br><br>
-                Browse our CV library, upload your own and get it in front of the right people. <br>
-                Oh, and you'll be able to choose who can see your CV details, since we care <br>
-                about your privacy and never share your informations without your approval. <br></p>  
-            </div>
+
+                <div class="container">
+
+                    <ul id="posts"></ul>
+
+                </div>
+
         </main>
     {% else %}
         <main role="main" class="container">
@@ -24,4 +23,12 @@
         </main>
     {% endif %}
 
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	
+	
+    <script type="text/javascript" src="{{ asset('js/infiniteScroll.js') }}"></script>
 {% endblock %}
