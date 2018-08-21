@@ -10,7 +10,7 @@ body {
 }
 
 
-/* POST CSS */
+/* POST and COMMENT CSS */
 
 .card-footer.text-muted .deco-none { /* poster name */
     color:#3d3b3b !important;
@@ -18,11 +18,8 @@ body {
 }
 
 p.group-name {
-
     color: #3d3b3b !important;
 }
-
-
 
 .icons { /* icons */
     display: inline !important;
@@ -37,7 +34,6 @@ h2.card-title { /* post title */
     display: inline;
     color: #3d3b3b !important;
 }
-
 
 .media .deco-none { /* commenter name */
     color:#3d3b3b !important;
