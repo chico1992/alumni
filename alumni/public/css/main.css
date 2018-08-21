@@ -10,7 +10,7 @@ body {
 }
 
 
-/* POST CSS */
+/* POST and COMMENT CSS */
 
 .card-footer.text-muted .deco-none { /* poster name */
     color:#3d3b3b !important;
@@ -18,11 +18,8 @@ body {
 }
 
 p.group-name {
-
     color: #3d3b3b !important;
 }
-
-
 
 .icons { /* icons */
     display: inline !important;
@@ -38,7 +35,6 @@ h2.card-title { /* post title */
     color: #3d3b3b !important;
 }
 
-
 .media .deco-none { /* commenter name */
     color:#3d3b3b !important;
     text-decoration:none;
@@ -52,6 +48,12 @@ h2.card-title { /* post title */
     margin-top: -28px;
     margin-right: 15px;
     color: #3d3b3b !important;
+}
+
+.comment-box h5.title  {
+    color:#3d3b3b !important;
+    margin-left: 20px;
+    margin-top: 15px;
 }
 
 /* END POST CSS */
