@@ -32,7 +32,7 @@
 							{% if user.getProfilePicture() is empty %}
 								<td></td>
 							{% else %}
-								<td><img src="{{ path('download_picture', { 'document': user.getProfilePicture().getId()}) }}" alt="profile picture" width="80px" /></td>
+								<td><img src="{{ path('download_document', { 'document': user.getProfilePicture().getId()}) }}" alt="profile picture" width="80px" /></td>
 							{% endif %}
 							{% if user.getUsername()|length() > 10 %}
 								{% set username = user.getUsername()|slice(0, 10) %}
