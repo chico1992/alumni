@@ -16,25 +16,25 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @UniqueEntity(fields="email", message="Email already taken")
  * @UniqueEntity(fields="username", message="Username already taken")
  */
-class User implements UserInterface
+class User implements UserInterface //, \Serializable
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\Column(type="string" , length=36)
-     * @Groups({"posts"})
+     * @Groups({"posts","conversation","message","user"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Groups({"posts"})
+     * @Groups({"posts","conversation","message","user"})
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Groups({"posts"})
+     * @Groups({"posts","user"})
      */
     private $email;
 
@@ -45,13 +45,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"posts"})
+     * @Groups({"posts","conversation","message"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"posts"})
+     * @Groups({"posts","conversation","message","user"})
      */
     private $lastname;
 
@@ -90,7 +90,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Document", cascade={"persist", "remove"})
      * @Assert\File(mimeTypes={ "image/*" })
-     * @Groups({"posts"})
+     * @Groups({"posts","user"})
      */
     private $profilePicture;
 
@@ -292,24 +292,24 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCv(): ?Cv
+    public function getCv()
     {
         return $this->cv;
     }
 
-    public function setCv(?Cv $cv): self
+    public function setCv($cv): self
     {
         $this->cv = $cv;
 
         return $this;
     }
 
-    public function getProfilePicture(): ?Document
+    public function getProfilePicture()
     {
         return $this->profilePicture;
     }
 
-    public function setProfilePicture(?Document $profilePicture): self
+    public function setProfilePicture($profilePicture): self
     {
         $this->profilePicture = $profilePicture;
 
@@ -325,4 +325,32 @@ class User implements UserInterface
         return null;
 
     }
+
+    // /** @see \Serializable::serialize() */
+    // public function serialize()
+    // {
+    //     return serialize(array(
+    //         $this->id,
+    //         $this->username,
+    //         $this->firstname,
+    //         $this->lastname,
+    //         $this->profilePicture,
+    //         // see section on salt below
+    //         // $this->salt,
+    //     ));
+    // }
+
+    // /** @see \Serializable::unserialize() */
+    // public function unserialize($serialized)
+    // {
+    //     list (
+    //         $this->id,
+    //         $this->username,
+    //         $this->firstname,
+    //         $this->lastname,
+    //         $this->profilePicture,
+    //         // see section on salt below
+    //         // $this->salt
+    //     ) = unserialize($serialized, array('allowed_classes' => false));
+    // }
 }
