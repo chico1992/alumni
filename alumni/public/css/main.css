@@ -17,6 +17,12 @@ body {
     text-decoration:none;
 }
 
+p.group-name {
+
+    color: #3d3b3b !important;
+}
+
+
 
 .icons { /* icons */
     display: inline !important;
