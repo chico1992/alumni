@@ -8,3 +8,44 @@ body {
         padding-top: 56px;
     }
 }
+
+
+/* POST CSS */
+
+.card-footer.text-muted .deco-none { /* poster name */
+    color:#3d3b3b !important;
+    text-decoration:none;
+}
+
+
+.icons { /* icons */
+    display: inline !important;
+    position: absolute;
+    right: .5rem;
+    font-size: 95%;
+    padding: .0rem .7rem;
+    color: #3d3b3b !important;
+}
+
+h2.card-title { /* post title */
+    display: inline;
+    color: #3d3b3b !important;
+}
+
+
+.media .deco-none { /* commenter name */
+    color:#3d3b3b !important;
+    text-decoration:none;
+}
+
+.icons-comment { /* icons */
+    display: inline !important;
+    position: absolute;
+    right: .5rem;
+    font-size: 75%;
+    margin-top: -28px;
+    margin-right: 15px;
+    color: #3d3b3b !important;
+}
+
+/* END POST CSS */
