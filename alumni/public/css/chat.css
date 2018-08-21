@@ -58,6 +58,7 @@ form .send { /* button */
 /* ---------- LIVE-CHAT ---------- */
 
 .live-chat {
+	pointer-events:auto;
     margin-top: auto;
 	bottom: 0;
 	font-size: 12px;
@@ -142,6 +143,7 @@ form .send { /* button */
 /* ---------- LIST OF CONVERSATIONS ---------- */
 
 .list-chat {
+	pointer-events:auto;
     margin-top: auto;
 	bottom: 0;
 	font-size: 12px;
