@@ -12,7 +12,7 @@ use App\Entity\User;
 class SearchController extends Controller
 {
 
-public function listUsers(Request $request)
+    public function listUsers(Request $request)
     {
         $manager = $this->getDoctrine()->getManager();
     
