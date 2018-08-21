@@ -21,13 +21,11 @@
             <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
 
-        <div class="form-label-group mb-2">
-            <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Username">
-        </div>
+        <label for="inputEmail" class="sr-only">Username</label>
+        <input type="text" id="inputEmail" class="form-control" placeholder="Username" name="_username" value="{{ last_username }}" required autofocus>
 
-        <div class="form-label-group">
-            <input class="form-control" type="password" id="password" name="_password" placeholder="Password">
-        </div>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" name="_password" placeholder="Password" required>
 
         <button class="btn btn-lg btn-dark btn-block" type="submit" value="login">Login</button>
 
