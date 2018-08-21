@@ -47,6 +47,7 @@ class ProfileController extends Controller{
                 $file->move($this->getParameter('upload_dir'));
                 
                 $user->setProfilePicture($document);
+                
                 $manager->persist($document);
                 $manager->remove($picture);
             }

@@ -29,7 +29,11 @@
 			</tr>
 			<tr>
 				<td>Photo :</td>
-				<td>{{ searchedUser.getProfilePicture() }}</td>
+				{% if searchedUser.getProfilePicture() is empty %}
+					<td></td>
+				{% else %}
+					<td><img src="{{ path('download_picture', { 'document': searchedUser.getProfilePicture().getId()}) }}" alt="profile picture"  width="200px" /></td>
+				{% endif %}
 			</tr>
 			<tr>
 				<td>CV :</td>
