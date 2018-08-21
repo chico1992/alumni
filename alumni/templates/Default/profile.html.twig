@@ -12,31 +12,35 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td>Username :</td>
+				<td>Username:</td>
 				<td>{{ user.getUsername() }}</td>
 			</tr>
 			<tr>
-				<td>Firstname :</td>
+				<td>Firstname:</td>
 				<td>{{ user.getFirstname() }}</td>
 			</tr>
 			<tr>
-				<td>Lastname :</td>
+				<td>Lastname:</td>
 				<td>{{ user.getLastname() }}</td>
 			</tr>
 			<tr>
-				<td>Email :</td>
+				<td>Email:</td>
 				<td>{{ user.getEmail() }}</td>
 			</tr>
 			<tr>
-				<td>CV :</td>
-				<td>{{ user.getCv() }}</td>
+				<td>CV:</td>
+				<td>
+					<object type="application/pdf" width="30%" height="50%" data="{{ path('download_document', { 'document': cv.getId()}) }}">
+				</td>
+ 
+</object>
 			</tr>
 			<tr>
 				<td>Photo :</td>
 				{% if user.getProfilePicture() is empty %}
 					<td></td>
 				{% else %}
-					<td><img src="{{ path('download_picture', { 'document': user.getProfilePicture().getId() } ) }}" alt="profile picture" /></td>
+					<td><img src="{{ path('download_document', { 'document': user.getProfilePicture().getId()}) }}" alt="profile picture"  width="200px" /></td>
 				{% endif %}
 			</tr>
 		</tbody>

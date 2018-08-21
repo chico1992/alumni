@@ -29,11 +29,19 @@
 			</tr>
 			<tr>
 				<td>Photo :</td>
-				<td>{{ searchedUser.getProfilePicture() }}</td>
+				{% if searchedUser.getProfilePicture() is empty %}
+					<td></td>
+				{% else %}
+					<td><img src="{{ path('download_document', { 'document': searchedUser.getProfilePicture().getId()}) }}" alt="profile picture"  width="200px" /></td>
+				{% endif %}
 			</tr>
 			<tr>
 				<td>CV :</td>
-				<td>{{ searchedUser.getCv() }}</td>
+				{% if cv is not empty %}
+					<td><object type="application/pdf" width="30%" height="50%" data="{{ path('download_document', { 'document': cv.getId()}) }}"></td>
+				{% else %}
+					<td>No public cv</td>
+				{% endif %}
 			</tr>
 		</tbody>
 	</table>
