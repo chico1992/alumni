@@ -54,4 +54,10 @@ h2.card-title { /* post title */
     color: #3d3b3b !important;
 }
 
+.comment-box h5.title  {
+    color:#3d3b3b !important;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
 /* END POST CSS */
