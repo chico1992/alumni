@@ -6,6 +6,7 @@ body {
 }
 
 .chat{
+	pointer-events: none;
     display: flex;
     flex-direction: row-reverse;
     position: fixed;
