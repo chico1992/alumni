@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @UniqueEntity(fields="email", message="Email already taken")
  * @UniqueEntity(fields="username", message="Username already taken")
  */
-class User implements UserInterface
+class User implements UserInterface //, \Serializable
 {
     /**
      * @ORM\Id()
@@ -82,17 +82,16 @@ class User implements UserInterface
     private $visibilityGroups;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Cv", cascade={"persist", "remove"})
-     * @Assert\File(mimeTypes={ "application/pdf" })
-     */
-    private $cv;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Document", cascade={"persist", "remove"})
      * @Assert\File(mimeTypes={ "image/*" })
      * @Groups({"posts","user"})
      */
     private $profilePicture;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Cv", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $cv;
 
     public function __construct()
     {
@@ -292,24 +291,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCv(): ?Cv
-    {
-        return $this->cv;
-    }
-
-    public function setCv(?Cv $cv): self
-    {
-        $this->cv = $cv;
-
-        return $this;
-    }
-
-    public function getProfilePicture(): ?Document
+    public function getProfilePicture()
     {
         return $this->profilePicture;
     }
 
-    public function setProfilePicture(?Document $profilePicture): self
+    public function setProfilePicture($profilePicture): self
     {
         $this->profilePicture = $profilePicture;
 
@@ -325,4 +312,49 @@ class User implements UserInterface
         return null;
 
     }
+
+    public function getCv(): ?Cv
+    {
+        return $this->cv;
+    }
+
+    public function setCv(Cv $cv): self
+    {
+        $this->cv = $cv;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $cv->getUser()) {
+            $cv->setUser($this);
+        }
+
+        return $this;
+    }
+
+    // /** @see \Serializable::serialize() */
+    // public function serialize()
+    // {
+    //     return serialize(array(
+    //         $this->id,
+    //         $this->username,
+    //         $this->firstname,
+    //         $this->lastname,
+    //         $this->profilePicture,
+    //         // see section on salt below
+    //         // $this->salt,
+    //     ));
+    // }
+
+    // /** @see \Serializable::unserialize() */
+    // public function unserialize($serialized)
+    // {
+    //     list (
+    //         $this->id,
+    //         $this->username,
+    //         $this->firstname,
+    //         $this->lastname,
+    //         $this->profilePicture,
+    //         // see section on salt below
+    //         // $this->salt
+    //     ) = unserialize($serialized, array('allowed_classes' => false));
+    // }
 }

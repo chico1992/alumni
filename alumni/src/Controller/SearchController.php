@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\UserSearchFormType;
 use App\DTO\UserSearch;
 use App\Entity\User;
+use App\Entity\Cv;
 
 
 class SearchController extends Controller
@@ -35,10 +36,21 @@ class SearchController extends Controller
 
     public function showUser(User $user)
     {
+        $userid = $user->getId();
+        $manager = $this->getDoctrine()->getManager();
+
+        $cv = $manager->getRepository(Cv::class)->findOneBy(['user' => $userid]);
+        if($cv)
+        {
+            $document = $cv->getDocument();
+        } else {
+            $document = null;
+        }
         return $this->render(
             'default/profileSearch.html.twig',
             [
-                'searchedUser' => $user
+                'searchedUser' => $user,
+                'cv' => $document
             ]
         );
     }

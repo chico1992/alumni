@@ -2,7 +2,7 @@
 
 {% block title %} Welcome to Alumni {% endblock %}
 
-{% block body %} 
+    {% include 'postBox.html.twig' %}
 
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <main role="main" class="container">
