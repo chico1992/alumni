@@ -48,6 +48,11 @@ class ProfileController extends Controller{
                 
                 $user->setProfilePicture($document);
                 $manager->persist($document);
+                $manager->remove($picture);
+            }
+            else
+            {
+                $user->setProfilePicture($picture);
             }
 
             $manager->flush();

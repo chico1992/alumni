@@ -29,8 +29,8 @@ class ProfileFormType extends AbstractType
         )->add(
             'profilePicture',
             FileType::class,
-            ['label'=>'Please upload your profile picture'],
-            ['required' => false]
+            ['label'=>'Please upload your profile picture',
+            'required' => false]
         );;
         
         if ($options['standalone']) {
