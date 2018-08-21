@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CvRepository")
@@ -19,6 +21,7 @@ class Cv
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Document", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\File(mimeTypes={ "application/pdf" })
      */
     private $document;
 
@@ -27,17 +30,23 @@ class Cv
      */
     private $status;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="cv", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function getDocument(): ?Document
+    public function getDocument()
     {
         return $this->document;
     }
 
-    public function setDocument(Document $document): self
+    public function setDocument($document): self
     {
         $this->document = $document;
 
@@ -52,6 +61,18 @@ class Cv
     public function setStatus(bool $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

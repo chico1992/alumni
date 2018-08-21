@@ -82,17 +82,16 @@ class User implements UserInterface //, \Serializable
     private $visibilityGroups;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Cv", cascade={"persist", "remove"})
-     * @Assert\File(mimeTypes={ "application/pdf" })
-     */
-    private $cv;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Document", cascade={"persist", "remove"})
      * @Assert\File(mimeTypes={ "image/*" })
      * @Groups({"posts","user"})
      */
     private $profilePicture;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Cv", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $cv;
 
     public function __construct()
     {
@@ -292,18 +291,6 @@ class User implements UserInterface //, \Serializable
         return $this;
     }
 
-    public function getCv()
-    {
-        return $this->cv;
-    }
-
-    public function setCv($cv): self
-    {
-        $this->cv = $cv;
-
-        return $this;
-    }
-
     public function getProfilePicture()
     {
         return $this->profilePicture;
@@ -324,6 +311,23 @@ class User implements UserInterface //, \Serializable
     {
         return null;
 
+    }
+
+    public function getCv(): ?Cv
+    {
+        return $this->cv;
+    }
+
+    public function setCv(Cv $cv): self
+    {
+        $this->cv = $cv;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $cv->getUser()) {
+            $cv->setUser($this);
+        }
+
+        return $this;
     }
 
     // /** @see \Serializable::serialize() */

@@ -40,7 +40,7 @@ profile_edit:
 
 cv_edit:
     path:       /profile/cv
-    controller: App\Controller\CvController::cvEdit
+    controller: App\Controller\ProfileController::cvEdit
 
 user_list:
     path:       /users
@@ -115,8 +115,12 @@ get_user_conversations:
     path:       /user/conversations
     controller: App\Controller\UserController::getCurrentUserConversations
 
-download_picture:
+download_document:
     path:       /profile/{document}
-    controller: App\Controller\ProfileController::downloadPicture
+    controller: App\Controller\ProfileController::downloadDocument
+
+display_cv:
+    path:       /profile/{user}
+    controller: App\Controller\ProfileController::showCv
 
 

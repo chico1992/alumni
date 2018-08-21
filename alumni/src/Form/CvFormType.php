@@ -3,13 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Cv;
-use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class CvFormType extends AbstractType
 {
@@ -17,23 +16,27 @@ class CvFormType extends AbstractType
     {
         $builder
             ->add(
-                'cv',
+                'document',
                 FileType::class,
-                ['label'=>'Please upload your CV'],
-                ['required' => false]
-            )
-            /* ->add(
+                ['label'=>'Please upload your Cv (PDF files only)',
+                'required' => true]
+            )->add(
                 'status',
-                CheckboxType::class,
-                ['label'=>'Show your CV publicly?'],
-                ['required' => false]
-            ) */;
+                ChoiceType::class,
+                array(
+                    'choices' => array(
+                        'public' => true,
+                        'private' => false,
+                    )
+                )
+            )
+        ;
 
         if ($options['standalone']) {
             $builder->add(
                 'submit', 
-                SubmitType::class,
-                ['attr'=>['class'=>'btn-success btn-block']]
+                SubmitType::class, 
+                ['attr' => ['class' => 'btn btn-lg btn-dark btn-block']]
             );
         }
     }
@@ -41,7 +44,7 @@ class CvFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => Cv::class,
             'standalone' => false
         ]);
     }
