@@ -14,10 +14,10 @@ $(function() {
             conversations.forEach(conversation => {
                 showConversation(conversation);
             });
+            addClick();
         })
     }
     let socket = io('http://localhost:3000');
-    console.log(user!=null);
     if(user!=null){
         socket.on('connect',function(){
             if(conversations!=null){
@@ -25,6 +25,7 @@ $(function() {
                     showConversation(conversation);
                     socket.emit('room',conversation.id);
                 });
+                addClick();
             }
             socket.emit('room',user.id);
         });
@@ -38,15 +39,14 @@ $(function() {
         console.log('Incoming conversation',conversation);
         conversations.push(JSON.parse(conversation));
         showConversation(conversation);
+        addClick();
         sessionStorage.setItem('conversations',JSON.stringify(conversations));
     })
 
     function showConversation(conversation){
-        console.log("blah");
         let user = JSON.parse(sessionStorage.getItem('user'))
-        let conversationField = $('<div class="chat-message-content"></div>');
+        let conversationField = $('<div class="chat-message-content" data-value="'+ conversation.id+'"></div>');
         let name = $('<h4></h4>');
-        console.log(conversation.users);
         users=conversation.users;
         users.forEach(convUser=> {
             if(user.id != convUser.id){
@@ -56,4 +56,14 @@ $(function() {
         conversationField.append(name);
         $('.chat-window-list').append(conversationField);
     }
+
+    
 });
+
+function addClick() {
+
+	$('.chat-message-content').click(function(){
+        console.log($(this).data("value"));
+    });
+
+}
