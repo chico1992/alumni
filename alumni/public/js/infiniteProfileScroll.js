@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 	var win = $(window);
 
-	$.get("http://localhost/posts/"+timestamp).done(function(result){
+	$.get("http://localhost/posts/"+USER+"/"+timestamp).done(function(result){
 		let X = result.length;
 		
 		let ul = $('#posts');

@@ -80,6 +80,39 @@ class PostController extends Controller
         );
     }
 
+    public function getProfilePosts($user, $creationDate)
+    {
+        $time = new \DateTime();
+        $time->setTimestamp(intval($creationDate)); // change string to int
+        $posts = $this->getDoctrine()
+            ->getManager()
+            ->getRepository(Post::class);
+        
+        $postSearch = new PostSearch();
+
+        $postSearch->creationDate=$time;
+        $postSearch->user=$user;
+        $postSearch->groups=$this->getUser()->getVisibilityGroups();
+        $postSearch->status=true;
+        
+        $postList = $posts->findByDate($postSearch);
+        $serializer = $this->getSerializer();
+        $data = $serializer->serialize(
+            $postList,
+            'json', 
+            array(
+                'groups' => array('posts')
+            )
+        );
+
+        return new JsonResponse(
+            $data,
+            200,
+            [],
+            true
+        );
+    }
+
 
     public function listPosts(Request $request)
     {

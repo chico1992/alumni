@@ -54,6 +54,10 @@ posts:
     path:       /posts/{creationDate}
     controller: App\Controller\PostController::getPosts
 
+user_posts:
+    path:       /posts/{user}/{creationDate}
+    controller: App\Controller\PostController::getUserPosts
+
 post_list:
     path:       /post/list
     controller: App\Controller\PostListController::postList
