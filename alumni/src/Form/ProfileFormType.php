@@ -17,27 +17,27 @@ class ProfileFormType extends AbstractType
         $builder->add(
             'username',
             TextType::class,
-            ['label'=>'Please choose a Username']
+            ['label'=>'Username']
         )->add(
             'firstname',
             TextType::class,
-            ['label'=>'Please enter your Firstname']
+            ['label'=>'First Name']
         )->add(
             'lastname',
             TextType::class,
-            ['label'=>'Please enter your Lastname']
+            ['label'=>'Last Name']
         )->add(
             'profilePicture',
             FileType::class,
-            ['label'=>'Please upload your profile picture',
+            ['label'=>'Picture',
             'required' => false]
         );;
         
         if ($options['standalone']) {
             $builder->add(
-                'submit', 
+                'Update', 
                 SubmitType::class,
-                ['attr'=>['class'=>'btn-success btn-block']]
+                ['attr'=>['class'=> 'btn btn-dark']]
             );
         }
     }

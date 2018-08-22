@@ -57,3 +57,16 @@ h2.card-title { /* post title */
 }
 
 /* END POST CSS */
+
+
+
+
+
+/* PROFILE CSS */
+
+#profile-pic {
+    border-radius: 50%;
+}
+
+
+/* END PROFILE CSS */

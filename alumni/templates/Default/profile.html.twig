@@ -1,56 +1,100 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Your profile{% endblock %}
+{% block title %}Profile{% endblock %}
+
 
 {% block body %}
-	<table class="table">
-		<thead>
-			<tr>
-				<th scope="col"></th>
-				<th scope="col">User information</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Username:</td>
-				<td>{{ user.getUsername() }}</td>
-			</tr>
-			<tr>
-				<td>Firstname:</td>
-				<td>{{ user.getFirstname() }}</td>
-			</tr>
-			<tr>
-				<td>Lastname:</td>
-				<td>{{ user.getLastname() }}</td>
-			</tr>
-			<tr>
-				<td>Email:</td>
-				<td>{{ user.getEmail() }}</td>
-			</tr>
-			<tr>
-				<td>CV:</td>
-				{% if cv is empty %}
-					<td></td>
-				{% else %}
-					<td>
-						<object type="application/pdf" width="30%" height="50%" data="{{ path('download_document', { 'document': cv.getId()}) }}"></object>
-					</td>
-				{% endif %}
+<div class="container">
+    <div class="row">
+    
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Profile</h4>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
 
-			</tr>
-			<tr>
-				<td>Photo :</td>
-				{% if user.getProfilePicture() is empty %}
-					<td></td>
-				{% else %}
-					<td><img src="{{ path('download_document', { 'document': user.getProfilePicture().getId()}) }}" alt="profile picture"  width="200px" /></td>
-				{% endif %}
-			</tr>
-		</tbody>
-	</table>
+                            <form>
 
-<a href="{{ path("profile_edit") }}" class="btn btn-primary btn-lg" role="button">Edit profile</a>
-<a href="{{ path("cv_edit") }}" class="btn btn-primary btn-lg" role="button">Upload CV</a>
+								{% if user.getProfilePicture() is empty %}
+                                <div class="text-center">
+                                    <img id="profile-pic" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="picture img-circle img-thumbnail" alt="picture">
+                                </div>
+								{% else %}
+								<div class="text-center">
+									<img src="{{ path('download_document', { 'document': user.getProfilePicture().getId()}) }}" class="picture img-circle img-thumbnail" alt="picture">
+								</div>
+								{% endif %}
+                                
+                                <br>
+ 
+                                <div class="form-group row">
+                                    <label for="username" class="col-4 col-form-label">Username</label> 
+                                    <div class="col-8">
+                                        <label for="username" class="col-4 col-form-label">{{ user.getUsername() }}</label> 
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="name" class="col-4 col-form-label">First Name</label> 
+                                    <div class="col-8">
+                                        <label for="name" class="col-4 col-form-label">{{ user.getFirstname() }}</label> 
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="lastname" class="col-4 col-form-label">Last Name</label> 
+                                    <div class="col-8">
+                                        <label for="lastname" class="col-4 col-form-label">{{ user.getLastname() }}</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+									<label for="email" class="col-4 col-form-label">Email</label>
+                                    <div class="col-8">
+                                        <label for="email" class="col-4 col-form-label">{{ user.getEmail() }}</label>
+                                    </div>
+                                </div>
+
+								<div class="form-group row">
+									<label for="group" class="col-4 col-form-label">Group</label>
+                                    <div class="col-8">
+									{% for visibilitygroup in user.getVisibilityGroups() %}
+                                        <label for="group" class="col-4 col-form-label">{{ visibilitygroup.getLabel() }}</label>
+									{% endfor %}
+                                    </div>
+                                </div>
+
+								<div class="form-group row">
+                                    <label for="cv" class="col-4 col-form-label">CV</label> 
+                                    <div class="col-8">
+										<a href="#"></a>
+									</div>
+								</div>
+									
+
+                                <div class="form-group row">
+                                    <div class="offset-4 col-8">
+                                    <a href="{{ path("profile_edit") }}" class="btn btn-dark" role="button">Edit profile</a>
+                                    <a href="{{ path("cv_edit") }}" class="btn btn-dark" role="button">Upload CV</a>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 
 {% endblock %}
