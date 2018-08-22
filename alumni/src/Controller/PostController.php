@@ -47,17 +47,17 @@ class PostController extends Controller
         );
     }
   
-    public function getPosts(\DateTime $creationDate)
+    public function getPosts($creationDate)
     {
-        // $time = new \DateTime();
-        // $time->setTimestamp($creationDate);
+        $time = new \DateTime();
+        $time->setTimestamp(intval($creationDate)); // change string to int
         $posts = $this->getDoctrine()
             ->getManager()
             ->getRepository(Post::class);
         
         $postSearch = new PostSearch();
 
-        $postSearch->creationDate=$creationDate;
+        $postSearch->creationDate=$time;
         $postSearch->user=null;
         $postSearch->groups=$this->getUser()->getVisibilityGroups();
         $postSearch->status=true;
