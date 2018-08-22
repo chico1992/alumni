@@ -29,11 +29,14 @@
 			</tr>
 			<tr>
 				<td>CV:</td>
-				<td>
-					<object type="application/pdf" width="30%" height="50%" data="{{ path('download_document', { 'document': cv.getId()}) }}">
-				</td>
- 
-</object>
+				{% if cv is empty %}
+					<td></td>
+				{% else %}
+					<td>
+						<object type="application/pdf" width="30%" height="50%" data="{{ path('download_document', { 'document': cv.getId()}) }}"></object>
+					</td>
+				{% endif %}
+
 			</tr>
 			<tr>
 				<td>Photo :</td>

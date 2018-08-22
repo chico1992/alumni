@@ -24,7 +24,12 @@ class ProfileController extends Controller{
 
         $userid = $user->getId();
         $cv = $manager->getRepository(Cv::class)->findOneBy(['user' => $userid]);
-        $document = $cv->getDocument();
+        if($cv){
+            $document = $cv->getDocument();
+        }
+        else{
+            $document = null;
+        }
 
         return $this->render('Default/profile.html.twig', ['user' => $user, 'cv' => $document]
         );
