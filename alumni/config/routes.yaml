@@ -123,4 +123,6 @@ display_cv:
     path:       /profile/{user}
     controller: App\Controller\ProfileController::showCv
 
-
+cvtheque:
+    path:       /cvtheque
+    controller: App\Controller\DefaultController::loadCvs
