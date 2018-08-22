@@ -155,7 +155,6 @@ class PostController extends Controller
             {
                 $editError = true;
             }
-
         }
         
         return $this->render(
