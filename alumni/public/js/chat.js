@@ -11,6 +11,9 @@ $(function() {
         $.get("http://localhost/user/conversations").done(function(res){
             conversations = res;
             sessionStorage.setItem('conversations',JSON.stringify(conversations));
+            conversations.forEach(conversation => {
+                showConversation(conversation);
+            });
         })
     }
     let socket = io('http://localhost:3000');
@@ -19,6 +22,7 @@ $(function() {
         socket.on('connect',function(){
             if(conversations!=null){
                 conversations.forEach(conversation => {
+                    showConversation(conversation);
                     socket.emit('room',conversation.id);
                 });
             }
@@ -30,10 +34,26 @@ $(function() {
         console.log('Incoming message:', message);
     });
 
-    socket.on('conversation',function(message){
-        console.log('Incoming conversation',message);
-        conversations.push(JSON.parse(message));
+    socket.on('conversation',function(conversation){
+        console.log('Incoming conversation',conversation);
+        conversations.push(JSON.parse(conversation));
+        showConversation(conversation);
         sessionStorage.setItem('conversations',JSON.stringify(conversations));
     })
 
+    function showConversation(conversation){
+        console.log("blah");
+        let user = JSON.parse(sessionStorage.getItem('user'))
+        let conversationField = $('<div class="chat-message-content"></div>');
+        let name = $('<h4></h4>');
+        console.log(conversation.users);
+        users=conversation.users;
+        users.forEach(convUser=> {
+            if(user.id != convUser.id){
+                name.text(convUser.username);
+            }
+        });
+        conversationField.append(name);
+        $('.chat-window-list').append(conversationField);
+    }
 });
