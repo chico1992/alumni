@@ -119,8 +119,5 @@ download_document:
     path:       /profile/{document}
     controller: App\Controller\ProfileController::downloadDocument
 
-display_cv:
-    path:       /profile/{user}
-    controller: App\Controller\ProfileController::showCv
 
 

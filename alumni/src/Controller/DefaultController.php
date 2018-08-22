@@ -32,4 +32,9 @@ class DefaultController extends Controller
         );
     }
 
+    public function loadCvs()
+    {
+        $cvs = $manager->getRepository(Cv::class)->findBy(['status' => 1]);
+
+    }
 }
