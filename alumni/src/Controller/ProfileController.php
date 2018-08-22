@@ -117,6 +117,7 @@ class ProfileController extends Controller{
         } else {
             $oldcv = new Cv();
             $oldcv->setUser($user);
+            $doc = $oldcv->getDocument();
         }
 
         $cvForm = $this->createForm(CvFormType::class, $oldcv, ['standalone' => true]);
