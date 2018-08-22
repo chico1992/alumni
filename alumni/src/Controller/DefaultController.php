@@ -31,7 +31,18 @@ class DefaultController extends Controller
             )
         );
     }
-
-    
-
+  
+  
+    public function loadCvs()
+    {
+        $cvs = $manager->getRepository(Cv::class)->findBy(['status' => 1]);
+        
+        return $this->render(
+            'Default/cvtheque.html.twig',
+            array(
+                'cvs' => $cvs
+            )
+        );
+    }
+   
 }
