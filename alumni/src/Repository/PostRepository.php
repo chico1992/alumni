@@ -35,9 +35,9 @@ class PostRepository extends ServiceEntityRepository
             ->setParameter('status', $dto->status);
         if(!empty($dto->user)){
             $queryBuilder->andWhere(
-                'p.author like :author'
+                'p.author = :author'
             );
-            $queryBuilder->setParameter('autor',$dto->user);
+            $queryBuilder->setParameter('author',$dto->user);
         }
         if(!empty($dto->groups)){
             $queryBuilder->andWhere(

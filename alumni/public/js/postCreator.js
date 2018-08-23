@@ -1,5 +1,3 @@
-
-
 function postCreator(post)
 {
     let user = JSON.parse(sessionStorage.getItem("user"));
@@ -33,7 +31,7 @@ function postCreator(post)
     let commentBodyForm = $('<form></form>');
     let commentBodyFormDiv =$('<div class="form-group"></div>');
 
-    postHeader.append($('<p class="group-name font-weight-light font-italic d-inline">'+"Posted in: "+post.visibility.label+" the "+postDate+" at "+postHour+" by "+'</p>'+" "+
+    postHeader.append($('<p class="group-name font-weight-light font-italic d-inline">'+"Posted in "+post.visibility.label+" the "+postDate+" at "+postHour+" by "+'</p>'+" "+
     '<a href="#" class="deco-none">'+post.author.firstname+'</a>'));
     
     if (user.id == post.author.id)

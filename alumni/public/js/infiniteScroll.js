@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 	var win = $(window);
 
-	$.get("http://localhost/posts/"+timestamp).done(function(result){
+	$.get("/posts/"+timestamp).done(function(result){
 		let X = result.length;
 		
 		let ul = $('#posts');
@@ -34,7 +34,7 @@ $(document).ready(function() {
 			let unixtime = (new Date(time)).getTime()/1000;
 			console.log(unixtime);
 
-			$.get("http://localhost/posts/"+unixtime).done(function(res){
+			$.get("/posts/"+unixtime).done(function(res){
 				let ul = $('#posts');
 				if (res.length != 0)
 				{

@@ -80,7 +80,7 @@ class PostController extends Controller
         );
     }
 
-    public function getProfilePosts($user, $creationDate)
+    public function getUserPosts(User $user, $creationDate)
     {
         $time = new \DateTime();
         $time->setTimestamp(intval($creationDate)); // change string to int
@@ -91,7 +91,7 @@ class PostController extends Controller
         $postSearch = new PostSearch();
 
         $postSearch->creationDate=$time;
-        $postSearch->user=$user;
+        $postSearch->user=$user->getId();
         $postSearch->groups=$this->getUser()->getVisibilityGroups();
         $postSearch->status=true;
         

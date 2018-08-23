@@ -9,16 +9,14 @@ $(document).ready(function() {
 
 	var win = $(window);
 
-	$.get("http://localhost/posts/"+USER+"/"+timestamp).done(function(result){
-		let X = result.length;
-		
-		let ul = $('#posts');
+	$.get("/posts/"+USER+"/"+timestamp).done(function(result){
+
 		result.forEach(post => {
 			
 			posts.push(post)
-			//ul.append($('<li>').text(post.creationDate));
-			$("#postPinBoard").append(postCreator(post))
+			$("#profilePinBoard").append(postCreator(post))
 			console.log(post);
+
 
 		});
 		
@@ -34,7 +32,7 @@ $(document).ready(function() {
 			let unixtime = (new Date(time)).getTime()/1000;
 			console.log(unixtime);
 
-			$.get("http://localhost/posts/"+unixtime).done(function(res){
+			$.get("/posts/"+unixtime).done(function(res){
 				let ul = $('#posts');
 				if (res.length != 0)
 				{
@@ -42,7 +40,7 @@ $(document).ready(function() {
 						
 						posts.push(post)
 						//ul.append($('<li>').text(post.creationDate));
-						$("#postPinBoard").append(postCreator(post))
+						$("#profilePinBoard").append(postCreator(post))
 						
 					});
 				} 
