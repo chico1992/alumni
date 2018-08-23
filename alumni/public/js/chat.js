@@ -16,13 +16,27 @@ $(function() {
             });
             addClick();
         })
+    }else{
+        conversations.forEach(conversation =>{
+            showConversation(conversation);
+            if(sessionStorage.getItem(conversation.id) != null){
+                conv=JSON.parse(sessionStorage.getItem(conversation.id));
+                addConversation(conversation);
+                if(conv.messages){
+                    let messages = conv.messages;
+                    messages.forEach(message => {
+                        console.log('hi');
+                        addMessage(message);
+                    });
+                }
+            }
+        });
     }
     let socket = io(':3000');
     if(user!=null){
         socket.on('connect',function(){
             if(conversations!=null){
                 conversations.forEach(conversation => {
-                    showConversation(conversation);
                     socket.emit('room',conversation.id);
                 });
                 addClick();
