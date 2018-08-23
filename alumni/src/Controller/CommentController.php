@@ -108,5 +108,27 @@ class CommentController extends Controller
             ]
         );
     }
+
+    public function flagComment(Request $request, Comment $comment)
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $comment->setFlag(1);
+        
+        $manager->persist($comment);
+        $manager->flush();
+
+        $serializer = $this->getSerializer();
+
+        return new JsonResponse(
+            $serializer->serialize("The comment was successfully flagged", 'json'),
+            200,
+            [],
+            true
+        );  
+    }
+    public function getSerializer() : SerializerInterface
+    {
+        return $this->get('serializer');
+    }
     
 }
