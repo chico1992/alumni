@@ -82,7 +82,9 @@
                                     <label for="cv" class="col-4 col-form-label">CV:</label> 
                                     <div class="cv col-8">
 										<label for="group" class="cv-label col-4 col-form-label" >
-                                            <a href="{{ path('download_document', { 'document': cv.getId()}) }}">OPEN CV</a>
+                                            {% if cv is not empty %}
+                                                <a href="{{ path('download_document', { 'document': cv.getId()}) }}">OPEN CV</a>
+                                            {% endif %}
                                         </label>
 									</div>
 								</div>
