@@ -1,9 +1,3 @@
-body {
-	background: #e9e9e9;
-	color: #9a9a9a;
-	font: 100%/1.5em "Droid Sans", sans-serif;
-	margin: 0;
-}
 
 .chat{
 	pointer-events: none;
@@ -14,44 +8,24 @@ body {
     right: 0;
 }
 
-a { text-decoration: none; }
-
-
-h4, h5 {
-	line-height: 1.5em;
-	margin: 0;
+a.chat-close-live { 
+	text-decoration: none; 
 }
 
-hr {
-	background: #e9e9e9;
-    border: 0;
-    -moz-box-sizing: content-box;
-    box-sizing: content-box;
-    height: 1px;
-    margin: 0;
-    min-height: 1px;
+.list-chat .chat-time {
+	font-size: 11px;
 }
 
-input {
-	border: 0;
-	color: inherit;
-    font-family: inherit;
-    font-size: 100%;
-    line-height: normal;
-    margin: 0;
+
+form .message-box {
+    font-size: 83%;
+	display: inline;
 }
 
-p { margin: 0; }
 
-form { /* placeholder */
-    position: absolute;
-    font-size: 98%;
-    display: inline;
-}
-
-form .send { /* button */
-    font-size: 91%;
-    margin: 0 0 1px 1px;
+form .send {
+    font-size: 95%;
+    margin: 0 0 2.5px 2px;
     display: inline;
 }
 
@@ -91,8 +65,9 @@ form .send { /* button */
 	border-radius: 3px;
 	padding: 8px;
 	outline: none;
-	width: 234px;
+	width: 233px;
 }
+
 
 .chat-close-list, .chat-close-live {
 	background: #1b2126;
@@ -107,6 +82,7 @@ form .send { /* button */
 	text-align: center;
 	width: 16px;
 }
+
 
 .chat-window-live, .chat-window-list {
     height: 350px;
@@ -133,7 +109,7 @@ form .send { /* button */
     position: relative;
     display: block;
     padding: 12px 0px;
-    margin: 0 0 10px 0;
+	margin: 0 0 10px 0;
 }
 
 .chat-message-content {
@@ -165,7 +141,8 @@ form .send { /* button */
 }
 
 .list-chat h5 {
-	font-size: 10px;
+	font-size: 12px;
+	margin-bottom: 2px;
 }
 
 .list-chat form {

@@ -18,15 +18,15 @@ class CvFormType extends AbstractType
             ->add(
                 'document',
                 FileType::class,
-                ['label'=>'Please upload your Cv (PDF files only)',
+                ['label'=>'Upload your CV here (.PDF files only)',
                 'required' => true]
             )->add(
                 'status',
                 ChoiceType::class,
                 array(
                     'choices' => array(
-                        'public' => true,
-                        'private' => false,
+                        'Public' => true,
+                        'Private' => false,
                     )
                 )
             )
@@ -36,7 +36,7 @@ class CvFormType extends AbstractType
             $builder->add(
                 'submit', 
                 SubmitType::class, 
-                ['attr' => ['class' => 'btn btn-lg btn-dark btn-block']]
+                ['attr' => ['class' => 'btn btn-dark']]
             );
         }
     }

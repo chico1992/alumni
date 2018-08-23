@@ -24,7 +24,12 @@ class ProfileController extends Controller{
 
         $userid = $user->getId();
         $cv = $manager->getRepository(Cv::class)->findOneBy(['user' => $userid]);
-        $document = $cv->getDocument();
+        if($cv){
+            $document = $cv->getDocument();
+        }
+        else{
+            $document = null;
+        }
 
         return $this->render('Default/profile.html.twig', ['user' => $user, 'cv' => $document]
         );
@@ -56,12 +61,13 @@ class ProfileController extends Controller{
                 $file->move($this->getParameter('upload_dir'));
                 
                 $user->setProfilePicture($document);
-                
                 $manager->persist($document);
-                $manager->remove($picture);
+
+                if($picture){
+                    $manager->remove($picture);
+                }
             }
-            else
-            {
+            else{
                 $user->setProfilePicture($picture);
             }
 
@@ -70,7 +76,7 @@ class ProfileController extends Controller{
             return $this->redirectToRoute('profile');
         }
         /*
-        very important! previous bug
+        very important! ->previous bug
         */
         $user->setProfilePicture($picture);
         
@@ -82,6 +88,7 @@ class ProfileController extends Controller{
             ]
         );
     }
+
 
     public function downloadDocument(Document $document)
     {
@@ -112,6 +119,7 @@ class ProfileController extends Controller{
         } else {
             $oldcv = new Cv();
             $oldcv->setUser($user);
+            $doc = $oldcv->getDocument();
         }
 
         $cvForm = $this->createForm(CvFormType::class, $oldcv, ['standalone' => true]);

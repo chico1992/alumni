@@ -36,7 +36,7 @@ class PostController extends Controller
             $manager->persist($post);
             $manager->flush();
             // redirect to user list GET
-            return $this->redirectToRoute('post');
+            return $this->redirectToRoute('homepage');
         }
         return $this->render(
             'Default\post.html.twig',
@@ -47,10 +47,10 @@ class PostController extends Controller
         );
     }
   
-    public function getPosts(int $creationDate)
+    public function getPosts($creationDate)
     {
         $time = new \DateTime();
-        $time->setTimestamp($creationDate);
+        $time->setTimestamp(intval($creationDate)); // change string to int
         $posts = $this->getDoctrine()
             ->getManager()
             ->getRepository(Post::class);
@@ -155,7 +155,6 @@ class PostController extends Controller
             {
                 $editError = true;
             }
-
         }
         
         return $this->render(

@@ -4,23 +4,20 @@
 {% block body %}
 
 
+        
+{% block body %} 
+
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <main role="main" class="container">
-            {# <div class="starter-template">
-                <h1>Welcome to Alumni!</h1>
-                <p class="lead">Exchange and share informations with your classmates, as well as with <br> 
-                other current and former students who followed the same training like you. <br><br>
-                Browse our CV library, upload your own and get it in front of the right people. <br>
-                Oh, and you'll be able to choose who can see your CV details, since we care <br>
-                about your privacy and never share your informations without your approval. <br></p>  
+
+            {% include 'postBox.html.twig' %}
+            <div class="container">
+
+                <ul id="posts"></ul>
+
             </div>
-            <a href="http://localhost/conversation/new/2b7c7397-a487-11e8-8219-0242ac120002" class="btn btn-primary" >Message user test10</a>
-            <form action="http://localhost/newMessage" method="post">
-                <input type="text" name="conversation" value="578ec1f5-a312-11e8-a25c-0242ac120002" hidden>
-                <input type="text" name="content">
-                <input type="submit" value="Send" class="btn btn-success">
-            </form> #}
             {% include 'chat.html.twig' %}
+
         </main>
     {% else %}
         <main role="main" class="container">
@@ -33,8 +30,11 @@
 
 {% endblock %}
 {% block javascripts %}
-    {{parent()}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+	{{ parent() }}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+		
     <script src="{{ asset('js/messages.js') }}"></script>
-    <script src="{{ asset('js/chat.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/chat.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/infiniteScroll.js') }}"></script>
+   
 {% endblock %}
