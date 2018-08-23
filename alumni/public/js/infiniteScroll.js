@@ -5,7 +5,7 @@ $(document).ready(function() {
 	var timestamp = parseInt(number);
 	var posts = [];
 
-    console.log(timestamp);
+  console.log(timestamp);
 
 	var win = $(window);
 

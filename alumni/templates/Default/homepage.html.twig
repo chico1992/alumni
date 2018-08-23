@@ -8,6 +8,7 @@
 
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <main role="main" class="container">
+
             {% include 'postBox.html.twig' %}
 
             <div class="container">
@@ -17,6 +18,7 @@
 
             </div>
             {% include 'chat.html.twig' %}
+
 
 
         </main>
