@@ -12,6 +12,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 use App\DTO\PostSearch;
 use App\Service\MessageSender;
 use App\Form\PostEditFormType;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 
 class PostController extends Controller
@@ -111,45 +112,63 @@ class PostController extends Controller
             true
         );  
     }
+
     public function getSerializer() : SerializerInterface
     {
         return $this->get('serializer');
     }
 
-    public function deletePost(Request $request, Post $post)
+    public function deletePost(Request $request, Post $post, AuthorizationCheckerInterface $authChecker)
     {
-        $idUser = $this->getUser();
+        $user = $this->getUser();
         $deletionError = false;
+
+        $flag = $post->getFlag();
+
         
-        if(($idUser == $post->getAuthor()))
+        if($user == $post->getAuthor() || true === $authChecker->isGranted('ROLE_ADMIN'))
         {
             $manager = $this->getDoctrine()->getManager();
             $manager->remove($post);
             $manager->flush();
+            
+            if (true === $authChecker->isGranted('ROLE_ADMIN') && $flag == 1){
+                return $this->redirectToRoute('flags');
+            } else {
+                return $this->redirectToRoute('homepage');
+            }
         } 
         else
         {
             $deletionError = true;  
         }
-
-        return $this->redirectToRoute('post_list');
     }
 
-    public function editUserPost(Post $post, Request $request)
+    public function editPost(Post $post, Request $request, AuthorizationCheckerInterface $authChecker)
     {
         $editForm = $this->createForm(PostEditFormType::class, $post, ['standalone'=>true]);
         $editForm->handleRequest($request);
 
         $editError = false;
-        $idUser = $this->getUser();
+        $user = $this->getUser();
+
+        $flag = $post->getFlag();
         
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             
-            if(($idUser == $post->getAuthor()))
+            if($user == $post->getAuthor() || true === $authChecker->isGranted('ROLE_ADMIN'))
             {
+                if (true === $authChecker->isGranted('ROLE_ADMIN')){
+                    $post->setFlag(0);
+                }
+
                 $this->getDoctrine()->getManager()->flush();
             
-                return $this->redirectToRoute('post_list');
+                if (true === $authChecker->isGranted('ROLE_ADMIN') && $flag == 1){
+                    return $this->redirectToRoute('flags');
+                } else {
+                    return $this->redirectToRoute('homepage');
+                }
             }
             else
             {

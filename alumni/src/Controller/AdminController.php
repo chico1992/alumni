@@ -95,53 +95,5 @@ class AdminController extends Controller
         );
     }
 
-    public function editPost(Post $post, Request $request)
-    {
-        $editForm = $this->createForm(PostEditFormType::class, $post, ['standalone'=>true]);
-        $editForm->handleRequest($request);
-        
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-
-           //add if user = admin
-            $post->setFlag(0);
-            
-            
-            $this->getDoctrine()->getManager()->flush();
-            
-            return $this->redirectToRoute('flags');
-        }
-        
-        return $this->render(
-            'admin/editPost.html.twig',
-            [
-                'post'=>$post,
-                'edit_form'=>$editForm->createView()
-            ]
-        );
-    }
-
-    public function editComment(Comment $comment, Request $request)
-    {
-        $editForm = $this->createForm(CommentEditFormType::class, $comment, ['standalone'=>true]);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-
-            //add if user = admin
-            $comment->setFlag(0);
-
-            $this->getDoctrine()->getManager()->flush();
-            
-            return $this->redirectToRoute('flags');
-        }
-        
-        return $this->render(
-            'admin/editComment.html.twig',
-            [
-                'comment'=>$comment,
-                'edit_form'=>$editForm->createView()
-            ]
-        );
-    }
 
 }
