@@ -3,24 +3,23 @@
 {% block title %} CV Library {% endblock %}
 
 {% block body %}
-	<div class="container">
-		{% if cvs is empty %}
-			<p>No CV found in the application</p>
-		{% else %}
-			<div class="row">
-                {% for post in posts %}
-                    <div class="col-md-4">
-                        <div class="card mb-4 shadow-sm">
-                            <object type="application/pdf" width="30%" height="50%" data="{{ path('download_document', { 'document': cv.getId()}) }}">
+
+    <div class="container-fluid">
+        {% if cvs is empty %}
+            <p>No CV found in the application</p>
+        {% else %}
+                <div class="row">
+                    {% for cv in cvs %}
+                        <div class="col-xs-1 col-md-4 col-lg-3">
+                            <object type="application/pdf" width="250px" height="400px" data="{{ path('download_cv', { 'document': cv.getDocument().getId()}) }}"></object>
                             <div class="card-body">
-                                <a data="{{ path('download_document', { 'document': cv.getId()}) }}">Details</a>
+                                <a href="{{ path('download_cv', { 'document': cv.getDocument().getId()}) }}">Details</a>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
-            </div>
+                    {% endfor %}
+                </div>
 
-		{% endif %}
-	</div>
+        {% endif %}
+    </div>
 
 {% endblock %}

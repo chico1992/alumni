@@ -119,7 +119,10 @@ download_document:
     path:       /profile/{document}
     controller: App\Controller\ProfileController::downloadDocument
 
-
 cvtheque:
     path:       /cvtheque
     controller: App\Controller\DefaultController::loadCvs
+
+download_cv:
+    path:       /cvtheque/{document}
+    controller: App\Controller\ProfileController::downloadDocument
