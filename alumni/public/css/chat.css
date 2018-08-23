@@ -1,5 +1,6 @@
 
 .chat{
+	pointer-events: none;
     display: flex;
     flex-direction: row-reverse;
     position: fixed;
@@ -31,6 +32,7 @@ form .send {
 /* ---------- LIVE-CHAT ---------- */
 
 .live-chat {
+	pointer-events:auto;
     margin-top: auto;
 	bottom: 0;
 	font-size: 12px;
@@ -115,12 +117,14 @@ form .send {
 }
 
 .chat-message-content {
-	margin-left: 56px;
+	padding-left: 56px;
+	border-bottom: 1px solid #9a9a9a;
 }
 
 /* ---------- LIST OF CONVERSATIONS ---------- */
 
 .list-chat {
+	pointer-events:auto;
     margin-top: auto;
 	bottom: 0;
 	font-size: 12px;

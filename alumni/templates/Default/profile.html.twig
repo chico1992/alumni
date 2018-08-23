@@ -11,10 +11,11 @@
 
 
 {% block body %}
+
 <div class="container">
-    <div class="row">
+    <div class="row" id="profilePinBoard">
     
-        <div class="col-md-9">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -23,7 +24,7 @@
                             <hr>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" >
                         <div class="col-md-12">
 
                             <form>
@@ -105,5 +106,20 @@
     </div>
 </div>
 
-
 {% endblock %}
+
+{% block javascripts %}
+
+	{{ parent() }}
+	<script>
+		const USER = "{{user.getId()}}";
+		console.log(USER);
+	</script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+
+    <script type="text/javascript" src="{{ asset('js/postCreator.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/infiniteProfileScroll.js') }}"></script>
+	
+{% endblock %}
+

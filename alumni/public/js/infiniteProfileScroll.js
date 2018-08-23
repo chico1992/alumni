@@ -5,21 +5,17 @@ $(document).ready(function() {
 	var timestamp = parseInt(number);
 	var posts = [];
 
-  console.log(timestamp);
+    console.log(timestamp);
 
 	var win = $(window);
 
-	$.get("/posts/"+timestamp).done(function(result){
-		let X = result.length;
-		
-		let ul = $('#posts');
+	$.get("/posts/"+USER+"/"+timestamp).done(function(result){
+
 		result.forEach(post => {
 			
 			posts.push(post)
-			//ul.append($('<li>').text(post.creationDate));
-			$("#postPinBoard").append(postCreator(post))
+			$("#profilePinBoard").append(postCreator(post))
 			console.log(post);
-
 		});
 		
 	});
@@ -34,29 +30,25 @@ $(document).ready(function() {
 			let unixtime = (new Date(time)).getTime()/1000;
 			console.log(unixtime);
 
-			$.get("/posts/"+unixtime).done(function(res){
-				let ul = $('#posts');
+			$.get("/posts/"+USER+"/"+unixtime).done(function(res){
 				if (res.length != 0)
 				{
 					res.forEach(post => {
 						
 						posts.push(post)
-						//ul.append($('<li>').text(post.creationDate));
-						$("#postPinBoard").append(postCreator(post))
+						$("#profilePinBoard").append(postCreator(post))
 						
 					});
 				} 
 				else 
 				{
 					console.log("No Post left!")
-					$("#postPinBoard").append('<strong>No Posts left!</strong>')
+					$("#profilePinBoard").append('<strong>No Posts left!</strong>')
 					win.off("scroll");
 				}
 				
 			});
-
 			//$('#loading').show();
-
 		}
 	});
 });

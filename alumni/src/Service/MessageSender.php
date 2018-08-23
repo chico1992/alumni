@@ -16,14 +16,14 @@ class MessageSender
         $this->channel = $this->connection->channel();
     }
     
-    public function sendMessage($message)
+    public function pushToQueue($message, $queue)
     {
-        $this->channel->queue_declare('messages',false,false,false,false);
+        $this->channel->queue_declare($queue,false,false,false,false);
         $msg = new AMQPMessage($message);
-        $this->channel->basic_publish($msg,'','messages');
+        $this->channel->basic_publish($msg,'',$queue);
         $this->channel->close();
         $this->connection->close();
-        return 200;
+        return true;
     }
 
 }

@@ -34,6 +34,7 @@ class Conversation
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="receiver", orphanRemoval=true)
+     * @ORM\OrderBy({"creationDate" = "ASC"})
      */
     private $messages;
 

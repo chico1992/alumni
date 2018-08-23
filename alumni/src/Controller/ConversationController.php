@@ -7,11 +7,12 @@ use App\Entity\User;
 use App\Entity\Conversation;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Service\MessageSender;
 
 
 class ConversationController extends Controller
 {
-    public function newConversation(User $user)
+    public function newConversation(User $user,MessageSender $messageSender)
     {
         $conv = new Conversation();
         $exists = false;
@@ -41,6 +42,7 @@ class ConversationController extends Controller
             )
         );
 
+        $messageSender->pushToQueue($data,'conversations');
         return new JsonResponse(
             $data,
             200,
