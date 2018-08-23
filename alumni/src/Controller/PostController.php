@@ -36,7 +36,7 @@ class PostController extends Controller
             $manager->persist($post);
             $manager->flush();
             // redirect to user list GET
-            return $this->redirectToRoute('post');
+            return $this->redirectToRoute('homepage');
         }
         return $this->render(
             'Default\post.html.twig',
@@ -188,7 +188,6 @@ class PostController extends Controller
             {
                 $editError = true;
             }
-
         }
         
         return $this->render(

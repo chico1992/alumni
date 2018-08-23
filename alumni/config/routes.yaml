@@ -123,5 +123,15 @@ download_document:
     path:       /profile/{document}
     controller: App\Controller\ProfileController::downloadDocument
 
+unpublished_posts:
+    path:       /profile/unpublished
+    controller: App\Controller\PostListController::showUnpublishedPosts
 
 
+cvtheque:
+    path:       /cvtheque
+    controller: App\Controller\DefaultController::loadCvs
+
+download_cv:
+    path:       /cvtheque/{document}
+    controller: App\Controller\ProfileController::downloadDocument
