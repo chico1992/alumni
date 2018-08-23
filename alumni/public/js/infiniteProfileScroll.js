@@ -16,8 +16,6 @@ $(document).ready(function() {
 			posts.push(post)
 			$("#profilePinBoard").append(postCreator(post))
 			console.log(post);
-
-
 		});
 		
 	});
@@ -32,14 +30,12 @@ $(document).ready(function() {
 			let unixtime = (new Date(time)).getTime()/1000;
 			console.log(unixtime);
 
-			$.get("/posts/"+unixtime).done(function(res){
-				let ul = $('#posts');
+			$.get("/posts/"+USER+"/"+unixtime).done(function(res){
 				if (res.length != 0)
 				{
 					res.forEach(post => {
 						
 						posts.push(post)
-						//ul.append($('<li>').text(post.creationDate));
 						$("#profilePinBoard").append(postCreator(post))
 						
 					});
@@ -47,14 +43,12 @@ $(document).ready(function() {
 				else 
 				{
 					console.log("No Post left!")
-					$("#postPinBoard").append('<strong>No Posts left!</strong>')
+					$("#profilePinBoard").append('<strong>No Posts left!</strong>')
 					win.off("scroll");
 				}
 				
 			});
-
 			//$('#loading').show();
-
 		}
 	});
 });

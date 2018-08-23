@@ -1,7 +1,6 @@
 function postCreator(post)
 {
     let user = JSON.parse(sessionStorage.getItem("user"));
-    console.log(user);
 
     let postTime = post.creationDate;
     let date = new Date(postTime);
