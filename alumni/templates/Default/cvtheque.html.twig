@@ -1,5 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link href="{{ asset('css/cv.css') }}" rel="stylesheet">
+
+{% endblock %}
+
 {% block title %} CV Library {% endblock %}
 
 {% block body %}
