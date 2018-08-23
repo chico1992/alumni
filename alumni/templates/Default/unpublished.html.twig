@@ -1,0 +1,34 @@
+	{% extends 'base.html.twig' %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block body %}
+	<div class="container">
+    	{% if posts is empty %}
+    		<p>No posts found in the application</p>
+    	{% else %}      
+				{% for post in posts %}
+			<div class="card mb-3">
+				<div class="card-footer text-muted">
+					Posted in <p class="group-name font-weight-light font-italic d-inline">{{ post.getVisibility().getLabel() }}</p> on {{ post.getCreationDate() | date('Y-m-d H:i:s') }} 
+					<div class="icons">
+						<a href="#" class="deco-none"><i class="fas fa-pencil-alt mr-2 d-inline"></i></a>
+						<a href="#" class="deco-none"><i class="fas fa-trash-alt mr-2 d-inline"></i></a>
+						<a href="#" class="deco-none"><i class="fas fa-flag mr-2 d-inline"></i></a>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="media-body">
+						<div class="media-body ">
+							<img class="mr-3 mb-3 rounded-circle" src="http://placehold.it/40x40" alt="">
+							<h2 class="card-title"> {{ post.getTitle() }}</h2>
+						</div>
+						<p class="card-text"> {{ post.getContent() }} </p>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+    	{% endif %}
+	</div>
+	
+{% endblock %}

@@ -17,7 +17,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">CV Library</a>
+                            <a class="nav-link" href="{{ path('cvtheque') }}">CV Library</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('user_list') }}">Users</a>
@@ -32,14 +32,14 @@
 
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('logout') }}">Logout</a>
+                            <a class="nav-link" onclick="sessionStorage.clear();" href="{{ path('logout') }}">Logout</a>
                         </li>
                     {% else %}
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">CV Library</a>
+                            <a class="nav-link" href="{{ path('cvtheque') }}">CV Library</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('login') }}">Login</a>
