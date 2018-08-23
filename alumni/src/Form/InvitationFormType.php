@@ -27,7 +27,7 @@ class InvitationFormType extends AbstractType
                 array(
                     'class' => Role::class,
                     'choice_label' => 'label',
-                    'expanded' => false,
+                    'expanded' => true,
                     'multiple' => true
                 )
             )
