@@ -115,6 +115,11 @@ get_user_conversations:
     path:       /user/conversations
     controller: App\Controller\UserController::getCurrentUserConversations
 
+unpublished_posts:
+    path:       /profile/unpublished
+    controller: App\Controller\PostListController::showUnpublishedPosts
+
+#this route absolutely needs to be at the bottom!!!!!!!!!#
 download_document:
     path:       /profile/{document}
     controller: App\Controller\ProfileController::downloadDocument
