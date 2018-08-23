@@ -5,15 +5,15 @@
 
 {% block body %} 
 
-    {% include 'postBox.html.twig' %}
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <main role="main" class="container">
+            {% include 'postBox.html.twig' %}
 
-                <div class="container">
+                {# <div class="container">
 
                     <ul id="posts"></ul>
 
-                </div>
+                </div> #}
 
         </main>
     {% else %}
@@ -32,6 +32,7 @@
 	
 	
 	<script type="text/javascript" src="{{ asset('js/chat.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/postCreator.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/infiniteScroll.js') }}"></script>
    
 {% endblock %}
