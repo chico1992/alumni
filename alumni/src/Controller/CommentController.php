@@ -9,6 +9,7 @@ use App\Form\CommentFormType;
 use App\Entity\Post;
 use Doctrine\ORM\Mapping\Id;
 use App\Form\CommentEditFormType;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CommentController extends Controller
 {    
@@ -22,7 +23,6 @@ class CommentController extends Controller
         $comment->setPost($post);
         $form = $this->createForm(CommentFormType::class, $comment, ['standalone' => true]);
         
-        
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) 
         {
@@ -30,10 +30,8 @@ class CommentController extends Controller
             $manager->persist($comment);
             $manager->flush();
             
-            return $this->redirectToRoute('post_list');
+            return $this->redirectToRoute('homepage');
         }
-        
-        
         
         return $this->render(
             'Default/comment.html.twig',
@@ -44,46 +42,61 @@ class CommentController extends Controller
     }
 
 
-    public function delete(Request $request, Comment $comment)
+    public function deleteComment(Request $request, Comment $comment)
     {
-        $idUser = $this->getUser();
+        $user = $this->getUser();
         $deletionError = false;
+
+        $flag = $comment->getFlag();
         
-        if(($idUser == $comment->getAuthor()))
+        if($user == $comment->getAuthor() || true === $authChecker->isGranted('ROLE_ADMIN'))
         {
             $manager = $this->getDoctrine()->getManager();
             $manager->remove($comment);
             $manager->flush();
+
+            if (true === $authChecker->isGranted('ROLE_ADMIN') && $flag == 1){
+                return $this->redirectToRoute('flags');
+            } else {
+                return $this->redirectToRoute('homepage');
+            }
         } 
         else
         {
             $deletionError = true;  
         }
-
-        return $this->redirectToRoute('post_list');
     }
 
-    public function editUserComment(Comment $comment, Request $request)
+    public function editComment(Comment $comment, Request $request, AuthorizationCheckerInterface $authChecker)
     {
         $editForm = $this->createForm(CommentEditFormType::class, $comment, ['standalone'=>true]);
         $editForm->handleRequest($request);
 
         $editError = false;
-        $idUser = $this->getUser();
+        $user = $this->getUser();
+
+        $flag = $comment->getFlag();
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             
-            if(($idUser == $comment->getAuthor()))
+            if($user == $comment->getAuthor() || true === $authChecker->isGranted('ROLE_ADMIN'))
             {
+                if (true === $authChecker->isGranted('ROLE_ADMIN')){
+                    $comment->setFlag(0);
+                }
+
                 $this->getDoctrine()->getManager()->flush();
             
-                return $this->redirectToRoute('post_list');
+                if (true === $authChecker->isGranted('ROLE_ADMIN') && $flag == 1){
+                    return $this->redirectToRoute('flags');
+                } else {
+                    return $this->redirectToRoute('homepage');
+                }
             }
             else
             {
                 $editError = true;
             }
-  
         }
         
         return $this->render(
@@ -94,6 +107,28 @@ class CommentController extends Controller
                 'edit_form'=>$editForm->createView()
             ]
         );
+    }
+
+    public function flagComment(Request $request, Comment $comment)
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $comment->setFlag(1);
+        
+        $manager->persist($comment);
+        $manager->flush();
+
+        $serializer = $this->getSerializer();
+
+        return new JsonResponse(
+            $serializer->serialize("The comment was successfully flagged", 'json'),
+            200,
+            [],
+            true
+        );  
+    }
+    public function getSerializer() : SerializerInterface
+    {
+        return $this->get('serializer');
     }
     
 }

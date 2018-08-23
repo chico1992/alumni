@@ -54,6 +54,10 @@ posts:
     path:       /posts/{creationDate}
     controller: App\Controller\PostController::getPosts
 
+user_posts:
+    path:       /posts/{user}/{creationDate}
+    controller: App\Controller\PostController::getUserPosts
+
 post_list:
     path:       /post/list
     controller: App\Controller\PostListController::postList
@@ -64,15 +68,19 @@ delete_post:
 
 delete_comment:
     path:       /comment/delete/{id}
-    controller: App\Controller\CommentController::delete
+    controller: App\Controller\CommentController::deleteComment
 
 comment:
     path:       /comment/{post}
     controller: App\Controller\CommentController::comment
 
 flag_post:
-    path:       /post/{post}/flag
+    path:       /post/flag/{post}
     controller: App\Controller\PostController::flagPost
+
+flag_comment:
+    path:       /comment/flag/{comment}
+    controller: App\Controller\PostController::flagComment
 
 new_conversation:
     path:       /conversation/new/{user}
@@ -90,28 +98,20 @@ get_user:
     path:       /user
     controller: App\Controller\UserController::getCurrentUser
     
-post_user_edit:
+post_edit:
     path:       /post/edit/{id}
-    controller: App\Controller\PostController::editUserPost
+    controller: App\Controller\PostController::editPost
 
-comment_user_edit:
+comment_edit:
     path:       /comment/edit/{id}
-    controller: App\Controller\CommentController::editUserComment
+    controller: App\Controller\CommentController::editComment
 
 flags:
     path:       /admin/flags
     controller: App\Controller\AdminController::listFlags
-    
-post_edit:
-    path:       /admin/flags/post/edit/{post}
-    controller: App\Controller\AdminController::editPost
-
-comment_edit:
-    path:       /admin/flags/comment/edit/{comment}
-    controller: App\Controller\AdminController::editComment
 
 profile_search:
-    path:       /users/search{user}
+    path:       /users/search/{user}
     controller: App\Controller\SearchController::showUser 
 
 
@@ -126,7 +126,6 @@ download_document:
 unpublished_posts:
     path:       /profile/unpublished
     controller: App\Controller\PostListController::showUnpublishedPosts
-
 
 cvtheque:
     path:       /cvtheque

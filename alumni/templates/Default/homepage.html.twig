@@ -8,14 +8,16 @@
 
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <main role="main" class="container">
-
             {% include 'postBox.html.twig' %}
+
             <div class="container">
+
 
                 <ul id="posts"></ul>
 
             </div>
             {% include 'chat.html.twig' %}
+
 
         </main>
     {% else %}
@@ -34,6 +36,7 @@
 		
     <script src="{{ asset('js/messages.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/chat.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/postCreator.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/infiniteScroll.js') }}"></script>
    
 {% endblock %}
