@@ -46,6 +46,27 @@ class MessageController extends Controller
             true
         );
     }
+
+    public function allMessages(Conversation $conversation)
+    {
+        $messages = $conversation->getMessages();
+        $serializer = $this->getSerializer();
+        $data = $serializer->serialize(
+            $messages,
+            'json', 
+            array(
+                'groups' => array('message')
+            )
+        );
+        return new JsonResponse(
+            $data,
+            200,
+            [],
+            true
+        );
+
+    }
+    
     public function getSerializer() : SerializerInterface
     {
         return $this->get('serializer');

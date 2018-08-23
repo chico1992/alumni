@@ -2,13 +2,13 @@ $(function() {
     let user = JSON.parse(sessionStorage.getItem('user'));
     let conversations = JSON.parse(sessionStorage.getItem('conversations'));
     if(user == null){
-        $.get("http://localhost/user").done(function(res) {
+        $.get("/user").done(function(res) {
             user = res;
             sessionStorage.setItem('user',JSON.stringify(user));   
         });
     }
     if(conversations == null){
-        $.get("http://localhost/user/conversations").done(function(res){
+        $.get("/user/conversations").done(function(res){
             conversations = res;
             sessionStorage.setItem('conversations',JSON.stringify(conversations));
             conversations.forEach(conversation => {
@@ -17,7 +17,7 @@ $(function() {
             addClick();
         })
     }
-    let socket = io('http://localhost:3000');
+    let socket = io(':3000');
     if(user!=null){
         socket.on('connect',function(){
             if(conversations!=null){
@@ -33,6 +33,7 @@ $(function() {
 
     socket.on('message',function(message){
         console.log('Incoming message:', message);
+        addMessage(JSON.parse(message));
     });
 
     socket.on('conversation',function(conversation){
@@ -69,6 +70,7 @@ function addConversation(conversation){
         e.preventDefault();
         conversationWindow.fadeOut(300);
         conversationWindow.remove();
+        sessionStorage.removeItem(conversation.id);
     });
     console.log("blah");
     let conversationWindowHeaderText = $('<h4></h4>');
@@ -83,15 +85,15 @@ function addConversation(conversation){
     conversationWindow.append(conversationWindowHeader);
 
     /* conversation window */
-    let chatWindow = $('<div class="chat-window-live"></div>');
-    let chatHistory = $('<div class="chat-history"></div>');
+    let chatWindow = $('<div class="chat-window-live border"></div>');
+    let chatHistory = $('<div class="chat-history" id="'+ conversation.id+'"></div>');
     conversationWindowHeader.click(function() {
         chatWindow.slideToggle(300, 'swing');
     });
     chatWindow.append(chatHistory);
     
     /* form */
-    let form = $('<form action="http://localhost/newMessage" method="post"></form>');
+    let form = $('<form action="/newMessage" method="post"></form>');
     let inputConversation = $('<input type="text" name="conversation" value="'+conversation.id+'" hidden>');
     let inputMessage = $('<input type="text" name="content" placeholder="Type your message…" autofocus>');
     let inputButton = $('<input type="submit" class="send btn btn-dark" value="Send">');
@@ -102,7 +104,7 @@ function addConversation(conversation){
         e.preventDefault();
         let data = $( this ).serialize();
         console.log(data);
-        $.post("http://localhost/newMessage", data).done(function(res) {
+        $.post("/newMessage", data).done(function(res) {
             console.log(res);
         });
         inputMessage.val("");
@@ -133,18 +135,48 @@ function addConversation(conversation){
         // </div> 
 
 function addClick() {
-
 	$('.chat-message-content').click(function(){
         console.log($(this).data("value"));
         let convId=$(this).data("value");
-        let conversations = JSON.parse(sessionStorage.getItem("conversations"));
-        let conv = {};
-        conversations.forEach(conversation =>{
-            if(conversation.id == convId){
-                conv = conversation;
-            }
-        });
-        addConversation(conv);
+        console.log(sessionStorage.getItem(convId));
+        if(sessionStorage.getItem(convId)==null){
+            let conversations = JSON.parse(sessionStorage.getItem("conversations"));
+            let conv = {};
+            conversations.forEach(conversation =>{
+                if(conversation.id == convId){
+                    conv = conversation;
+                }
+            });
+            addConversation(conv);
+            loadMessages(conv);
+        }
     });
+}
 
+function loadMessages(conv){
+    $.get("/allMessages/"+conv.id).done(function(res) {
+        conv.messages=res;
+        sessionStorage.setItem(conv.id,JSON.stringify(conv));
+        console.log(res); 
+        res.forEach(message=>{
+            console.log(message);
+            addMessage(message);
+        }); 
+    });
+}
+
+function addMessage(message){
+    console.log("helloo");
+    let chatWindow = $("#"+message.receiver.id);
+    let user = JSON.parse(sessionStorage.getItem('user'));
+    let messageContainer = "";
+    if(user.id == message.sender.id){
+        messageContainer = $('<div class="chat-message-me"></div>');
+    }else{
+        messageContainer = $('<div class="chat-message bg-light text-dark border-top border-bottom"></div>');
+    }
+    let messageP = $('<p></p>');
+    messageP.text(message.content);
+    messageContainer.append(messageP);
+    chatWindow.append(messageContainer);
 }
