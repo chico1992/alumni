@@ -5,15 +5,14 @@
 
 {% block body %} 
 
-    {% include 'postBox.html.twig' %}
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <main role="main" class="container">
+            <div class="container">
 
-                <div class="container">
-
-                    <ul id="posts"></ul>
+                <div class="row">
 
                 </div>
+            </div>      
 
         </main>
     {% else %}

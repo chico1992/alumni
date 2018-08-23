@@ -36,7 +36,7 @@ $(document).ready(function() {
 		let postBodyContent = $('<div class="media-body"></div>');
 		let postBodyContentHeader = $('<div class="media-body"></div>');
 
-		let commentDiv = $('<div class="container p-3 mb-2 bg-light text-dark border-top border-bottom"></div>');
+		let commentDiv = $('<div class="container p-3 mb-2 border-top"></div>');
 		let commentHeader = $('<div class="container ml-2 mt-1"></div>');
 		let commentBody = $('<div class="card-body"></div>');
 		let commentBodyForm = $('<form></form>');

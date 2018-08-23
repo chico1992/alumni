@@ -62,8 +62,14 @@ h2.card-title { /* post title */
 
 /* PROFILE CSS */
 
-#profile-pic {
+.img-thumbnail {
     border-radius: 50%;
+}
+
+.cv .cv-label a {
+    text-decoration: none;
+    color: inherit;
+    font-style: oblique;
 }
 
 /* END PROFILE CSS */

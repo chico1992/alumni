@@ -20,6 +20,7 @@ class CvFormType extends AbstractType
                 FileType::class,
                 ['label'=>'Upload your CV here (.PDF files only)',
                 'required' => true]
+            
             )->add(
                 'status',
                 ChoiceType::class,
