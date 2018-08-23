@@ -58,8 +58,19 @@ h2.card-title { /* post title */
 
 /* END POST CSS */
 
-/* CV Library */
 
+
+/* PROFILE CSS */
+
+#profile-pic {
+    border-radius: 50%;
+}
+
+/* END PROFILE CSS */
+
+
+
+/* CV Library */
 
 @media (max-width: 991.98px) { 
     .container-fluid {
