@@ -71,8 +71,12 @@ comment:
     controller: App\Controller\CommentController::comment
 
 flag_post:
-    path:       /post/{post}/flag
+    path:       /post/flag/{post}
     controller: App\Controller\PostController::flagPost
+
+flag_comment:
+    path:       /comment/flag/{comment}
+    controller: App\Controller\PostController::flagComment
 
 new_conversation:
     path:       /conversation/new/{user}
