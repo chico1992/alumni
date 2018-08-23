@@ -61,12 +61,13 @@ class ProfileController extends Controller{
                 $file->move($this->getParameter('upload_dir'));
                 
                 $user->setProfilePicture($document);
-                
                 $manager->persist($document);
-                $manager->remove($picture);
+
+                if($picture){
+                    $manager->remove($picture);
+                }
             }
-            else
-            {
+            else{
                 $user->setProfilePicture($picture);
             }
 
@@ -75,7 +76,7 @@ class ProfileController extends Controller{
             return $this->redirectToRoute('profile');
         }
         /*
-        very important! previous bug
+        very important! ->previous bug
         */
         $user->setProfilePicture($picture);
         
@@ -87,6 +88,7 @@ class ProfileController extends Controller{
             ]
         );
     }
+
 
     public function downloadDocument(Document $document)
     {
