@@ -1,19 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Welcome to Alumni {% endblock %}
+{% block title %}{% endblock %}
 
 
+        
 {% block body %} 
 
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <main role="main" class="container">
             {% include 'postBox.html.twig' %}
 
-                {# <div class="container">
+            <div class="container">
 
-                    <ul id="posts"></ul>
 
-                </div> #}
+                <ul id="posts"></ul>
+
+            </div>
+            {% include 'chat.html.twig' %}
+
 
         </main>
     {% else %}
@@ -29,8 +33,8 @@
 {% block javascripts %}
 	{{ parent() }}
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-	
-	
+		
+    <script src="{{ asset('js/messages.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/chat.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/postCreator.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/infiniteScroll.js') }}"></script>

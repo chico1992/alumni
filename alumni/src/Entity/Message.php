@@ -38,6 +38,17 @@ class Message
      */
     private $receiver;
 
+    /**
+     * @ORM\Column(type="datetime")
+     * @Groups({"message"})
+     */
+    private $creationDate;
+
+    public function __construct()
+    {
+        $this->creationDate = new \DateTime();
+    }
+
     public function getId(): ?string
     {
         return $this->id;
@@ -78,4 +89,10 @@ class Message
 
         return $this;
     }
+
+    public function getCreationDate(): ?\DateTimeInterface
+    {
+        return $this->creationDate;
+    }
+
 }
