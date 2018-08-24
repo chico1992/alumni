@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity()
@@ -13,16 +14,19 @@ class Comment
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\Column(type="string" , length=36)
+     * @Groups({"comment"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"comment"})
      */
     private $creationDate;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"comment"})
      */
     private $content;
 
@@ -34,12 +38,14 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"comment"})
      */
     private $author;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Post", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"comment"})
      */
     private $post;
   
@@ -48,6 +54,7 @@ class Comment
 
     {
         $this->creationDate = new \DateTime();
+        $this->flag = false;
     }
 
 

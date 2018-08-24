@@ -10,34 +10,66 @@ use App\Entity\Post;
 use Doctrine\ORM\Mapping\Id;
 use App\Form\CommentEditFormType;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class CommentController extends Controller
 {    
     public function Comment(Request $request, Post $post)
     {   
-        $flag = false;
-        $manager = $this->getDoctrine()->getManager();
         $comment = new Comment();
-        $comment->setAuthor($this->getUser());
-        $comment->setFlag($flag);
-        $comment->setPost($post);
-        $form = $this->createForm(CommentFormType::class, $comment, ['standalone' => true]);
-        
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) 
+        $content = $request->request->get('content');
+        $serializer = $this->getSerializer();
+        if($content)
         {
-
+            $comment->setAuthor($this->getUser());
+            $comment->setPost($post);
+            $comment->setContent($content);
+            $manager = $this->getDoctrine()->getManager();
             $manager->persist($comment);
             $manager->flush();
+            $data = $serializer->serialize(
+                $comment,
+                'json', 
+                array(
+                    'groups' => array('comment')
+                )
+            );
             
-            return $this->redirectToRoute('homepage');
+            return new JsonResponse(
+                $data,
+                200,
+                [],
+                true
+            );
         }
-        
-        return $this->render(
-            'Default/comment.html.twig',
-            [
-                'form' => $form->createView()
-            ]
+        else
+        {
+            return new JsonResponse(
+                $serializer->serialize("The content of your request was not good", 'json'),
+                400,
+                [],
+                true
+            );
+        }
+    }
+
+    public function getComments(Post $post)
+    {
+        $commentss = $post->getComments();
+        $serializer = $this->getSerializer();
+        $data = $serializer->serialize(
+            $comments,
+            'json', 
+            array(
+                'groups' => array('comment')
+            )
+        );
+        return new JsonResponse(
+            $data,
+            200,
+            [],
+            true
         );
     }
 
