@@ -14,7 +14,7 @@
 						<tr>
 							<th>Title</th>
 							<th>Username</th>
-							<th>Status</th>
+							<th>Content</th>
 							<th></th>
 							<th></th>
 						</tr>
@@ -24,12 +24,7 @@
 							<tr>
 								<td>{{ post.getTitle() }}</td>
 								<td>{{ post.getAuthor().getUsername() }}</td>
-								{% if post.getFlag() %}
-									{% set flag = "flagged" %}
-								{% else %}
-									{% set flag = "unappropriate content?" %}
-								{% endif %}
-								<td>{{ flag }}</td>
+								<td>{{ post.getContent() }}</td>
 								<td><a href="{{ path('post_edit', {id: post.getId()}) }}">Edit</a></td>
 								<td><a href="{{ path('delete_post', {id: post.getId()}) }}">Delete</a></td>
 							</tr>
@@ -46,9 +41,8 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>title</th>
 							<th>Username</th>
-							<th>status</th>
+							<th>Content</th>
 							<th></th>
 							<th></th>
 						</tr>
@@ -57,12 +51,7 @@
 						{% for comment in comments %}
 							<tr>
 								<td>{{ comment.getAuthor().getUsername() }}</td>
-								{% if comment.getFlag() %}
-									{% set flag = "flagged" %}
-								{% else %}
-									{% set flag = "unappropriate content?" %}
-								{% endif %}
-								<td>{{ flag }}</td>
+								<td>{{ comment.getContent() }}</td>
 								<td><a href="{{ path("comment_edit", {id: comment.getId()}) }}">Edit</a></td>
 								<td><a href="{{ path('delete_comment', {id: comment.getId()}) }}">Delete</a></td>
 							</tr>
