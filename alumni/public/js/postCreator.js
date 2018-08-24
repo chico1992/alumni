@@ -63,15 +63,21 @@ function postCreator(post)
     let commentBodyFormDiv =$('<div class="form-group"></div>');
 
     postHeader.append($('<p class="group-name font-weight-light font-italic d-inline">'+"Posted in "+post.visibility.label+" the "+postDate+" at "+postHour+" by "+'</p>'+" "+
-    '<a href="#" class="deco-none">'+post.author.firstname+'</a>'));
+    '<a href="/profile/'+post.author.id+'" class="deco-none">'+post.author.firstname+'</a>'));
     
     if (user.id == post.author.id)
     {
-        postHeaderIcons.append($('<a href="#" class="deco-none"><i class="fas fa-pencil-alt mr-2 d-inline"></i></a>'));
-        postHeaderIcons.append($('<a href="#" class="deco-none"><i class="fas fa-trash-alt mr-2 d-inline"></i></a>'));
+        postHeaderIcons.append($('<a href="/post/edit/'+post.id+'" class="deco-none"><i class="fas fa-pencil-alt mr-2 d-inline"></i></a>'));
+        postHeaderIcons.append($('<a href="/post/delete/'+post.id+'" class="deco-none"><i class="fas fa-trash-alt mr-2 d-inline"></i></a>'));
     }
-
-    postHeaderIcons.append($('<a href="#" class="deco-none"><i class="fas fa-flag mr-2 d-inline"></i></a>'));
+    let postFlagIcon = $('<a href="#" class="deco-none"><i class="fas fa-flag mr-2 d-inline"></i></a>');
+    postFlagIcon.click(function(e){
+        e.preventDefault();
+        $.get('/post/flag/'+post.id).done(function(res){
+            alert(res);
+        });
+    })
+    postHeaderIcons.append(postFlagIcon);
 
     postHeader.append(postHeaderIcons);
 
@@ -101,22 +107,32 @@ function postCreator(post)
 }
 
 function addComment(comment){
+    let user = JSON.parse(sessionStorage.getItem("user"));
     let commentContaiener = $('<div class="media pb-3 mb-3 border-bottom"></div>');
     let commenterImage = $('<img class="d-flex ml-2 mr-3 rounded-circle" src="http://placehold.it/30x30" alt="">');
     commentContaiener.append(commenterImage);
     let commentBody = $('<div class="media-body"></div>');
     let commenterName = $('<h6 class="mt-0 mt-1"><h6>');
-    let commenterNameLink = $('<a href="#" class="deco-none"></a>');
+    let commenterNameLink = $('<a href="/profile/'+comment.author.id+'" class="deco-none"></a>');
     commenterName.append(commenterNameLink);
     commenterNameLink.text(comment.author.username);
     commentBody.append(commenterName);
 
     let commentIcons = $('<div class="icons-comment"></div>');
-    let commentIconEdit = $('<a href="#" class="deco-none"><i class="fas fa-pencil-alt mr-2 d-inline"></i></a>');
-    let commentIconDelete = $('<a href="#" class="deco-none"><i class="fas fa-trash-alt mr-2 d-inline"></i></a>');
     let commentIconFlag = $('<a href="#" class="deco-none"><i class="fas fa-flag mr-2 d-inline"></i></a>');
-    commentIcons.append(commentIconEdit);
-    commentIcons.append(commentIconDelete);
+    if (user.id == comment.author.id){
+        let commentIconEdit = $('<a href="/comment/edit/'+comment.id+'" class="deco-none"><i class="fas fa-pencil-alt mr-2 d-inline"></i></a>');
+        let commentIconDelete = $('<a href="/comment/delete/'+comment.id+'" class="deco-none"><i class="fas fa-trash-alt mr-2 d-inline"></i></a>');
+        commentIcons.append(commentIconEdit);
+        commentIcons.append(commentIconDelete);
+    }
+    commentIconFlag.click(function(e){
+        e.preventDefault();
+        $.get('/comment/flag/'+comment.id).done(function(res){
+            alert(res);
+        });
+    })
+
     commentIcons.append(commentIconFlag);
     commentBody.append(commentIcons);
 
