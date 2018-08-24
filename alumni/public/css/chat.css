@@ -91,29 +91,32 @@ form .send {
 
 .chat-history {
 	padding: 10px;
-}
-
-.chat-history {
     height: 312px;
 	padding: 8px 24px;
 	overflow-y: scroll;
 }
 
+
 .chat-message {
-    text-align: left;
+	text-align: left;
 	float: left;
-	padding: 30px 15px 0 25px;
+	padding: 0 0 0 0;
 	height: 20px;
 	width: 100%;
 }
 
+.chat-message p {
+	color: red;
+}
+
 .chat-message-me p {
+	color: blue;
     text-align: right;
     float: right;
-	padding: 5px 10px 5px 12px;
+	padding: 35px 0 0 0;
 	height: 20px;
 	width: 100%;
-	margin: 0;
+	margin: 0 0;
 }
 
 .chat-message-content {
