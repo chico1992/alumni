@@ -29,12 +29,12 @@ class Comment
     /**
      * @ORM\Column(type="text")
      * @Groups({"comment"})
+     * @Assert\NotBlank()
      */
     private $content;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Assert\NotBlank()
      */
     private $flag;
 
