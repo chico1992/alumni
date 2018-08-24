@@ -5,11 +5,11 @@
 
 {% block body %}
 
-	<div class="container mt-5 pl-5 pt-5">
+	<div class="container d-flex justify-content-center pt-5 mt-5">
 		{% if groups is empty %}
 			<p>No group found in the application</p>
 		{% else %}
-			<table class="table table-striped">
+			<table class="table table-striped" style="width:70%">
 				<thead>
 					<tr>
 						<th>Group</th>
@@ -28,7 +28,7 @@
 	
 	<br>
 	
-	<div class="container pl-5">
+	<div class="container d-flex justify-content-center pl-5">
 	    {{ form(form) }}
 	</div>
 	
