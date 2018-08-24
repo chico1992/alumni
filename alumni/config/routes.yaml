@@ -115,8 +115,8 @@ flags:
     controller: App\Controller\AdminController::listFlags
 
 profile_search:
-    path:       /users/search/{user}
-    controller: App\Controller\SearchController::showUser 
+    path:       /profile/{user}
+    controller: App\Controller\SearchController::showUser
 
 
 get_user_conversations:
