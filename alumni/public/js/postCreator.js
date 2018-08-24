@@ -24,7 +24,7 @@ function postCreator(post)
     let postBodyContent = $('<div class="media-body"></div>');
     let postBodyContentHeader = $('<div class="media-body"></div>');
 
-    let commentDiv = $('<div class="container p-3 mb-2 border-top border-bottom"></div>');
+    let commentDiv = $('<div class="container p-3 mb-2 border-top border-bottom bg-light text-dark"></div>');
     let commentLoaderArea=$('<div class="media mb-4"></div>');
     let commentLoader =$('<a href="#"> LOAD ALL COMMENTS </a>');
     
@@ -101,7 +101,7 @@ function postCreator(post)
 }
 
 function addComment(comment){
-    let commentContaiener = $('<div class="media mb-4"></div>');
+    let commentContaiener = $('<div class="media pb-3 mb-3 border-bottom"></div>');
     let commenterImage = $('<img class="d-flex ml-2 mr-3 rounded-circle" src="http://placehold.it/30x30" alt="">');
     commentContaiener.append(commenterImage);
     let commentBody = $('<div class="media-body"></div>');
