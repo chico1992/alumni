@@ -36,17 +36,15 @@ class SearchController extends Controller
 
     public function showUser(User $user)
     {
-        $userid = $user->getId();
-        $sessionUser = $this->getUser();
         $manager = $this->getDoctrine()->getManager();
         $userActions = false;
 
-        if ($sessionUser == $userid)
+        if ($user == $this->getUser())
         {
             $userActions = true;
         }
 
-        $cv = $manager->getRepository(Cv::class)->findOneBy(['user' => $userid]);
+        $cv = $manager->getRepository(Cv::class)->findOneBy(['user' => $user->getId()]);
         if($cv)
         {
             $document = $cv->getDocument();
