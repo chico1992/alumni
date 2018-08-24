@@ -17,7 +17,7 @@ class CommentEditFormType extends AbstractType
         $builder 
             ->add('content',
                 TextareaType::class,
-                ['label' => 'Change the content of this flagged post']
+                ['label' => 'Change the content of this post']
             )
         ;
     if ($options['standalone']) {

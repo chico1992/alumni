@@ -74,7 +74,7 @@ class CommentController extends Controller
     }
 
 
-    public function deleteComment(Request $request, Comment $comment)
+    public function deleteComment(Request $request, Comment $comment, AuthorizationCheckerInterface $authChecker)
     {
         $user = $this->getUser();
         $deletionError = false;

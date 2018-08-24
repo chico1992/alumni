@@ -80,7 +80,7 @@ flag_post:
 
 flag_comment:
     path:       /comment/flag/{comment}
-    controller: App\Controller\PostController::flagComment
+    controller: App\Controller\CommentController::flagComment
 
 new_conversation:
     path:       /conversation/new/{user}
