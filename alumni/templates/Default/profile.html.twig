@@ -4,7 +4,7 @@
     {{ parent() }}
 
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('css/post.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block title %}Profile{% endblock %}
@@ -73,7 +73,7 @@
 									<label for="group" class="col-4 col-form-label">Group:</label>
                                     <div class="col-8">
 									{% for visibilitygroup in user.getVisibilityGroups() %}
-                                        <label for="group" class="col-4 col-form-label">{{ visibilitygroup.getLabel() }}</label>
+                                        <label for="group" class="group-label col col-form-label">{{ visibilitygroup.getLabel() }}</label>
 									{% endfor %}
                                     </div>
                                 </div>
@@ -83,13 +83,14 @@
                                     <div class="cv col-8">
 										<label for="group" class="cv-label col-4 col-form-label" >
                                             {% if cv is not empty %}
-                                                <a href="{{ path('download_document', { 'document': cv.getId()}) }}">OPEN CV</a>
+                                                <a href="{{ path('download_document', { 'document': cv.getId()}) }}">DISPLAY CV</a>
                                             {% endif %}
                                         </label>
 									</div>
 								</div>
-									
 
+                                <br>
+									
                                 <div class="form-group row">
                                     <div class="offset-4 col-8">
                                     <a href="{{ path("profile_edit") }}" class="btn btn-dark" role="button">Edit profile</a>
