@@ -56,7 +56,7 @@ class CommentController extends Controller
 
     public function getComments(Post $post)
     {
-        $commentss = $post->getComments();
+        $comments = $post->getComments();
         $serializer = $this->getSerializer();
         $data = $serializer->serialize(
             $comments,

@@ -24,8 +24,30 @@ function postCreator(post)
     let postBodyContent = $('<div class="media-body"></div>');
     let postBodyContentHeader = $('<div class="media-body"></div>');
 
-    let commentDiv = $('<div class="container p-3 mb-2 border-top"></div>');
-    let commentHeader = $('<div class="container ml-2 mt-1"></div>');
+    let commentDiv = $('<div class="container p-3 mb-2 border-top border-bottom"></div>');
+    let commentLoaderArea=$('<div class="media mb-4"></div>');
+    let commentLoader =$('<a href="#"> LOAD ALL COMMENTS </a>');
+    
+    commentLoaderArea.append(commentLoader);
+    commentDiv.append(commentLoaderArea);
+    commentLoader.click(function(e){
+        e.preventDefault();
+        console.log('hello comments');
+        $.get('/post/comments/'+post.id).done(function(res){
+            console.log(res);
+            commentDiv.empty();
+            if(res.length==0){
+                console.log("empty");
+                commentDiv.append('<h5>No comments available</h5>');
+            }else{
+                res.forEach(comment => {
+                    commentDiv.append(addComment(comment));
+                });
+            }
+        });
+    });
+
+    let commentHeader = $('<div class="comment-box"></div>');
     let commentBody = $('<div class="card-body"></div>');
     let commentBodyForm = $('<form method="post"></form>');
     let commentArea = $('<textarea class="form-control p-3 mb-2 bg-light text-dark" name="content" rows="3" required></textarea>');
@@ -65,15 +87,44 @@ function postCreator(post)
     commentBodyForm.append($('<button type="submit" class="btn btn-dark">Submit</button>'));
     commentBody.append(commentBodyForm);
 
-    commentDiv.append(commentHeader);
-    commentDiv.append(commentBody);
-
+    
     postDiv.append(postHeader);
     postDiv.append(postBody);
     postDiv.append(commentDiv);
-
+    postDiv.append(commentHeader);
+    postDiv.append(commentBody);
+    
     mainDiv.append(postDiv);
 
     return mainDiv;
     
+}
+
+function addComment(comment){
+    let commentContaiener = $('<div class="media mb-4"></div>');
+    let commenterImage = $('<img class="d-flex ml-2 mr-3 rounded-circle" src="http://placehold.it/30x30" alt="">');
+    commentContaiener.append(commenterImage);
+    let commentBody = $('<div class="media-body"></div>');
+    let commenterName = $('<h6 class="mt-0 mt-1"><h6>');
+    let commenterNameLink = $('<a href="#" class="deco-none"></a>');
+    commenterName.append(commenterNameLink);
+    commenterNameLink.text(comment.author.username);
+    commentBody.append(commenterName);
+
+    let commentIcons = $('<div class="icons-comment"></div>');
+    let commentIconEdit = $('<a href="#" class="deco-none"><i class="fas fa-pencil-alt mr-2 d-inline"></i></a>');
+    let commentIconDelete = $('<a href="#" class="deco-none"><i class="fas fa-trash-alt mr-2 d-inline"></i></a>');
+    let commentIconFlag = $('<a href="#" class="deco-none"><i class="fas fa-flag mr-2 d-inline"></i></a>');
+    commentIcons.append(commentIconEdit);
+    commentIcons.append(commentIconDelete);
+    commentIcons.append(commentIconFlag);
+    commentBody.append(commentIcons);
+
+    let commentContent = $('<small></small>');
+    commentContent.text(comment.content);
+    commentBody.append(commentContent);
+
+    commentContaiener.append(commentBody);
+    return commentContaiener;
+
 }
