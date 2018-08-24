@@ -81,7 +81,7 @@ function postCreator(post)
     postBodyContent.append($('<p class="card-text">'+post.content+'</p>'));
     postBody.append(postBodyContent);
 
-    commentHeader.append($('<h5>Leave a Comment:</h5>'))
+    commentHeader.append($('<h5 class="comment ml-3">Leave a Comment:</h5>'))
     commentBodyFormDiv.append(commentArea);
     commentBodyForm.append(commentBodyFormDiv);
     commentBodyForm.append($('<button type="submit" class="btn btn-dark">Submit</button>'));
