@@ -7,6 +7,7 @@ $(function() {
             sessionStorage.setItem('user',JSON.stringify(user));   
         });
     }
+    while(user == null){}
     if(conversations == null){
         $.get("/user/conversations").done(function(res){
             conversations = res;
