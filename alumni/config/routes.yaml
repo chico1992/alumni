@@ -102,6 +102,10 @@ post_edit:
     path:       /post/edit/{id}
     controller: App\Controller\PostController::editPost
 
+get_comments:
+    path:       /post/comments/{post}
+    controller: App\Controller\CommentController::getComments
+
 comment_edit:
     path:       /comment/edit/{id}
     controller: App\Controller\CommentController::editComment

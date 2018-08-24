@@ -4,11 +4,23 @@
 
 .img-thumbnail {
     border-radius: 50%;
+    align-items: center;
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+    background: #E6E7ED;
+    text-align: center;
+    align-content: center;
+
 }
 
 .cv .cv-label a {
     text-decoration: none;
-    color: inherit;
+    font-style: oblique;
+
+}
+
+.group-label {
     font-style: oblique;
 }
 

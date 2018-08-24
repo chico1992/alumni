@@ -17,7 +17,7 @@ class Post
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\Column(type="string" , length=36)
-     * @Groups({"posts"})
+     * @Groups({"posts","comment"})
      */
     private $id;
 
@@ -62,6 +62,7 @@ class Post
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="post", orphanRemoval=true)
+     * @ORM\OrderBy({"creationDate" = "ASC"})
      */
     private $comments;
 
