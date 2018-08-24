@@ -56,7 +56,7 @@ function postCreator(post)
         let data = $( this ).serialize();
         console.log(data);
         $.post("/comment/"+post.id, data).done(function(res) {
-            console.log(res);
+            commentDiv.append(addComment(res));
         });
         commentArea.val("");
     });
