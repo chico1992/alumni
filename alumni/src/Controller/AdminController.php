@@ -40,7 +40,7 @@ class AdminController extends Controller
         $groups = $manager->getRepository(VisibilityGroup::class)->findAll();
 
         return $this->render(
-            'admin/groupCreation.html.twig',
+            'Admin/groupCreation.html.twig',
             [
                 'groups' =>  $groups,
                 'form' => $form->createView()
