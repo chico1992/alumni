@@ -37,6 +37,7 @@ class Post
     /**
      * @ORM\Column(type="text")
      * @Groups({"posts"})
+     * @Assert\NotBlank()
      */
     private $content;
 

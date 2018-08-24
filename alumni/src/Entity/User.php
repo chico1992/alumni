@@ -29,29 +29,34 @@ class User implements UserInterface //, \Serializable
     /**
      * @ORM\Column(type="string", length=100)
      * @Groups({"posts","conversation","message","user"})
+     * @Assert\NotBlank()
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=100)
      * @Groups({"posts","user"})
+     * @Assert\NotBlank()
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"posts","conversation","message"})
+     * @Assert\NotBlank()
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"posts","conversation","message","user"})
+     * @Assert\NotBlank()
      */
     private $lastname;
 

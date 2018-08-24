@@ -22,16 +22,19 @@ class Invitation
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $email;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Role")
+     * @Assert\NotBlank()
      */
     private $roles;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\VisibilityGroup")
+     * @Assert\NotBlank()
      */
     private $visibilityGroups;
 

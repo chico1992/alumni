@@ -19,6 +19,7 @@ class Role
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
      */
     private $label;
 

@@ -23,6 +23,7 @@ class VisibilityGroup
     /**
      * @ORM\Column(type="string", length=100)
      * @Groups({"posts"})
+     * @Assert\NotBlank()
      */
     private $label;
 
