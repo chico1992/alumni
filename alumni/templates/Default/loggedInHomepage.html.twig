@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/post.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/chat.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}{% endblock %}
+
+
+        
+{% block body %} 
+    <main role="main" class="container">
+
+        {% include 'postBox.html.twig' %}
+
+        {% include 'chat.html.twig' %}
+
+    </main>
+
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+		
+    <script src="{{ asset('js/messages.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/chat.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/postCreator.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/infiniteScroll.js') }}"></script>
+   
+{% endblock %}

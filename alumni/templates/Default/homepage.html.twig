@@ -1,44 +1,9 @@
-{% extends 'base.html.twig' %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
-{% block title %}{% endblock %}
+    {% include 'Default/loggedInHomepage.html.twig' %}
 
+{% else %}
+    
+    {% include 'Default/notLoggedInHomepage.html.twig' %}
 
-        
-{% block body %} 
-
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <main role="main" class="container">
-
-            {% include 'postBox.html.twig' %}
-
-            <div class="container">
-
-
-                <ul id="posts"></ul>
-
-            </div>
-            {% include 'chat.html.twig' %}
-
-
-
-        </main>
-    {% else %}
-        <main role="main" class="container">
-            <div class="starter-template">
-                <h1>Welcome to Alumni!</h1>
-                <p class="lead">Sign up with your invitation link or browse our CV library.</p>  
-            </div>
-        </main>
-    {% endif %}
-
-{% endblock %}
-{% block javascripts %}
-	{{ parent() }}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-		
-    <script src="{{ asset('js/messages.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/chat.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/postCreator.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/infiniteScroll.js') }}"></script>
-   
-{% endblock %}
+{% endif %}
