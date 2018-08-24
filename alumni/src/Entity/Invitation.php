@@ -22,19 +22,18 @@ class Invitation
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(message = "The email '{{ value }}' is not a valid email.")
      * @Assert\NotBlank()
      */
     private $email;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Role")
-     * @Assert\NotBlank()
      */
     private $roles;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\VisibilityGroup")
-     * @Assert\NotBlank()
      */
     private $visibilityGroups;
 

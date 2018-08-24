@@ -28,7 +28,7 @@ class UserFormType extends AbstractType
                 [
                     'type' => PasswordType::class,
                     'invalid_message' => 'The password fields must match.',
-                    'first_options'  => array('label' => 'Password'),
+                    'first_options'  => array('label' => 'Password (minimum 8 characters)'),
                     'second_options' => array('label' => 'Repeat Password')
                 ]
             )->add(
