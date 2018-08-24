@@ -57,7 +57,7 @@
 								{% set lastname = user.getLastname() %}
 							{% endif %}
 							<td>{{ lastname }}</td>
-							<td><a href="{{ path("profile_search", {'user' : user.getId()}) }}" class="btn btn-primary btn-lg">View profile</a></td>
+							<td><a href="{{ path("profile_search", {'user' : user.getId()}) }}" class="btn btn-dark">View Profile</a></td>
 						</tr>
 					{% endfor %}
 				</tbody>

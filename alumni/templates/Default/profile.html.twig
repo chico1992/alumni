@@ -93,9 +93,14 @@
 									
                                 <div class="form-group row">
                                     <div class="offset-4 col-8">
-                                    <a href="{{ path("profile_edit") }}" class="btn btn-dark" role="button">Edit profile</a>
-                                    <a href="{{ path("cv_edit") }}" class="btn btn-dark" role="button">Upload CV</a>
-                                    <a href="{{ path("post") }}" class="btn btn-dark" role="button">Create Post</a>
+                                        <a href="{{ path("post") }}" class="btn btn-outline-dark float-right" role="button">Create Post</a>
+                                        <br>
+                                        <br>
+                                        <div>
+                                            <a href="{{ path("profile_edit") }}" class="btn btn-dark" role="button">Edit Profile</a>
+                                            <a href="{{ path("cv_edit") }}" class="btn btn-dark" role="button">Upload CV</a>
+                                            <a href="#" id="conversation-button" class="btn btn-outline-dark float-right" role="button">Send Message</a>
+                                        </div>
                                     </div>
                                 </div>
 
