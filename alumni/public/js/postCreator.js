@@ -27,7 +27,17 @@ function postCreator(post)
     let commentDiv = $('<div class="container p-3 mb-2 border-top"></div>');
     let commentHeader = $('<div class="container ml-2 mt-1"></div>');
     let commentBody = $('<div class="card-body"></div>');
-    let commentBodyForm = $('<form></form>');
+    let commentBodyForm = $('<form method="post"></form>');
+    let commentArea = $('<textarea class="form-control p-3 mb-2 bg-light text-dark" name="content" rows="3" required></textarea>');
+    commentBodyForm.submit(function(e){
+        e.preventDefault();
+        let data = $( this ).serialize();
+        console.log(data);
+        $.post("/comment/"+post.id, data).done(function(res) {
+            console.log(res);
+        });
+        commentArea.val("");
+    });
     let commentBodyFormDiv =$('<div class="form-group"></div>');
 
     postHeader.append($('<p class="group-name font-weight-light font-italic d-inline">'+"Posted in "+post.visibility.label+" the "+postDate+" at "+postHour+" by "+'</p>'+" "+
@@ -50,7 +60,7 @@ function postCreator(post)
     postBody.append(postBodyContent);
 
     commentHeader.append($('<h5>Leave a Comment:</h5>'))
-    commentBodyFormDiv.append($('<textarea class="form-control p-3 mb-2 bg-light text-dark" rows="3"></textarea>'));
+    commentBodyFormDiv.append(commentArea);
     commentBodyForm.append(commentBodyFormDiv);
     commentBodyForm.append($('<button type="submit" class="btn btn-dark">Submit</button>'));
     commentBody.append(commentBodyForm);

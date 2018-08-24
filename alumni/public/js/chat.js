@@ -109,7 +109,7 @@ function addConversation(conversation){
     /* form */
     let form = $('<form action="/newMessage" method="post"></form>');
     let inputConversation = $('<input type="text" name="conversation" value="'+conversation.id+'" hidden>');
-    let inputMessage = $('<input type="text" name="content" placeholder="Type your message…" autofocus>');
+    let inputMessage = $('<input type="text" name="content" placeholder="Type your message…" autofocus required>');
     let inputButton = $('<input type="submit" class="send btn btn-dark" value="Send">');
     form.append(inputConversation);
     form.append(inputMessage);
