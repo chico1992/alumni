@@ -124,7 +124,7 @@ get_user_conversations:
     controller: App\Controller\UserController::getCurrentUserConversations
 
 download_document:
-    path:       /profile/{document}
+    path:       /profile/document/{document}
     controller: App\Controller\ProfileController::downloadDocument
 
 unpublished_posts:
