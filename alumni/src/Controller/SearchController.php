@@ -47,9 +47,9 @@ class SearchController extends Controller
             $document = null;
         }
         return $this->render(
-            'Default/profileSearch.html.twig',
+            'Default/profile.html.twig',
             [
-                'searchedUser' => $user,
+                'user' => $user,
                 'cv' => $document
             ]
         );
