@@ -28,6 +28,7 @@ class User implements UserInterface //, \Serializable
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
      * @Groups({"posts","conversation","message","user","comment"})
      */
     private $username;
@@ -35,22 +36,28 @@ class User implements UserInterface //, \Serializable
     /**
      * @ORM\Column(type="string", length=100)
      * @Groups({"posts","user"})
+     * @Assert\NotBlank()
+     * @Assert\Email(message = "The email '{{ value }}' is not a valid email.")
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=8, minMessage = "Your password must be at least {{ limit }} characters long")
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      * @Groups({"posts","conversation","message","comment"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      * @Groups({"posts","conversation","message","user","comment"})
      */
     private $lastname;

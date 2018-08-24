@@ -22,6 +22,7 @@ class Cv
      * @ORM\OneToOne(targetEntity="App\Entity\Document", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      * @Assert\File(mimeTypes={ "application/pdf" })
+     * @Assert\NotBlank()
      */
     private $document;
 
