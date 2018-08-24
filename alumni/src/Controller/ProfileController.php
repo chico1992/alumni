@@ -20,6 +20,7 @@ class ProfileController extends Controller{
     {
         $user = $this->getUser();
         $manager = $this->getDoctrine()->getManager();
+        $userActions = true;
 
 
         $userid = $user->getId();
@@ -31,7 +32,7 @@ class ProfileController extends Controller{
             $document = null;
         }
 
-        return $this->render('Default/profile.html.twig', ['user' => $user, 'cv' => $document]
+        return $this->render('Default/profile.html.twig', ['user' => $user, 'cv' => $document, 'userActions' => $userActions]
         );
     }
 

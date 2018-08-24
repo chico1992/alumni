@@ -37,7 +37,14 @@ class SearchController extends Controller
     public function showUser(User $user)
     {
         $userid = $user->getId();
+        $sessionUser = $this->getUser();
         $manager = $this->getDoctrine()->getManager();
+        $userActions = false;
+
+        if ($sessionUser == $userid)
+        {
+            $userActions = true;
+        }
 
         $cv = $manager->getRepository(Cv::class)->findOneBy(['user' => $userid]);
         if($cv)
@@ -50,7 +57,9 @@ class SearchController extends Controller
             'Default/profile.html.twig',
             [
                 'user' => $user,
-                'cv' => $document
+                'cv' => $document,
+                'userActions' => $userActions
+
             ]
         );
     }
