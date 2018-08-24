@@ -3,72 +3,74 @@
 {% block title %} Flags {% endblock %}
 
 {% block body %}
-	<h3>Flagged Posts</h3>
-	<div class="container">
-		{% if posts is empty %}
-			<p>No post found in the application</p>
-		{% else %}
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>title</th>
-						<th>Username</th>
-						<th>status</th>
-						<th></th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for post in posts %}
+	<div class="container mt-5">
+		<h3 style="text-align:center">Flagged Posts</h3>
+		<div class="container d-flex justify-content-center mt-5">
+			{% if posts is empty %}
+				<p>No post found in the application</p>
+			{% else %}
+				<table class="table table-striped">
+					<thead>
 						<tr>
-							<td>{{ post.getTitle() }}</td>
-							<td>{{ post.getAuthor().getUsername() }}</td>
-							{% if post.getFlag() %}
-								{% set flag = "flagged" %}
-							{% else %}
-								{% set flag = "unappropriate content?" %}
-							{% endif %}
-							<td>{{ flag }}</td>
-							<td><a href="{{ path('post_edit', {id: post.getId()}) }}">Edit</a></td>
-							<td><a href="{{ path('delete_post', {id: post.getId()}) }}">Delete</a></td>
+							<th>Title</th>
+							<th>Username</th>
+							<th>Status</th>
+							<th></th>
+							<th></th>
 						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-		{% endif %}
-	</div>
-    <h3>Flagged Comments</h3>
-	<div class="container">
-		{% if comments is empty %}
-			<p>No comment found in the application</p>
-		{% else %}
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>title</th>
-						<th>Username</th>
-						<th>status</th>
-						<th></th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for comment in comments %}
+					</thead>
+					<tbody>
+						{% for post in posts %}
+							<tr>
+								<td>{{ post.getTitle() }}</td>
+								<td>{{ post.getAuthor().getUsername() }}</td>
+								{% if post.getFlag() %}
+									{% set flag = "flagged" %}
+								{% else %}
+									{% set flag = "unappropriate content?" %}
+								{% endif %}
+								<td>{{ flag }}</td>
+								<td><a href="{{ path('post_edit', {id: post.getId()}) }}">Edit</a></td>
+								<td><a href="{{ path('delete_post', {id: post.getId()}) }}">Delete</a></td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			{% endif %}
+		</div>
+		<h3 style="text-align:center">Flagged Comments</h3>
+		<div class="container d-flex justify-content-center mt-5">
+			{% if comments is empty %}
+				<p>No comment found in the application</p>
+			{% else %}
+				<table class="table table-striped">
+					<thead>
 						<tr>
-							<td>{{ comment.getAuthor().getUsername() }}</td>
-							{% if comment.getFlag() %}
-								{% set flag = "flagged" %}
-							{% else %}
-								{% set flag = "unappropriate content?" %}
-							{% endif %}
-							<td>{{ flag }}</td>
-							<td><a href="{{ path("comment_edit", {id: comment.getId()}) }}">Edit</a></td>
-							<td><a href="{{ path('delete_comment', {id: comment.getId()}) }}">Delete</a></td>
+							<th>title</th>
+							<th>Username</th>
+							<th>status</th>
+							<th></th>
+							<th></th>
 						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-		{% endif %}
+					</thead>
+					<tbody>
+						{% for comment in comments %}
+							<tr>
+								<td>{{ comment.getAuthor().getUsername() }}</td>
+								{% if comment.getFlag() %}
+									{% set flag = "flagged" %}
+								{% else %}
+									{% set flag = "unappropriate content?" %}
+								{% endif %}
+								<td>{{ flag }}</td>
+								<td><a href="{{ path("comment_edit", {id: comment.getId()}) }}">Edit</a></td>
+								<td><a href="{{ path('delete_comment', {id: comment.getId()}) }}">Delete</a></td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			{% endif %}
+		</div>
 	</div>
 
 {% endblock %}
