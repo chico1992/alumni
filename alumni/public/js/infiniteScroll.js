@@ -18,6 +18,8 @@ $(document).ready(function() {
 			$("#first").append($('<div class="starter-template" id="second"></div>'));
 			$("#second").append($('<h1>Welcome to Alumni!</h1>'));
 			$("#second").append($('<p class="lead">Feel free to create a post or to chat with other users.</p>'));
+			$("#second").append($('<a href="/post" class="btn btn-outline-dark float-right" role="button">Create a Post</a>'));
+			
 		}
 		result.forEach(post => {
 			
