@@ -138,6 +138,8 @@ form .send {
     height: 312px;
 	padding: 8px 24px;
 	overflow-y: scroll;
+	display: flex;
+	flex-direction : column-reverse;
 }
 
 
