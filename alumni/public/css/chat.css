@@ -5,8 +5,52 @@
     flex-direction: row-reverse;
     position: fixed;
     bottom: 0;
-    right: 0;
+	right: 0;
+	list-style: none;
+    margin: 0;
+    padding: 0;
 }
+
+.chat section
+{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+
+
+.chat section.left .chat-body
+{
+	margin-left: 60px;
+	text-align: right;
+	float: right;
+
+	position: relative;
+	background: #e7d3d3;
+	border-radius: .4em;
+	
+}
+
+.chat section.right .chat-body
+{
+	margin-right: 60px;
+	text-align: left;
+	float: left;
+	
+	position: relative;
+	background: #e6e6e6;
+	border-radius: .4em;
+}
+
+
+.chat section .chat-body p
+{
+    margin: 0;
+    color: #777777;
+}
+
+
+
+/* *********************** */
 
 a.chat-close-live { 
 	text-decoration: none; 
@@ -91,29 +135,32 @@ form .send {
 
 .chat-history {
 	padding: 10px;
-}
-
-.chat-history {
     height: 312px;
 	padding: 8px 24px;
 	overflow-y: scroll;
 }
 
+
 .chat-message {
-    text-align: left;
+	text-align: left;
 	float: left;
-	padding: 30px 15px 0 25px;
+	padding: 0 0 0 0;
 	height: 20px;
 	width: 100%;
 }
 
+.chat-message p {
+	color: red;
+}
+
 .chat-message-me p {
+	color: blue;
     text-align: right;
     float: right;
-	padding: 5px 10px 5px 12px;
+	padding: 35px 0 0 0;
 	height: 20px;
 	width: 100%;
-	margin: 0;
+	margin: 0 0;
 }
 
 .chat-message-content {
