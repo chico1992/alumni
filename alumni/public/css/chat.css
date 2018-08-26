@@ -11,14 +11,14 @@
     padding: 0;
 }
 
-.chat li
+.chat section
 {
     margin-bottom: 10px;
     padding-bottom: 5px;
 }
 
 
-.chat li.left .chat-body
+.chat section.left .chat-body
 {
 	margin-left: 60px;
 	text-align: right;
@@ -30,7 +30,7 @@
 	
 }
 
-.chat li.right .chat-body
+.chat section.right .chat-body
 {
 	margin-right: 60px;
 	text-align: left;
@@ -42,7 +42,7 @@
 }
 
 
-.chat li .chat-body p
+.chat section .chat-body p
 {
     margin: 0;
     color: #777777;
