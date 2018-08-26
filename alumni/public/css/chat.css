@@ -5,8 +5,52 @@
     flex-direction: row-reverse;
     position: fixed;
     bottom: 0;
-    right: 0;
+	right: 0;
+	list-style: none;
+    margin: 0;
+    padding: 0;
 }
+
+.chat li
+{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+
+
+.chat li.left .chat-body
+{
+	margin-left: 60px;
+	text-align: right;
+	float: right;
+
+	position: relative;
+	background: #e7d3d3;
+	border-radius: .4em;
+	
+}
+
+.chat li.right .chat-body
+{
+	margin-right: 60px;
+	text-align: left;
+	float: left;
+	
+	position: relative;
+	background: #e6e6e6;
+	border-radius: .4em;
+}
+
+
+.chat li .chat-body p
+{
+    margin: 0;
+    color: #777777;
+}
+
+
+
+/* *********************** */
 
 a.chat-close-live { 
 	text-decoration: none; 
