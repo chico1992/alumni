@@ -5,11 +5,11 @@
 {% block body %}
 	<div class="container mt-5">
 		<h3 style="text-align:center">Flagged Posts</h3>
-		<div class="container d-flex justify-content-center mt-5">
+		<div class="container d-flex justify-content-center mt-5 mb-5">
 			{% if posts is empty %}
 				<p>No post found in the application</p>
 			{% else %}
-				<table class="table table-striped">
+				<table class="table table-striped table-responsive">
 					<thead>
 						<tr>
 							<th>Title</th>
