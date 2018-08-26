@@ -5,12 +5,20 @@ function postCreator(post)
     let postTime = post.creationDate;
     let date = new Date(postTime);
 
-    let postYear = date.getFullYear();
-    let postMonth = date.getMonth()+1;
-    let postDay = date.getDate();
+    function addZero(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
 
-    let postHour = date.getHours();
-    let postMinute = date.getMinutes();
+    let postYear = date.getFullYear();
+    let postMonth = addZero(date.getMonth()+1);
+    let postDay = addZero(date.getDate());
+
+
+    let postHour = addZero(date.getHours());
+    let postMinute = addZero(date.getMinutes());
 
     postDate = postDay+ "." +postMonth+ "." +postYear;
     postHour = postHour+ ":" + postMinute;
