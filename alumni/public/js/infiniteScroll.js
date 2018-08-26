@@ -11,15 +11,11 @@ $(document).ready(function() {
 
 	$.get("/posts/"+timestamp).done(function(result){
 		let X = result.length;
-		
-		let ul = $('#posts');
+		console.log(X);
 		result.forEach(post => {
 			
 			posts.push(post)
-			//ul.append($('<li>').text(post.creationDate));
 			$("#postPinBoard").append(postCreator(post))
-			console.log(post);
-
 		});
 		
 	});
@@ -35,13 +31,12 @@ $(document).ready(function() {
 			console.log(unixtime);
 
 			$.get("/posts/"+unixtime).done(function(res){
-				let ul = $('#posts');
+				
 				if (res.length != 0)
 				{
 					res.forEach(post => {
 						
 						posts.push(post)
-						//ul.append($('<li>').text(post.creationDate));
 						$("#postPinBoard").append(postCreator(post))
 						
 					});
