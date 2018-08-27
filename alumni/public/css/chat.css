@@ -23,6 +23,7 @@
 	margin-left: 60px;
 	text-align: right;
 	float: right;
+	padding: 6px 6px 6px 6px;
 
 	position: relative;
 	background: #e7d3d3;
@@ -35,6 +36,7 @@
 	margin-right: 60px;
 	text-align: left;
 	float: left;
+	padding: 6px 6px 6px 6px;
 	
 	position: relative;
 	background: #e6e6e6;

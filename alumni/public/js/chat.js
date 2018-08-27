@@ -75,7 +75,7 @@ function connect(){
 
 function showConversation(conversation){
     let user = JSON.parse(sessionStorage.getItem('user'));
-    let conversationField = $('<div class="chat-message-content" data-value="'+ conversation.id+'"></div>');
+    let conversationField = $('<div class="chat-message-content mt-2 mb-3" data-value="'+ conversation.id+'"></div>');
     let name = $('<h4></h4>');
     users=conversation.users;
     users.forEach(convUser=> {
