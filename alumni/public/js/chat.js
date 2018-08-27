@@ -5,18 +5,15 @@ $(function() {
         $.get("/user").done(function(res) {
             user = res;
             sessionStorage.setItem('user',JSON.stringify(user));   
-        });
-    }
-    // while(user == null){}
-    if(conversations == null){
-        $.get("/user/conversations").done(function(res){
-            conversations = res;
-            sessionStorage.setItem('conversations',JSON.stringify(conversations));
-            conversations.forEach(conversation => {
-                showConversation(conversation);
+            $.get("/user/conversations").done(function(res){
+                conversations = res;
+                sessionStorage.setItem('conversations',JSON.stringify(conversations));
+                conversations.forEach(conversation => {
+                    showConversation(conversation);
+                });
+                connect();
             });
-            addClick();
-        })
+        });
     }else{
         conversations.forEach(conversation =>{
             showConversation(conversation);
@@ -32,19 +29,24 @@ $(function() {
                 }
             }
         });
+        connect();
     }
+    
+
+});
+
+function connect(){
+    let conversations = JSON.parse(sessionStorage.getItem('conversations'));
+    let user = JSON.parse(sessionStorage.getItem('user'));
     let socket = io(':3000');
-    if(user!=null){
-        socket.on('connect',function(){
-            if(conversations!=null){
-                conversations.forEach(conversation => {
-                    socket.emit('room',conversation.id);
-                });
-                addClick();
-            }
-            socket.emit('room',user.id);
-        });
-    }
+    socket.on('connect',function(){
+        if(conversations!=[]){
+            conversations.forEach(conversation => {
+                socket.emit('room',conversation.id);
+            });
+        }
+        socket.emit('room',user.id);
+    });
 
     socket.on('message',function(message){
         console.log('Incoming message:', message);
@@ -52,14 +54,25 @@ $(function() {
     });
 
     socket.on('conversation',function(conversation){
+        let conv = JSON.parse(conversation);
         console.log('Incoming conversation',conversation);
-        conversations.push(JSON.parse(conversation));
-        showConversation(JSON.parse(conversation));
-        addClick();
-        sessionStorage.setItem('conversations',JSON.stringify(conversations));
-    })
-
-});
+        let exists = false;
+        conversations.forEach(con =>{
+            if(con.id == conv.id){
+                exists = true;
+            }
+        });
+        if(!exists){
+            conversations.push(conv);
+            showConversation(conv);
+            sessionStorage.setItem('conversations',JSON.stringify(conversations));
+            socket.emit('room',conv.id);
+        }
+        addConversation(conv);
+        loadMessages(conv);
+            
+    });
+}
 
 function showConversation(conversation){
     let user = JSON.parse(sessionStorage.getItem('user'));
@@ -69,6 +82,21 @@ function showConversation(conversation){
     users.forEach(convUser=> {
         if(user.id != convUser.id){
             name.text(convUser.username);
+        }
+    });
+    conversationField.click(function(){
+        console.log($(this).data("value"));
+        let convId=conversation.id;
+        if(sessionStorage.getItem(convId)==null){
+            let conversations = JSON.parse(sessionStorage.getItem("conversations"));
+            let conv = {};
+            conversations.forEach(conversation =>{
+                if(conversation.id == convId){
+                    conv = conversation;
+                }
+            });
+            addConversation(conv);
+            loadMessages(conv);
         }
     });
     conversationField.append(name);
@@ -130,24 +158,6 @@ function addConversation(conversation){
     $('.chat').append(conversationWindow);
 }
 
-function addClick() {
-	$('.chat-message-content').click(function(){
-        console.log($(this).data("value"));
-        let convId=$(this).data("value");
-        console.log(sessionStorage.getItem(convId));
-        if(sessionStorage.getItem(convId)==null){
-            let conversations = JSON.parse(sessionStorage.getItem("conversations"));
-            let conv = {};
-            conversations.forEach(conversation =>{
-                if(conversation.id == convId){
-                    conv = conversation;
-                }
-            });
-            addConversation(conv);
-            loadMessages(conv);
-        }
-    });
-}
 
 function loadMessages(conv){
     $.get("/allMessages/"+conv.id).done(function(res) {
