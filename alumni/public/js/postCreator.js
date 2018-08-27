@@ -40,12 +40,9 @@ function postCreator(post)
     commentDiv.append(commentLoaderArea);
     commentLoader.click(function(e){
         e.preventDefault();
-        console.log('hello comments');
         $.get('/post/comments/'+post.id).done(function(res){
-            console.log(res);
             commentDiv.empty();
             if(res.length==0){
-                console.log("empty");
                 commentDiv.append('<h5>No comments available</h5>');
             }else{
                 res.forEach(comment => {
@@ -62,7 +59,6 @@ function postCreator(post)
     commentBodyForm.submit(function(e){
         e.preventDefault();
         let data = $( this ).serialize();
-        console.log(data);
         $.post("/comment/"+post.id, data).done(function(res) {
             commentDiv.append(addComment(res));
         });

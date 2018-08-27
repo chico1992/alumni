@@ -1,11 +1,10 @@
-$(document).ready(function() {
+function infiniteScrollInit() {
 
     var currentdate = new Date(); 
     var number =  currentdate.getTime();
 	var timestamp = parseInt(number);
 	var posts = [];
 
-	console.log(timestamp);
 
 	var win = $(window);
 
@@ -13,9 +12,8 @@ $(document).ready(function() {
 
 		result.forEach(post => {
 			
-			posts.push(post)
-			$("#profilePinBoard").append(postCreator(post))
-			console.log(post);
+			posts.push(post);
+			$("#profilePinBoard").append(postCreator(post));
 		});
 		
 	});
@@ -26,24 +24,21 @@ $(document).ready(function() {
 		
 		if ($(document).height() - win.height() == win.scrollTop()) {
 			let time = posts[posts.length - 1].creationDate;
-			console.log(time);
 			let unixtime = (new Date(time)).getTime()/1000;
-			console.log(unixtime);
 
 			$.get("/posts/"+USER+"/"+unixtime).done(function(res){
 				if (res.length != 0)
 				{
 					res.forEach(post => {
 						
-						posts.push(post)
-						$("#profilePinBoard").append(postCreator(post))
+						posts.push(post);
+						$("#profilePinBoard").append(postCreator(post));
 						
 					});
 				} 
 				else 
 				{
-					console.log("No Post left!")
-					$("#profilePinBoard").append('<strong>No Posts left!</strong>')
+					$("#profilePinBoard").append('<strong>No Posts left!</strong>');
 					win.off("scroll");
 				}
 				
@@ -51,4 +46,4 @@ $(document).ready(function() {
 			//$('#loading').show();
 		}
 	});
-});
+}

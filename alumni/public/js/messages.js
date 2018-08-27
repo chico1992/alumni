@@ -24,9 +24,7 @@
 
 	$("#conversation-button").click(function(e) {
 		e.preventDefault();
-		console.log(USER);
 		$.get("/conversation/new/"+USER).done(function(res){
-			console.log(res);
 		});
 	});
 }) ();
