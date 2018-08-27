@@ -1,6 +1,31 @@
 
 /* POST and COMMENT CSS */
 
+.post-img {
+    border-radius: 50%;
+    object-fit: cover;
+    background: #E6E7ED;
+    height: 50px;
+    width: 50px;
+}
+
+.comment-img {
+    border-radius: 50%;
+    object-fit: cover;
+    background: #E6E7ED;
+    height: 35px;
+    width: 35px;
+}
+
+.no-comment-text {
+    font-size: 95%;
+    font-style: italic;
+}
+
+.comment {
+    margin-left: 20px !important;
+}
+
 .card-footer.text-muted .deco-none { /* poster name */
     color:#3d3b3b !important;
     text-decoration:none;

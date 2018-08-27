@@ -43,7 +43,7 @@ function postCreator(post)
         $.get('/post/comments/'+post.id).done(function(res){
             commentDiv.empty();
             if(res.length==0){
-                commentDiv.append('<h5>No comments available</h5>');
+                commentDiv.append('<h5 class="no-comment-text">No comments available</h5>');
             }else{
                 res.forEach(comment => {
                     commentDiv.append(addComment(comment));
@@ -85,7 +85,7 @@ function postCreator(post)
 
     postHeader.append(postHeaderIcons);
     if(post.author.profilePicture != null){
-        postBodyContentHeader.append($('<img class="mr-3 mb-3 rounded-circle" src="/profile/document/'+post.author.profilePicture.id+'" alt=""></img>'));
+        postBodyContentHeader.append($('<img class=" post-img mr-3 mb-3 rounded-circle" src="/profile/document/'+post.author.profilePicture.id+'" alt=""></img>'));
     }else{
         postBodyContentHeader.append($('<img class="mr-3 mb-3 rounded-circle" src="http://placehold.it/40x40" alt=""></img>'));
     }
@@ -119,7 +119,7 @@ function addComment(comment){
     let commentContaiener = $('<div class="media pb-3 mb-3 border-bottom"></div>');
     let commenterImage ="";
     if(comment.author.profilePicture != null){
-        commenterImage = $('<img class="d-flex ml-2 mr-3 rounded-circle" src="/profile/document/'+comment.author.profilePicture.id+'" alt="">');
+        commenterImage = $('<img class="comment-img d-flex ml-2 mr-3 rounded-circle" src="/profile/document/'+comment.author.profilePicture.id+'" alt="">');
     }else{
         commenterImage = $('<img class="d-flex ml-2 mr-3 rounded-circle" src="http://placehold.it/30x30" alt="">');
     }
