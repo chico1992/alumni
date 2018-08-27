@@ -7,11 +7,13 @@
 {% endblock %}
 
 {% block title %}Home{% endblock %}
-
-
         
 {% block body %} 
+
     <main role="main" class="container">
+        <div class="col-md-12">
+        <a href="{{ path("post") }}" class="button-home btn btn-dark btn-lg btn-block" role="button">Create Post</a>
+        </div>
 
         {% include 'postBox.html.twig' %}
 
@@ -20,6 +22,7 @@
     </main>
 
 {% endblock %}
+
 {% block javascripts %}
 	{{ parent() }}
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>

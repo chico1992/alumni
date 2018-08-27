@@ -25,7 +25,7 @@ class UserSearchFormType extends AbstractType
                 'submit', 
                 SubmitType::class, 
                 [
-                    'label' => 'search',
+                    'label' => 'Search',
                     'attr' => ['class' => 'btn btn-lg btn-dark btn-block']
                 ]
             );

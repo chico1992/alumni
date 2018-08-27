@@ -43,7 +43,11 @@ class InvitationFormType extends AbstractType
             )
         ;
         if($options['standalone']){
-            $builder->add('submit',SubmitType::class);
+            $builder->add(
+                'submit',
+                SubmitType::class,
+                ['attr' => ['class' => 'btn btn-lg btn-dark btn-block']]
+            );
         }
     }
 
