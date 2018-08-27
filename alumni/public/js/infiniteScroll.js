@@ -10,9 +10,9 @@ $(document).ready(function() {
 	var win = $(window);
 
 	$.get("/posts/"+timestamp).done(function(result){
-		let X = result.length;
+		let postCount = result.length;
 		
-		if( X == 0){
+		if(postCount == 0){
 			console.log(X);
 			$("#postPinBoard").append($('<main role="main" class="container" id="first"></main>'));
 			$("#first").append($('<div class="starter-template" id="second"></div>'));
