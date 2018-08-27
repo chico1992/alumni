@@ -34,4 +34,7 @@ RUN rm ./composer.phar
 COPY /entrypoint.sh /
 COPY /php.ini /usr/local/etc/php/
 
+RUN mkdir var/upload
+RUN chown -R www-data: var/upload
+
 ENTRYPOINT bash /entrypoint.sh
