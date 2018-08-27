@@ -54,7 +54,7 @@ $(function() {
     socket.on('conversation',function(conversation){
         console.log('Incoming conversation',conversation);
         conversations.push(JSON.parse(conversation));
-        showConversation(conversation);
+        showConversation(JSON.parse(conversation));
         addClick();
         sessionStorage.setItem('conversations',JSON.stringify(conversations));
     })
@@ -77,17 +77,16 @@ function showConversation(conversation){
 
 function addConversation(conversation){
     let user = JSON.parse(sessionStorage.getItem('user'));
-    let conversationWindow = $('<div class="live-chat"><div>');
+    let conversationWindow = $('<div class="live-chat clearfix"><div>');
     /* Header */
     let conversationWindowHeader = $('<header></header>');
-    let conversationWindowCloser = $('<a href="#" class="chat-close-live">x</a>');
+    let conversationWindowCloser = $('<a href="#" class="chat-close-live"><i class="fas fa-times-circle"></i></a>');
     conversationWindowCloser.click( function(e) {
         e.preventDefault();
         conversationWindow.fadeOut(300);
         conversationWindow.remove();
         sessionStorage.removeItem(conversation.id);
     });
-    console.log("blah");
     let conversationWindowHeaderText = $('<h4></h4>');
     users=conversation.users;
     users.forEach(convUser=> {
@@ -100,8 +99,10 @@ function addConversation(conversation){
     conversationWindow.append(conversationWindowHeader);
 
     /* conversation window */
-    let chatWindow = $('<div class="chat-window-live border"></div>');
-    let chatHistory = $('<div class="chat-history" id="'+ conversation.id+'"></div>');
+    let chatWindow = $('<div class="chat-window-live border clearfix"></div>');
+    let chatHistory = $('<div class="chat-history"></div>');
+    let chatMessageContainer = $('<div id="'+ conversation.id+'"></div>');
+    chatHistory.append(chatMessageContainer);
     conversationWindowHeader.click(function() {
         chatWindow.slideToggle(300, 'swing');
     });
@@ -128,26 +129,6 @@ function addConversation(conversation){
     conversationWindow.append(chatWindow);
     $('.chat').append(conversationWindow);
 }
-
-	
-        
-        // <div class="chat-window-live">			
-        //     <div class="chat-history">				
-        //         <div class="chat-message bg-light text-dark border-top border-bottom">										
-        //             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, explicabo quasi ratione odio dolorum harum.</p>
-        //         </div> <!-- end chat-message -->
-        //         <div class="chat-message-me">									
-        //             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, explicabo quasi ratione odio dolorum harum.</p>
-        //         </div> <!-- end chat-message -->
-        //     </div> <!-- end chat-history -->
-		
-        //     <form action="#" method="post">
-        //             <input type="text" placeholder="Type your message…" autofocus>
-        //             <input type="submit" class="send btn btn-dark" value="Send">
-        //             <input type="hidden">
-        //     </form>
-
-        // </div> 
 
 function addClick() {
 	$('.chat-message-content').click(function(){
@@ -184,14 +165,16 @@ function addMessage(message){
     console.log("helloo");
     let chatWindow = $("#"+message.receiver.id);
     let user = JSON.parse(sessionStorage.getItem('user'));
-    let messageContainer = "";
+    let messageBaseContainer = "";
     if(user.id == message.sender.id){
-        messageContainer = $('<div class="chat-message-me"></div>');
+        messageBaseContainer = $('<section class="left clearfix"></section>');
     }else{
-        messageContainer = $('<div class="chat-message bg-light text-dark border-top border-bottom"></div>');
+        messageBaseContainer = $('<section class="right clearfix"></section>');
     }
+    let messageContainer=$('<div class="chat-body clearfix"></div')
     let messageP = $('<p></p>');
     messageP.text(message.content);
     messageContainer.append(messageP);
-    chatWindow.append(messageContainer);
+    messageBaseContainer.append(messageContainer);
+    chatWindow.append(messageBaseContainer);
 }
