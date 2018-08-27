@@ -17,28 +17,28 @@ class UserFormType extends AbstractType
         $builder->add(
                 'username',
                 TextType::class,
-                ['label'=>'Please choose a Username']
+                ['label'=>'Username']
             )->add(
                 'email',
                 EmailType::class,
-                ['label'=>'Please enter the email adress, where your invitation was send to']
+                ['label'=>'Email adress (where your invitation was sent to)']
             )->add(
                 'password',
                 RepeatedType::class,
                 [
                     'type' => PasswordType::class,
-                    'invalid_message' => 'The password fields must match.',
+                    'invalid_message' => 'The password fields should match.',
                     'first_options'  => array('label' => 'Password (minimum 8 characters)'),
                     'second_options' => array('label' => 'Repeat Password')
                 ]
             )->add(
                 'firstname',
                 TextType::class,
-                ['label'=>'Please enter your Firstname']
+                ['label'=>'Firstname']
             )->add(
                 'lastname',
                 TextType::class,
-                ['label'=>'Please enter your Lastname']
+                ['label'=>'Lastname']
             );
             
         if ($options['standalone']) {
