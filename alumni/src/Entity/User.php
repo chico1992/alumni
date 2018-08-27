@@ -91,7 +91,7 @@ class User implements UserInterface //, \Serializable
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Document", cascade={"persist", "remove"})
      * @Assert\File(mimeTypes={ "image/*" })
-     * @Groups({"posts","user"})
+     * @Groups({"posts","user","comment"})
      */
     private $profilePicture;
 
