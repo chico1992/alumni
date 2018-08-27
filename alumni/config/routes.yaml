@@ -128,7 +128,7 @@ download_document:
     controller: App\Controller\ProfileController::downloadDocument
 
 unpublished_posts:
-    path:       /profile/unpublished
+    path:       /unpublished
     controller: App\Controller\PostListController::showUnpublishedPosts
 
 cvtheque:

@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Comment;
 use App\Entity\Post;
+use App\Entity\User;
 
 class PostListController extends Controller
 {  
