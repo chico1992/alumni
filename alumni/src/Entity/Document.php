@@ -16,12 +16,12 @@ class Document
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\Column(type="string", length=36)
+     * @Groups({"posts","comment"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"posts"})
      */
     private $path;
 

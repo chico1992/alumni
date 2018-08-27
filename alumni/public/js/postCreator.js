@@ -84,8 +84,11 @@ function postCreator(post)
     postHeaderIcons.append(postFlagIcon);
 
     postHeader.append(postHeaderIcons);
-
-    postBodyContentHeader.append($('<img class="mr-3 mb-3 rounded-circle" src="http://placehold.it/40x40" alt=""></img>'));
+    if(post.author.profilePicture != null){
+        postBodyContentHeader.append($('<img class="mr-3 mb-3 rounded-circle" src="/profile/document/'+post.author.profilePicture.id+'" alt=""></img>'));
+    }else{
+        postBodyContentHeader.append($('<img class="mr-3 mb-3 rounded-circle" src="http://placehold.it/40x40" alt=""></img>'));
+    }
     postBodyContentHeader.append($('<h2 class="card-title">'+post.title+'</h2>'));
     postBody.append(postBodyContentHeader);
     postBodyContent.append($('<p class="card-text">'+post.content+'</p>'));
@@ -111,9 +114,15 @@ function postCreator(post)
 }
 
 function addComment(comment){
+    console.log(comment);
     let user = JSON.parse(sessionStorage.getItem("user"));
     let commentContaiener = $('<div class="media pb-3 mb-3 border-bottom"></div>');
-    let commenterImage = $('<img class="d-flex ml-2 mr-3 rounded-circle" src="http://placehold.it/30x30" alt="">');
+    let commenterImage ="";
+    if(comment.author.profilePicture != null){
+        commenterImage = $('<img class="d-flex ml-2 mr-3 rounded-circle" src="/profile/document/'+comment.author.profilePicture.id+'" alt="">');
+    }else{
+        commenterImage = $('<img class="d-flex ml-2 mr-3 rounded-circle" src="http://placehold.it/30x30" alt="">');
+    }
     commentContaiener.append(commenterImage);
     let commentBody = $('<div class="media-body"></div>');
     let commenterName = $('<h6 class="mt-0 mt-1"><h6>');
