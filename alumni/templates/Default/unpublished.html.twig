@@ -1,9 +1,14 @@
-	{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/post.css') }}" rel="stylesheet">
+{% endblock %}
 
 {% block title %}Unpublished Posts{% endblock %}
 
 {% block body %}
-	<div class="container">
+	<div class="container mt-5">
     	{% if posts is empty %}
     		<p>No posts found in the application</p>
     	{% else %}      
@@ -12,9 +17,8 @@
 				<div class="card-footer text-muted">
 					Posted in <p class="group-name font-weight-light font-italic d-inline">{{ post.getVisibility().getLabel() }}</p> on {{ post.getCreationDate() | date('Y-m-d H:i:s') }} 
 					<div class="icons">
-						<a href="#" class="deco-none"><i class="fas fa-pencil-alt mr-2 d-inline"></i></a>
-						<a href="#" class="deco-none"><i class="fas fa-trash-alt mr-2 d-inline"></i></a>
-						<a href="#" class="deco-none"><i class="fas fa-flag mr-2 d-inline"></i></a>
+						<a href="{{ path('post_edit',{'id' : post.getId()}) }}" class="deco-none"><i class="fas fa-pencil-alt mr-2 d-inline"></i></a>
+						<a href="{{ path('delete_post',{'id' : post.getId()}) }}" class="deco-none"><i class="fas fa-trash-alt mr-2 d-inline"></i></a>
 					</div>
 				</div>
 				<div class="card-body">

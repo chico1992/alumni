@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Entity\VisibilityGroup;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class PostEditFormType extends AbstractType
 {
@@ -26,6 +27,15 @@ class PostEditFormType extends AbstractType
                 TextareaType::class,
                 ['label' => 'Edit the post']
 
+            )->add(
+                'status',
+                ChoiceType::class,
+                array(
+                    'choices' => array(
+                        'publish' => true,
+                        'draft' => false,
+                    )
+                )
             )
         ;
         if ($options['standalone']) {
