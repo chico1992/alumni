@@ -9,6 +9,8 @@ services:
         networks:
             - public
             - internal
+        volumes:
+            - ./upload:/var/www/html/var/upload/
     db:
         image: mysql:5.7
         environment:
