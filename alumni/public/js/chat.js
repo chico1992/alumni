@@ -12,7 +12,7 @@ $(function() {
                     showConversation(conversation);
                 });
                 connect();
-                infiniteScrollInit()
+                infiniteScrollInit();
             });
         });
     }else{
@@ -30,7 +30,7 @@ $(function() {
             }
         });
         connect();
-        infiniteScrollInit()
+        infiniteScrollInit();
     }
     
 

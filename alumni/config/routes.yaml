@@ -58,10 +58,6 @@ user_posts:
     path:       /posts/{user}/{creationDate}
     controller: App\Controller\PostController::getUserPosts
 
-post_list:
-    path:       /post/list
-    controller: App\Controller\PostListController::postList
-
 delete_post:
     path:       /post/delete/{id}
     controller: App\Controller\PostController::deletePost
@@ -118,7 +114,6 @@ profile_search:
     path:       /profile/{user}
     controller: App\Controller\SearchController::showUser
 
-
 get_user_conversations:
     path:       /user/conversations
     controller: App\Controller\UserController::getCurrentUserConversations
@@ -129,7 +124,7 @@ download_document:
 
 unpublished_posts:
     path:       /unpublished
-    controller: App\Controller\PostListController::showUnpublishedPosts
+    controller: App\Controller\PostController::showUnpublishedPosts
 
 cvtheque:
     path:       /cvtheque
