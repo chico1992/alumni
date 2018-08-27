@@ -71,7 +71,7 @@ function postCreator(post)
     let commentBodyFormDiv =$('<div class="form-group"></div>');
 
     postHeader.append($('<p class="group-name font-weight-light font-italic d-inline">'+"Posted in "+post.visibility.label+" the "+postDate+" at "+postHour+" by "+'</p>'+" "+
-    '<a href="/profile/'+post.author.id+'" class="deco-none">'+post.author.firstname+'</a>'));
+    '<a href="/profile/'+post.author.id+'" class="deco-none">'+post.author.username+'</a>'));
     
     if (user.id == post.author.id)
     {
