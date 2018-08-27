@@ -218,4 +218,23 @@ class PostController extends Controller
             ]
         );
     }
+
+    public function showUnpublishedPosts()
+    {   
+        $user = $this->getUser();
+        $userid = $user->getId();
+        $manager = $this->getDoctrine()->getManager();
+        
+        $criteria = ['author' => $userid, 'status' => 0];
+        $orderBy = ['creationDate' => 'DESC'];
+
+        $posts = $manager->getRepository(Post::class)->findBy($criteria, $orderBy);
+        
+        return $this->render(
+            'Default/unpublished.html.twig',
+            [
+                'posts' => $posts
+            ]
+        );
+    }
 }
