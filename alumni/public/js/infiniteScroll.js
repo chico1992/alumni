@@ -13,11 +13,9 @@ function infiniteScrollInit() {
 		
 		if(postCount == 0){
 			$("#postPinBoard").append($('<main role="main" class="container" id="first"></main>'));
-			$("#first").append($('<div class="starter-template" id="second"></div>'));
-			$("#second").append($('<h1>Welcome to Alumni!</h1>'));
-			$("#second").append($('<p class="lead">Feel free to create a post or to chat with other users.</p>'));
-			$("#second").append($('<a href="/post" class="btn btn-outline-dark float-right" role="button">Create a Post</a>'));
-			
+			$("#first").append($('<div class="starter-template mx-auto mt-1 text-center" id="second"></div>'));
+			$("#second").append($('<h1 class="text-uppercase"> <strong> Welcome to Alumni <strong> </h1>'));
+			$("#second").append($('<p class="lead">Feel free to create posts, comment or chat with other users.</p>'));
 		}
 		result.forEach(post => {
 			

@@ -20,6 +20,7 @@
 .no-comment-text {
     font-size: 95%;
     font-style: italic;
+    margin-left: 18px !important;
 }
 
 .comment {
