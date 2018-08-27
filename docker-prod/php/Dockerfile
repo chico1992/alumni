@@ -32,5 +32,6 @@ RUN ./composer.phar install
 RUN rm ./composer.phar
 
 COPY /entrypoint.sh /
+COPY /php.ini /usr/local/etc/php/
 
 ENTRYPOINT bash /entrypoint.sh
