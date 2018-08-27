@@ -12,6 +12,7 @@ $(function() {
                     showConversation(conversation);
                 });
                 connect();
+                infiniteScrollInit()
             });
         });
     }else{
@@ -23,13 +24,13 @@ $(function() {
                 if(conv.messages){
                     let messages = conv.messages;
                     messages.forEach(message => {
-                        console.log('hi');
                         addMessage(message);
                     });
                 }
             }
         });
         connect();
+        infiniteScrollInit()
     }
     
 
@@ -49,13 +50,11 @@ function connect(){
     });
 
     socket.on('message',function(message){
-        console.log('Incoming message:', message);
         addMessage(JSON.parse(message));
     });
 
     socket.on('conversation',function(conversation){
         let conv = JSON.parse(conversation);
-        console.log('Incoming conversation',conversation);
         let exists = false;
         conversations.forEach(con =>{
             if(con.id == conv.id){
@@ -85,7 +84,6 @@ function showConversation(conversation){
         }
     });
     conversationField.click(function(){
-        console.log($(this).data("value"));
         let convId=conversation.id;
         if(sessionStorage.getItem(convId)==null){
             let conversations = JSON.parse(sessionStorage.getItem("conversations"));
@@ -147,9 +145,7 @@ function addConversation(conversation){
     form.submit(function(e){
         e.preventDefault();
         let data = $( this ).serialize();
-        console.log(data);
         $.post("/newMessage", data).done(function(res) {
-            console.log(res);
         });
         inputMessage.val("");
     });
@@ -163,16 +159,13 @@ function loadMessages(conv){
     $.get("/allMessages/"+conv.id).done(function(res) {
         conv.messages=res;
         sessionStorage.setItem(conv.id,JSON.stringify(conv));
-        console.log(res); 
         res.forEach(message=>{
-            console.log(message);
             addMessage(message);
         }); 
     });
 }
 
 function addMessage(message){
-    console.log("helloo");
     let chatWindow = $("#"+message.receiver.id);
     let user = JSON.parse(sessionStorage.getItem('user'));
     let messageBaseContainer = "";

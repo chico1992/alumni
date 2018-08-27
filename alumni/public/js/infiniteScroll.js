@@ -1,11 +1,10 @@
-$(document).ready(function() {
+function infiniteScrollInit() {
 
     var currentdate = new Date(); 
     var number =  currentdate.getTime();
 	var timestamp = parseInt(number);
 	var posts = [];
 
-  console.log(timestamp);
 
 	var win = $(window);
 
@@ -13,7 +12,6 @@ $(document).ready(function() {
 		let postCount = result.length;
 		
 		if(postCount == 0){
-			console.log(X);
 			$("#postPinBoard").append($('<main role="main" class="container" id="first"></main>'));
 			$("#first").append($('<div class="starter-template" id="second"></div>'));
 			$("#second").append($('<h1>Welcome to Alumni!</h1>'));
@@ -23,8 +21,8 @@ $(document).ready(function() {
 		}
 		result.forEach(post => {
 			
-			posts.push(post)
-			$("#postPinBoard").append(postCreator(post))
+			posts.push(post);
+			$("#postPinBoard").append(postCreator(post));
 		});
 		
 	});
@@ -35,9 +33,7 @@ $(document).ready(function() {
 		
 		if ($(document).height() - win.height() == win.scrollTop()) {
 			let time = posts[posts.length - 1].creationDate;
-			console.log(time);
 			let unixtime = (new Date(time)).getTime()/1000;
-			console.log(unixtime);
 
 			$.get("/posts/"+unixtime).done(function(res){
 				
@@ -45,15 +41,14 @@ $(document).ready(function() {
 				{
 					res.forEach(post => {
 						
-						posts.push(post)
-						$("#postPinBoard").append(postCreator(post))
+						posts.push(post);
+						$("#postPinBoard").append(postCreator(post));
 						
 					});
 				} 
 				else 
 				{
-					console.log("No Post left!")
-					$("#postPinBoard").append('<strong>No Posts left!</strong>')
+					$("#postPinBoard").append('<strong>No Posts left!</strong>');
 					win.off("scroll");
 				}
 				
@@ -63,4 +58,4 @@ $(document).ready(function() {
 
 		}
 	});
-});
+}
