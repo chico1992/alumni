@@ -10,16 +10,21 @@ $(document).ready(function() {
 	var win = $(window);
 
 	$.get("/posts/"+timestamp).done(function(result){
-		let X = result.length;
+		let postCount = result.length;
 		
-		let ul = $('#posts');
+		if(postCount == 0){
+			console.log(X);
+			$("#postPinBoard").append($('<main role="main" class="container" id="first"></main>'));
+			$("#first").append($('<div class="starter-template" id="second"></div>'));
+			$("#second").append($('<h1>Welcome to Alumni!</h1>'));
+			$("#second").append($('<p class="lead">Feel free to create a post or to chat with other users.</p>'));
+			$("#second").append($('<a href="/post" class="btn btn-outline-dark float-right" role="button">Create a Post</a>'));
+			
+		}
 		result.forEach(post => {
 			
 			posts.push(post)
-			//ul.append($('<li>').text(post.creationDate));
 			$("#postPinBoard").append(postCreator(post))
-			console.log(post);
-
 		});
 		
 	});
@@ -35,13 +40,12 @@ $(document).ready(function() {
 			console.log(unixtime);
 
 			$.get("/posts/"+unixtime).done(function(res){
-				let ul = $('#posts');
+				
 				if (res.length != 0)
 				{
 					res.forEach(post => {
 						
 						posts.push(post)
-						//ul.append($('<li>').text(post.creationDate));
 						$("#postPinBoard").append(postCreator(post))
 						
 					});
