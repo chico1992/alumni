@@ -74,7 +74,7 @@ class SignupController extends Controller
                 $manager->remove($invitation);
                 $manager->flush();
 
-                return $this->redirectToRoute('homepage');
+                return $this->redirectToRoute('login');
             }
             
         }
