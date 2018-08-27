@@ -1,0 +1,56 @@
+version: "3"
+services:
+    www:
+        build: ./php
+        ports: 
+            - "80:80"
+        links:
+            - db
+        networks:
+            - public
+            - internal
+    db:
+        image: mysql:5.7
+        environment:
+            MYSQL_DATABASE: alumni
+            MYSQL_USER: user
+            MYSQL_PASSWORD: test
+            MYSQL_ROOT_PASSWORD: test
+        volumes:
+            - ../database:/docker-entrypoint-initdb.d
+            - ../db_alumni:/var/lib/mysql/
+        networks:
+            - internal
+    rabbit:
+        image: rabbitmq:3.7.7-alpine
+        environment:
+            RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+            RABBITMQ_DEFAULT_USER: "guest"
+            RABBITMQ_DEFAULT_PASS: "guest"
+            RABBITMQ_DEFAULT_VHOST: "/"
+        networks:
+            - internal
+    node:
+        build: ./node
+        environment:
+            - NODE_ENV=production
+        ports: 
+            - "3000:3000"
+        command: "npm start"
+        links:
+            - rabbit
+        depends_on:
+            - "rabbit"
+        networks:
+            - public
+            - internal
+        restart: always
+
+volumes:
+    db_alumni:
+
+networks:
+    public:
+        driver: bridge
+    internal:
+        driver: bridge
