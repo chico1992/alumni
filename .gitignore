@@ -4,3 +4,4 @@
 .vscode
 /alumni/templates/.unison.*
 node_modules
+/docker-prod/upload
